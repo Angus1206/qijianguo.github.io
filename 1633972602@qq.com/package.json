@@ -21,12 +21,14 @@
     "hexo-generator-index": "^0.2.0",
     "hexo-generator-sitemap": "^1.2.0",
     "hexo-generator-tag": "^0.2.0",
+    "hexo-helper-live2d": "^3.0.2",
     "hexo-renderer-ejs": "^0.3.1",
     "hexo-renderer-less": "^0.2.0",
     "hexo-renderer-marked": "^0.3.0",
     "hexo-renderer-stylus": "^0.3.1",
     "hexo-server": "^0.2.0",
     "hexo-util": "^0.6.3",
+    "hexo-wordcount": "^3.0.2",
     "moment": "^2.22.1",
     "utils-merge": "^1.0.1"
   }

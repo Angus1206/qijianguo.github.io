@@ -27,7 +27,7 @@ archive_dir: archives
 category_dir: categories
 code_dir: downloads/code
 i18n_dir: :lang
-skip_render:
+skip_render: README.md
 
 # Writing
 new_post_name: :title.md # File name of new posts
@@ -118,6 +118,10 @@ githubEmojis:
 ## Themes: https://hexo.io/themes/
 # 主题配置
 theme: next
+
+live2d:
+  model: wanko
+  bottom: -30
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
