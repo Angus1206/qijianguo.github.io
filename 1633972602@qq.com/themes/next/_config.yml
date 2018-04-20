@@ -61,7 +61,7 @@ footer:
   # Specify the date when the site was setup.
   # If not defined, current year will be used.
   #since: 2015
-
+  since: 2018
   # Icon between year and copyright info.
   icon:
     # Icon name in fontawesome, see: https://fontawesome.com/v4.7.0/icons
@@ -77,19 +77,19 @@ footer:
   # -------------------------------------------------------------
   powered:
     # Hexo link (Powered by Hexo).
-    enable: true
+    enable: false
     # Version info of Hexo after Hexo link (vX.X.X).
-    version: true
+    version: false
 
   theme:
     # Theme & scheme info link (Theme - NexT.scheme).
-    enable: true
+    enable: false
     # Version info of NexT after scheme info (vX.X.X).
-    version: true
+    version: false
   # -------------------------------------------------------------
   # Any custom text can be defined here.
   #custom_text: Hosted by <a target="_blank" rel="external nofollow" href="https://pages.coding.me"><b>Coding Pages</b></a>
-
+  custom_text: 有梦为马, 游历天涯
 # ---------------------------------------------------------------
 # SEO Settings
 # ---------------------------------------------------------------
@@ -118,10 +118,11 @@ index_with_subtitle: false
 # Value after `||` delimeter is the name of FontAwesome icon. If icon (with or without delimeter) is not specified, question icon will be loaded.
 menu:
   home: / || home
-  #about: /about/ || user
-  #tags: /tags/ || tags
-  #categories: /categories/ || th
   archives: /archives/ || archive
+  categories: /categories/ || th
+  tags: /tags/ || tags
+  top: /top/ || signal
+  about: /about/ || futbol-o
   #schedule: /schedule/ || calendar
   #sitemap: /sitemap.xml || sitemap
   #commonweal: /404/ || heartbeat
@@ -129,7 +130,7 @@ menu:
 # Enable/Disable menu icons / item badges.
 menu_settings:
   icons: true
-  badges: false
+  badges: true
 
 # ---------------------------------------------------------------
 # Scheme Settings
@@ -168,7 +169,6 @@ site_state: true
   
 social:
   GitHub: https://github.com/qijianguo || github
-  E-Mail: qijianguo_kiss@qq.com
 
 social_icons:
   enable: true
@@ -189,27 +189,34 @@ social_icons:
 #github_banner: https://github.com/yourname || Follow me on GitHub
 
 # Blog rolls
-links_icon: link
-links_title: Links
-links_layout: block
-#links_layout: inline
-#links:
-  #Title: http://example.com/
+# 侧栏友链设置
+links_icon: globe
+links_title: 神奇的链接
+#links_layout: block
+links_layout: inline
+links:
+  网易云音乐: https://music.163.com/#/user/home?id=86590096
+  Coldplay Official Website: http://coldplay.com/
+  获取 Elon Musk 的新闻: https://elonmusknews.org/
+  尼古拉·特斯拉：发明了现代世界的人: http://www.bilibili.com/video/av6211226/
+  关于此博客: https://reuixiy.github.io/about/
 
 # Sidebar Avatar
 # in theme directory(source/images): /images/avatar.gif
 # in site  directory(source/uploads): /uploads/avatar.gif
-#avatar: /images/avatar.gif
+avatar: /images/avatar.gif
 
 # Table Of Contents in the Sidebar
 toc:
   enable: true
 
   # Automatically add list number to toc.
+  # 自动加数字序号
   number: true
 
-  # If true, all words will placed on next lines if header width longer then sidebar width.
-  wrap: false
+  # 如果标题太长，则放到下一行继续显示
+  # 开启后可能要在 custom.styl 里加代码，本文 4.2 节有
+  wrap: true
 
 # Creative Commons 4.0 International License.
 # http://creativecommons.org/
@@ -239,7 +246,7 @@ sidebar:
   b2t: false
 
   # Scroll percent label in b2t button.
-  scrollpercent: false
+  scrollpercent: true
 
   # Enable sidebar on narrow view (only for Muse | Mist).
   onmobile: true
@@ -325,7 +332,8 @@ related_posts:
 # Declare license on posts
 post_copyright:
   enable: false
-  license: <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a>
+  license: CC BY-NC-SA 3.0
+  license_url: https://creativecommons.org/licenses/by-nc-sa/3.0/
 
 # Post edit
 # Dependencies: https://github.com/hexojs/hexo-deployer-git
@@ -343,7 +351,7 @@ post_edit:
 mobile_layout_economy: false
 
 # Android Chrome header panel color ($brand-bg / $headband-bg => $black-deep).
-android_chrome_color: "#222"
+android_chrome_color: "#fff"
 
 # Custom Logo.
 # !!Only available for Default Scheme currently.
@@ -919,7 +927,7 @@ vendors:
 
   # Internal version: 1.0.0
   # https://github.com/hustcc/canvas-nest.js
-  canvas_nest:
+  canvas_nest: true
 
   # three
   three:
