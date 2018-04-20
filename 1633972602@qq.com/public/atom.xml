@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://qijianguo.com/"/>
-  <updated>2018-04-16T01:15:35.364Z</updated>
+  <updated>2018-04-19T10:52:48.184Z</updated>
   <id>https://qijianguo.com/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>开头</title>
+    <link href="https://qijianguo.com/uncategorized/2018/04/19/%E8%89%B0%E9%9A%BE%E7%AC%AC%E4%B8%80%E6%AD%A5.html"/>
+    <id>https://qijianguo.com/uncategorized/2018/04/19/艰难第一步.html</id>
+    <published>2018-04-19T10:41:30.480Z</published>
+    <updated>2018-04-19T10:52:48.184Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="开头总是痛苦滴—痛并快乐着"><a href="#开头总是痛苦滴—痛并快乐着" class="headerlink" title="开头总是痛苦滴—痛并快乐着"></a>开头总是痛苦滴—<code>痛并快乐着</code></h3><blockquote><p>很早之前就想写点儿东西, 都怪自己的懒惰心理把所有的事都甩给了<code>没时间!</code>，总结一个字就是‘懒’， 以至于耽搁了很多事, 例如某件事上个月才算完结, 先去面壁了…</p></blockquote><h4 id="我该写点儿什么"><a href="#我该写点儿什么" class="headerlink" title="我该写点儿什么"></a>我该写点儿什么</h4><blockquote><p>趴在桌子上面壁了十分钟，还是想到了很多东西的， 比如，飞黄腾达啊，攒钱买房子啊，跟媳妇儿结婚啊，哈哈哈，其实我还想到了，做一个文艺的程序猿。在提升撸码技能的同时也能写写肉麻文章，给我亲爱的紫儿看。么么哒</p></blockquote><p>####我该做点儿什么 ?</p><blockquote><p>思考明天要做的事真的很要命，但是今天貌似又虚度了一天，无助加绝望。改了APP中产品新提出的几个需求，每天都是改bug&amp;&amp;改bug，痛苦ing…</p></blockquote><ul><li>长期目标：<blockquote><p>Java深入学习（多线程、netty、反射、Spring系列、Mybatis等）</p></blockquote></li></ul><blockquote><p>Android系统学习</p></blockquote><blockquote><p>数据库（MySQL、mongo、redis）</p></blockquote><blockquote><p>Linux</p></blockquote><blockquote><p>小程序</p></blockquote><ul><li>短期目标：<blockquote><p>4/5月学习Java多线程、Netty。<br>学习《企业级微信点餐系统》</p></blockquote></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;开头总是痛苦滴—痛并快乐着&quot;&gt;&lt;a href=&quot;#开头总是痛苦滴—痛并快乐着&quot; class=&quot;headerlink&quot; title=&quot;开头总是痛苦滴—痛并快乐着&quot;&gt;&lt;/a&gt;开头总是痛苦滴—&lt;code&gt;痛并快乐着&lt;/code&gt;&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;
+      
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>Hello World</title>

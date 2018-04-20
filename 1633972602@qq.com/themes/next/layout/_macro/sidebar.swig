@@ -186,7 +186,7 @@
           {% endif %}
         </div>
       {% endif %}
-
+	  {% include '../_custom/sidebar.swig' %}
     </div>
   </aside>
 {% endmacro %}
