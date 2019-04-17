@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#fff">
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-center-circle.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.2.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.2.0" color="#fff">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="IOUtils org.apache.commons.io.IOUtils  方法：  readLines 从输入流中读取多行数据write 把字节. 字符等写入输出流toInputStream 将字符串转化为输入流toString 转化IO流、byte[]、Url为StringtoByteArraycopy 拷贝文件，支持2G以上的数据lineIterator 从输入流返回一个迭代器，根据参数要">
+<meta name="keywords" content="java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java工具类">
+<meta property="og:url" content="https://qijianguo.com/Java/2019/04/17/Java工具类.html">
+<meta property="og:site_name" content="Angusの博客">
+<meta property="og:description" content="IOUtils org.apache.commons.io.IOUtils  方法：  readLines 从输入流中读取多行数据write 把字节. 字符等写入输出流toInputStream 将字符串转化为输入流toString 转化IO流、byte[]、Url为StringtoByteArraycopy 拷贝文件，支持2G以上的数据lineIterator 从输入流返回一个迭代器，根据参数要">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-04-17T07:45:34.485Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java工具类">
+<meta name="twitter:description" content="IOUtils org.apache.commons.io.IOUtils  方法：  readLines 从输入流中读取多行数据write 把字节. 字符等写入输出流toInputStream 将字符串转化为输入流toString 转化IO流、byte[]、Url为StringtoByteArraycopy 拷贝文件，支持2G以上的数据lineIterator 从输入流返回一个迭代器，根据参数要">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Angusの博客" type="application/atom+xml" />
+
+
+
+
+  <link rel="canonical" href="https://qijianguo.com/Java/2019/04/17/Java工具类.html"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Java工具类 | Angusの博客</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+	
+
+    
+	<a href="https://github.com/qijianguo"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
+
+
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Angusの博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">学习</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Startseite</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archiv<span class="badge">50</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />Kategorien<span class="badge">17</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />Tags<span class="badge">22</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-top">
+    <a href="/top/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-signal"></i> <br />top</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-futbol-o"></i> <br />Über</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://qijianguo.com/Java/2019/04/17/Java工具类.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Angus">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Angusの博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Java工具类
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-04-17 14:18:44 / Updated at: 15:45:34" itemprop="dateCreated datePublished" datetime="2019-04-17T14:18:44+08:00">2019-04-17</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="IOUtils"><a href="#IOUtils" class="headerlink" title="IOUtils"></a>IOUtils</h3><ul>
+<li>org.apache.commons.io.IOUtils</li>
+</ul>
+<p>方法：</p>
+<blockquote>
+<p>readLines 从输入流中读取多行数据<br>write 把字节. 字符等写入输出流<br>toInputStream 将字符串转化为输入流<br>toString 转化IO流、byte[]、Url为String<br>toByteArray<br>copy 拷贝文件，支持2G以上的数据<br>lineIterator 从输入流返回一个迭代器，根据参数要求读取的数据量，全部读取，如果数据不够，则失败<br>closeQuietly 关闭流</p>
+</blockquote>
+<p><strong><em>pom.xml</em></strong><br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	 <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.commons<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>commons-io<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">	 <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.3.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>示例：<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.apache.commons.io.IOUtils;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.io.LineIterator;</span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"><span class="keyword">import</span> java.util.<span class="built_in">List</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"><span class="markdown">/**</span></span></span><br><span class="line"><span class="comment"><span class="markdown"> * @author Angus</span></span></span><br><span class="line"><span class="comment"><span class="markdown"> * @version 1.0</span></span></span><br><span class="line"><span class="comment"><span class="markdown"> * @Title: TestIOUtils</span></span></span><br><span class="line"><span class="comment"><span class="markdown"> * @Description: TODO</span></span></span><br><span class="line"><span class="comment"><span class="markdown"> * @date 2018/11/20 13:13</span></span></span><br><span class="line"><span class="comment"><span class="markdown"> */</span></span></span><br><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">TestIOUtils</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    public <span class="keyword">static</span> <span class="keyword">void</span> main(<span class="built_in">String</span>[] args) &#123;</span><br><span class="line">        testIOUtils();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private <span class="keyword">static</span> <span class="keyword">void</span> testIOUtils() &#123;</span><br><span class="line">        File file = <span class="keyword">new</span> File(<span class="string">"test.json"</span>);</span><br><span class="line">        FileInputStream <span class="keyword">in</span> = <span class="keyword">null</span>;</span><br><span class="line">        FileOutputStream out = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">in</span> = <span class="keyword">new</span> FileInputStream(file);</span><br><span class="line">            out = <span class="keyword">new</span> FileOutputStream(<span class="string">"testCopy.json"</span>);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 从输入流中读取多行数据</span></span><br><span class="line">            <span class="built_in">List</span>&lt;<span class="built_in">String</span>&gt; list = IOUtils.readLines(<span class="keyword">in</span>, <span class="string">"UTF-8"</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            <span class="built_in">StringBuffer</span> str = <span class="keyword">new</span> <span class="built_in">StringBuffer</span>();</span><br><span class="line">            list.forEach(value -&gt; &#123;</span><br><span class="line">                str.append(value);</span><br><span class="line">            &#125;);</span><br><span class="line">            <span class="comment">// 把字节. 字符等写入输出流</span></span><br><span class="line">            IOUtils.write(str, out, <span class="string">"UTF-8"</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            <span class="comment">// 将字符串转化为输入流</span></span><br><span class="line">            <span class="built_in">String</span> testWord = <span class="string">"Hello IoUtils!"</span>;</span><br><span class="line">            InputStream in2 = IOUtils.toInputStream(testWord);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// toString转化IO流、byte[]、Url为String</span></span><br><span class="line">            <span class="built_in">String</span> inStr = IOUtils.toString(in2, <span class="string">"UTF-8"</span>);</span><br><span class="line">            byte[] bytes = IOUtils.toByteArray(in2);</span><br><span class="line">            <span class="built_in">String</span> byteStr = IOUtils.toString(bytes);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 拷贝文件，支持2G以上的数据</span></span><br><span class="line">            <span class="built_in">int</span> count = IOUtils.copy(<span class="keyword">in</span>, out);</span><br><span class="line">            <span class="built_in">String</span> response = count &gt; <span class="number">0</span> ? <span class="string">"拷贝成功"</span> : <span class="string">"拷贝失败，count &gt; 2147483647L"</span>;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 从输入流返回一个迭代器，根据参数要求读取的数据量，全部读取，如果数据不够，则失败</span></span><br><span class="line">            LineIterator lineIterator = IOUtils.lineIterator(<span class="keyword">new</span> FileInputStream(<span class="keyword">new</span> File(<span class="string">"test.json"</span>)), <span class="string">"UTF-8"</span>);</span><br><span class="line">            <span class="keyword">while</span> (lineIterator.hasNext()) &#123;</span><br><span class="line">                <span class="built_in">String</span> line = lineIterator.nextLine();</span><br><span class="line">            &#125;</span><br><span class="line">            lineIterator.close();</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            IOUtils.closeQuietly(<span class="keyword">in</span>);</span><br><span class="line">            IOUtils.closeQuietly(out);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="FileUtils"><a href="#FileUtils" class="headerlink" title="FileUtils"></a>FileUtils</h3><ul>
+<li>org.apache.commons.io.FileUtils</li>
+</ul>
+<p>方法：</p>
+<blockquote>
+<p>forceMkdir 强制创建文件夹，如果父级目录不存在则先创建父级目录<br>deleteDirectory 删除文件夹<br>writeStringToFile 将String写入文件中，如果文件目录不存在则都创建<br>copyFile 拷贝文件<br>forceDelete 强制删除<br>forceMkdir 强制创建目录，如果父级目录不存在则创建父级目录<br>copyDirectory 拷贝文件夹！ 【警告】如下操作（创建子文件夹），会造成死循环！<br>listFiles 列举目录下的文件（不是目录！）</p>
+</blockquote>
+<ul>
+<li>示例：<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.apache.commons.io.FileUtils;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.io.filefilter.DirectoryFileFilter;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.io.filefilter.FileFileFilter;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.io.filefilter.IOFileFilter;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.<span class="built_in">File</span>;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.util.Collection;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @author Angus</span></span><br><span class="line"><span class="comment"> * @version 1.0</span></span><br><span class="line"><span class="comment"> * @Title: TestFileUtils</span></span><br><span class="line"><span class="comment"> * @Description: TODO</span></span><br><span class="line"><span class="comment"> * @date 2018/11/20 15:44</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> class TestFileUtils &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(<span class="keyword">String</span>[] args) &#123;</span><br><span class="line">        testFileUtils();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> testFileUtils() &#123;</span><br><span class="line">        <span class="built_in">try</span> &#123;</span><br><span class="line">            <span class="comment">// 强制创建文件夹，如果父级目录不存在则先创建父级目录</span></span><br><span class="line">            FileUtils.forceMkdir(<span class="keyword">new</span> <span class="built_in">File</span>(<span class="string">"dir/testDir"</span>));</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 删除文件夹</span></span><br><span class="line">            FileUtils.deleteDirectory(<span class="keyword">new</span> <span class="built_in">File</span>(<span class="string">"dir"</span>));</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 将String写入文件中，如果文件目录不存在则都创建</span></span><br><span class="line">            FileUtils.writeStringToFile(<span class="keyword">new</span> <span class="built_in">File</span>(<span class="string">"dir/testDir/test.json"</span>), <span class="string">"&#123;\"name\": \"zs\"&#125;"</span>);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 拷贝文件</span></span><br><span class="line">            FileUtils.copyFile(<span class="keyword">new</span> <span class="built_in">File</span>(<span class="string">"dir/testDir/test.json"</span>), <span class="keyword">new</span> <span class="built_in">File</span>(<span class="string">"dir/testDir/testCopy.json"</span>));</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 强制删除</span></span><br><span class="line">            FileUtils.forceDelete(<span class="keyword">new</span> <span class="built_in">File</span>(<span class="string">"dir/testDir/test.json"</span>));</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 强制创建目录，如果父级目录不存在则创建父级目录</span></span><br><span class="line">            FileUtils.forceMkdir(<span class="keyword">new</span> <span class="built_in">File</span>(<span class="string">"dir/testDir2/test"</span>));</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 拷贝文件夹！ 【警告】如下操作（创建子文件夹），会造成死循环！</span></span><br><span class="line">            <span class="comment">// FileUtils.copyDirectory(new File("dir"), new File("dir/dirCopy"));</span></span><br><span class="line">            FileUtils.copyDirectory(<span class="keyword">new</span> <span class="built_in">File</span>(<span class="string">"dir"</span>), <span class="keyword">new</span> <span class="built_in">File</span>(<span class="string">"dirCopy"</span>));</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 列举目录下的文件（不是目录！）</span></span><br><span class="line">            List&lt;<span class="keyword">String</span>&gt; coll = (List&lt;<span class="keyword">String</span>&gt;) FileUtils.listFiles(<span class="keyword">new</span> <span class="built_in">File</span>(<span class="string">"dir"</span>), FileFileFilter.FILE, DirectoryFileFilter.DIRECTORY);</span><br><span class="line">        &#125; <span class="built_in">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="StringUtils"><a href="#StringUtils" class="headerlink" title="StringUtils"></a>StringUtils</h3><ul>
+<li>org.apache.commons.lang3.StringUtils</li>
+</ul>
+<p>方法</p>
+<blockquote>
+<p>isBlank<br>isEmpty<br>equals<br>split 字符串分割<br>EMPTY 返回空字符串<br>replace 替换字符串<br>capitalize 首字母大写</p>
+</blockquote>
+<p><strong><em>pom.xml</em></strong><br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.commons<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>commons-lang3<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.8.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>示例：<figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.apache.commons.lang3.StringUtils;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @author Angus</span></span><br><span class="line"><span class="comment"> * @version 1.0</span></span><br><span class="line"><span class="comment"> * @Title: TestStringUtils</span></span><br><span class="line"><span class="comment"> * @Description: TODO</span></span><br><span class="line"><span class="comment"> * @date 2018/11/20 16:20</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> class TestStringUtils &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(<span class="keyword">String</span>[] args) &#123;</span><br><span class="line">        testStringUtils();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> testStringUtils() &#123;</span><br><span class="line">        <span class="keyword">String</span> <span class="built_in">str</span> = <span class="string">"Hello-StringUtils!"</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">String</span> str2 = <span class="string">"Hello"</span>;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">boolean</span> blank = StringUtils.isBlank(<span class="built_in">str</span>);</span><br><span class="line"></span><br><span class="line">        <span class="built_in">boolean</span> empty = StringUtils.isEmpty(<span class="built_in">str</span>);</span><br><span class="line"></span><br><span class="line">        <span class="built_in">boolean</span> equals = StringUtils.equals(<span class="built_in">str</span>, str2);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">String</span> <span class="built_in">join</span> = StringUtils.<span class="built_in">join</span>(Arrays.asList(<span class="string">"hello"</span>, <span class="string">"StringUtils"</span>, <span class="string">"!"</span>));</span><br><span class="line">        System.out.<span class="built_in">println</span>(<span class="string">"输出结果为： [hello, StringUtils, !] "</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 字符串分割：默认是按空格分割</span></span><br><span class="line">        <span class="keyword">String</span>[] splitStrBlank = StringUtils.<span class="built_in">split</span>(<span class="built_in">str</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">String</span> s : splitStrBlank) &#123;</span><br><span class="line">            System.out.<span class="built_in">println</span>(s);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 自定义风格符</span></span><br><span class="line">        <span class="keyword">String</span>[] splitStrKey = StringUtils.<span class="built_in">split</span>(<span class="built_in">str</span>, <span class="string">"-"</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">String</span> s : splitStrKey) &#123;</span><br><span class="line">            System.out.<span class="built_in">println</span>(s);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 返回空字符串</span></span><br><span class="line">        <span class="keyword">String</span> emptyStr = StringUtils.EMPTY;</span><br><span class="line">        System.out.<span class="built_in">println</span>(emptyStr);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 替换字符串</span></span><br><span class="line">        <span class="keyword">String</span> replaceStr2 = StringUtils.replace(str2, <span class="string">"Hello"</span>, <span class="string">"你好！"</span>);</span><br><span class="line">        System.out.<span class="built_in">println</span>(replaceStr2);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 首字母大写</span></span><br><span class="line">        <span class="keyword">String</span> capitalizeStr2 = StringUtils.capitalize(str2.toLowerCase());</span><br><span class="line">        System.out.<span class="built_in">println</span>(capitalizeStr2);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+	
+	<div>
+      
+        
+      
+	</div>
+	
+	<div>
+	  
+		<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+	  
+	</div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" <i class="fa fa-tag"></i> java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/Linux/2019/04/17/Linux有趣（无用）的命令.html" rel="next" title="Linux有趣（无用）的命令">
+                <i class="fa fa-chevron-left"></i> Linux有趣（无用）的命令
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/Android/2019/04/17/Android中ViewPager.html" rel="prev" title="Android中ViewPager">
+                Android中ViewPager <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNTc4NS8xMjMyMQ=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="Angus" />
+            
+              <p class="site-author-name" itemprop="name">Angus</p>
+              <p class="site-description motion-element" itemprop="description">有梦为马, 游历天涯!</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">50</span>
+                    <span class="site-state-item-name">Artikel</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">17</span>
+                    <span class="site-state-item-name">Kategorien</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">22</span>
+                    <span class="site-state-item-name">Tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/qijianguo" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-globe"></i>
+                神奇的链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://music.163.com/#/user/home?id=86590096" title="网易云音乐" target="_blank">网易云音乐</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://coldplay.com/" title="Coldplay Official Website" target="_blank">Coldplay Official Website</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://elonmusknews.org/" title="获取 Elon Musk 的新闻" target="_blank">获取 Elon Musk 的新闻</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.bilibili.com/video/av6211226/" title="尼古拉·特斯拉：发明了现代世界的人" target="_blank">尼古拉·特斯拉：发明了现代世界的人</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://reuixiy.github.io/about/" title="关于此博客" target="_blank">关于此博客</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          <div id="days"></div>
+</script>
+<script language="javascript">
+function show_date_time(){
+window.setTimeout("show_date_time()", 1000);
+BirthDay=new Date("04/10/2018 15:00:00");
+today=new Date();
+timeold=(today.getTime()-BirthDay.getTime());
+sectimeold=timeold/1000
+secondsold=Math.floor(sectimeold);
+msPerDay=24*60*60*1000
+e_daysold=timeold/msPerDay
+daysold=Math.floor(e_daysold);
+e_hrsold=(e_daysold-daysold)*24;
+hrsold=setzero(Math.floor(e_hrsold));
+e_minsold=(e_hrsold-hrsold)*60;
+minsold=setzero(Math.floor((e_hrsold-hrsold)*60));
+seconds=setzero(Math.floor((e_minsold-minsold)*60));
+document.getElementById('days').innerHTML="已运行"+daysold+"天"+hrsold+"小时"+minsold+"分"+seconds+"秒";
+}
+function setzero(i){
+if (i<10)
+{i="0" + i};
+return i;
+}
+show_date_time();
+</script>
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#IOUtils"><span class="nav-number">1.</span> <span class="nav-text">IOUtils</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FileUtils"><span class="nav-number">2.</span> <span class="nav-text">FileUtils</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#StringUtils"><span class="nav-number">3.</span> <span class="nav-text">StringUtils</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+	  <div id="days"></div>
+</script>
+<script language="javascript">
+function show_date_time(){
+window.setTimeout("show_date_time()", 1000);
+BirthDay=new Date("04/10/2018 15:00:00");
+today=new Date();
+timeold=(today.getTime()-BirthDay.getTime());
+sectimeold=timeold/1000
+secondsold=Math.floor(sectimeold);
+msPerDay=24*60*60*1000
+e_daysold=timeold/msPerDay
+daysold=Math.floor(e_daysold);
+e_hrsold=(e_daysold-daysold)*24;
+hrsold=setzero(Math.floor(e_hrsold));
+e_minsold=(e_hrsold-hrsold)*60;
+minsold=setzero(Math.floor((e_hrsold-hrsold)*60));
+seconds=setzero(Math.floor((e_minsold-minsold)*60));
+document.getElementById('days').innerHTML="已运行"+daysold+"天"+hrsold+"小时"+minsold+"分"+seconds+"秒";
+}
+function setzero(i){
+if (i<10)
+{i="0" + i};
+return i;
+}
+show_date_time();
+</script>
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Angus</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+<!-- 
+
+-->
+
+  <div class="footer-custom">有梦为马, 游历天涯</div>
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共45.0k字</span>
+</div>
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="true"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.2.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.2.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.2.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.2.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.2.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":"wanko","bottom":-30,"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/"});</script></body>
+</html>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>

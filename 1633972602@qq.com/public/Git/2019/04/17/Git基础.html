@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#fff">
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-center-circle.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.2.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.2.0" color="#fff">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="1.1 获取项目的git仓库有两种取得git仓库的方法。 1.1.1 从当前目录初始化12345678# 创建项目文件夹&amp;gt; mkdir  git_practice# 进入文件夹下&amp;gt; cd git_practice# 初始化&amp;gt; git init 1.1.2 从现有仓库克隆语法 1git clone [url] 自定义项目名称：只需要再 url 后自定义项目名1$ git clone">
+<meta name="keywords" content="git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git基础">
+<meta property="og:url" content="https://qijianguo.com/Git/2019/04/17/Git基础.html">
+<meta property="og:site_name" content="Angusの博客">
+<meta property="og:description" content="1.1 获取项目的git仓库有两种取得git仓库的方法。 1.1.1 从当前目录初始化12345678# 创建项目文件夹&amp;gt; mkdir  git_practice# 进入文件夹下&amp;gt; cd git_practice# 初始化&amp;gt; git init 1.1.2 从现有仓库克隆语法 1git clone [url] 自定义项目名称：只需要再 url 后自定义项目名1$ git clone">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190308154121432.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1OTc0NzU5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190308165706103.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1OTc0NzU5,size_16,color_FFFFFF,t_70">
+<meta property="og:updated_time" content="2019-04-17T07:44:59.452Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Git基础">
+<meta name="twitter:description" content="1.1 获取项目的git仓库有两种取得git仓库的方法。 1.1.1 从当前目录初始化12345678# 创建项目文件夹&amp;gt; mkdir  git_practice# 进入文件夹下&amp;gt; cd git_practice# 初始化&amp;gt; git init 1.1.2 从现有仓库克隆语法 1git clone [url] 自定义项目名称：只需要再 url 后自定义项目名1$ git clone">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190308154121432.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1OTc0NzU5,size_16,color_FFFFFF,t_70">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Angusの博客" type="application/atom+xml" />
+
+
+
+
+  <link rel="canonical" href="https://qijianguo.com/Git/2019/04/17/Git基础.html"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Git基础 | Angusの博客</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+	
+
+    
+	<a href="https://github.com/qijianguo"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
+
+
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Angusの博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">学习</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Startseite</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archiv<span class="badge">50</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />Kategorien<span class="badge">17</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />Tags<span class="badge">22</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-top">
+    <a href="/top/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-signal"></i> <br />top</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-futbol-o"></i> <br />Über</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://qijianguo.com/Git/2019/04/17/Git基础.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Angus">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Angusの博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Git基础
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-04-17 14:18:44 / Updated at: 15:44:59" itemprop="dateCreated datePublished" datetime="2019-04-17T14:18:44+08:00">2019-04-17</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Git/" itemprop="url" rel="index"><span itemprop="name">Git</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-1-获取项目的git仓库"><a href="#1-1-获取项目的git仓库" class="headerlink" title="1.1 获取项目的git仓库"></a>1.1 获取项目的git仓库</h1><p>有两种取得git仓库的方法。</p>
+<h2 id="1-1-1-从当前目录初始化"><a href="#1-1-1-从当前目录初始化" class="headerlink" title="1.1.1 从当前目录初始化"></a>1.1.1 从当前目录初始化</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 创建项目文件夹</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> mkdir  git_practice</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 进入文件夹下</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> <span class="built_in">cd</span> git_practice</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 初始化</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> git init</span></span><br></pre></td></tr></table></figure>
+<h2 id="1-1-2-从现有仓库克隆"><a href="#1-1-2-从现有仓库克隆" class="headerlink" title="1.1.2 从现有仓库克隆"></a>1.1.2 从现有仓库克隆</h2><p>语法</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">clone</span> <span class="title">[url</span>]</span><br></pre></td></tr></table></figure>
+<p>自定义项目名称：只需要再 url 后自定义项目名<br><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="keyword">clone</span> <span class="title">[url</span>]  mygrit</span><br></pre></td></tr></table></figure></p>
+<h1 id="1-2-记录更新到仓库"><a href="#1-2-记录更新到仓库" class="headerlink" title="1.2 记录更新到仓库"></a>1.2 记录更新到仓库</h1><p>工作区下的文件状态分为：未跟踪 / 已跟踪。 文件的状态变化周期如下：<br><img src="https://img-blog.csdnimg.cn/20190308154121432.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1OTc0NzU5,size_16,color_FFFFFF,t_70" alt="文件的状态变化周期"></p>
+<h2 id="1-2-1-查看文件的状态"><a href="#1-2-1-查看文件的状态" class="headerlink" title="1.2.1 查看文件的状态"></a>1.2.1 查看文件的状态</h2><figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ git status</span><br><span class="line"><span class="keyword">On</span> branch master</span><br><span class="line">Your branch <span class="keyword">is</span> up <span class="keyword">to</span> <span class="built_in">date</span> <span class="keyword">with</span> <span class="comment">'origin/master'.</span></span><br><span class="line"></span><br><span class="line"><span class="literal">nothing</span> <span class="keyword">to</span> commit, working tree clean</span><br></pre></td></tr></table></figure>
+<p>注：没有查找到跟踪着的文件。</p>
+<p>用vim新建一个README</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> vi README</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 查看状态</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git status</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> On branch master</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Untracked files:</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> (use <span class="string">"git add &lt;file&gt;..."</span> to include <span class="keyword">in</span> what will be committed)</span></span><br><span class="line"><span class="meta">#</span><span class="bash"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> README</span></span><br><span class="line">nothing added to commit but untracked files present (use "git add" to track)</span><br></pre></td></tr></table></figure>
+<p>注：untracked files表示未跟踪， 即不会被git跟踪。</p>
+<h2 id="1-2-2-跟踪新文件"><a href="#1-2-2-跟踪新文件" class="headerlink" title="1.2.2 跟踪新文件"></a>1.2.2 跟踪新文件</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git add README</span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> git status</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> On branch master</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Changes to be committed:</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> (use <span class="string">"git reset HEAD &lt;file&gt;..."</span> to unstage)</span></span><br><span class="line"><span class="meta">#</span><span class="bash"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> new file: README</span></span><br><span class="line"><span class="meta">#</span><span class="bash"></span></span><br></pre></td></tr></table></figure>
+<p>注：README 文件已被跟踪，并处于暂存状态。</p>
+<p>“Changes to be committed” 这行下面的，就说明是已暂存状态。如果此时提交，那么该文件此<br>时此刻的版本将被留存在历史记录中</p>
+<h2 id="1-2-3-忽略文件"><a href="#1-2-3-忽略文件" class="headerlink" title="1.2.3 忽略文件"></a>1.2.3 忽略文件</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 添加git忽略文件</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> vi .gitignore</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 忽略所有以 .o 或 .a 结尾的文件</span></span><br><span class="line">*.[oa]</span><br><span class="line"></span><br><span class="line"> 忽略所有以波浪符（~）结尾的文件</span><br><span class="line">*~</span><br></pre></td></tr></table></figure>
+<p>文件 .gitignore 的格式规范如下：</p>
+<pre><code>• 所有空行或者以注释符号 ＃ 开头的行都会被 Git 忽略。
+• 可以使用标准的 glob 模式匹配。    
+• 匹配模式最后跟反斜杠（/）说明要忽略的是目录。    
+• 要忽略指定模式以外的文件或目录，可以在模式前加上惊叹号（!）取反
+</code></pre><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">所谓的 glob 模式是指 shell 所使用的简化了的正则表达式。星号（*）匹配零个或多个任意字符；[abc] 匹配</span><br><span class="line">任何一个列在方括号中的字符（这个例子要么匹配一个 a，要么匹配一个 b，要么匹配一个 c）；问号（?）</span><br><span class="line">只匹配一个任意字符；如果在方括号中使用短划线分隔两个字符，表示所有在这两个字符范围内的都可以匹配</span><br><span class="line">（比如 [<span class="number">0</span><span class="number">-9</span>] 表示匹配所有 <span class="number">0</span> 到 <span class="number">9</span> 的数字）。</span><br></pre></td></tr></table></figure>
+<p>再看一个 .gitignore 文件的例子：</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 此为注释 – 将被 Git 忽略</span></span><br><span class="line">*.a <span class="comment"># 忽略所有 .a 结尾的文件</span></span><br><span class="line">!<span class="class"><span class="keyword">lib</span>.<span class="title">a</span> <span class="comment"># 但 lib.a 除外</span></span></span><br><span class="line">/TODO <span class="comment"># 仅仅忽略项目根目录下的 TODO 文件，不包括 subdir/TODO</span></span><br><span class="line">build/ <span class="comment"># 忽略 build/ 目录下的所有文件</span></span><br><span class="line">doc/*.txt <span class="comment"># 会忽略 doc/notes.txt 但不包括 doc/server/arch.txt</span></span><br></pre></td></tr></table></figure>
+<h2 id="1-2-4-查看已暂存和未暂存的更新"><a href="#1-2-4-查看已暂存和未暂存的更新" class="headerlink" title="1.2.4 查看已暂存和未暂存的更新"></a>1.2.4 查看已暂存和未暂存的更新</h2><h2 id="1-2-5-提交更新"><a href="#1-2-5-提交更新" class="headerlink" title="1.2.5 提交更新"></a>1.2.5 提交更新</h2><p>在每次commit之前先用 git status 文件是否都 git add 了（即暂存过了），否则不会被记录。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git commit -m <span class="string">" update message "</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="1-2-6-跳过使用暂存"><a href="#1-2-6-跳过使用暂存" class="headerlink" title="1.2.6 跳过使用暂存"></a>1.2.6 跳过使用暂存</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git commit -a -m <span class="string">" update message "</span></span></span><br><span class="line">或</span><br><span class="line"><span class="meta">$</span><span class="bash"> git commit -am <span class="string">" update message "</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="1-2-7-移除文件"><a href="#1-2-7-移除文件" class="headerlink" title="1.2.7 移除文件"></a>1.2.7 移除文件</h2><p>删除未暂存的文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> rm 1.txt</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git rm 1.txt</span></span><br></pre></td></tr></table></figure>
+<p>强制删除<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git rm 1.txt  -f</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="1-2-8-移动文件"><a href="#1-2-8-移动文件" class="headerlink" title="1.2.8 移动文件"></a>1.2.8 移动文件</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git move file_from file_to</span></span><br></pre></td></tr></table></figure>
+<p>相当于</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> mv README.txt README</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git rm README.txt</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git add READ</span></span><br></pre></td></tr></table></figure>
+<h2 id="1-3-查看提交历史"><a href="#1-3-查看提交历史" class="headerlink" title="1.3 查看提交历史"></a>1.3 查看提交历史</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git <span class="built_in">log</span></span></span><br></pre></td></tr></table></figure>
+<p><strong>-p</strong> 显示提交的差异， <strong>-2</strong> 显示最近的两次提交<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git <span class="built_in">log</span> -p -2</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>–stat</strong> 仅显示简要的增改行数统计</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git <span class="built_in">log</span> --<span class="built_in">stat</span></span></span><br></pre></td></tr></table></figure>
+<p>还有个常用的 <strong>–pretty</strong> 选项，可以指定使用完全不同于默认格式的方式展示提交历史。比如用 <strong>oneline</strong> 将每个提交放在一行显示，这在提交数很大时非常有用。另外还有 <strong>short</strong>，<strong>full</strong> 和 <strong>fuller</strong> 可以用，展示的信息或多或少有些不同</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 每条记录显示一行</span></span><br><span class="line">git <span class="built_in">log</span> <span class="comment">--pretty=oneline</span></span><br></pre></td></tr></table></figure>
+<p>自定义输出格式<br><figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="keyword">log</span> --pretty=<span class="keyword">format</span>:<span class="string">"%h - %an, %ar : %s"</span></span><br><span class="line">a8876b9 - angus, <span class="number">18</span> minutes ago : 添加README</span><br><span class="line">f191557 - angus, <span class="number">24</span> minutes ago : 删除README.md</span><br></pre></td></tr></table></figure></p>
+<p>常用格式占位符<br><img src="https://img-blog.csdnimg.cn/20190308165706103.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1OTc0NzU5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h1 id="1-4-撤消操作"><a href="#1-4-撤消操作" class="headerlink" title="1.4 撤消操作"></a>1.4 撤消操作</h1><h2 id="1-4-1-修改最后一次提交"><a href="#1-4-1-修改最后一次提交" class="headerlink" title="1.4.1 修改最后一次提交"></a>1.4.1 修改最后一次提交</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">commit</span> <span class="comment">--amend</span></span><br></pre></td></tr></table></figure>
+<p>如果<strong>commit</strong>后发现还有未 <strong>add</strong> 的文件，则</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git commit -m <span class="string">"修改文件"</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git add 1.txt</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git commit --amend</span></span><br></pre></td></tr></table></figure>
+<p>上面的三条命令最终得到一个提交，第二个提交命令修正了第一个的提交内容。</p>
+<h2 id="1-4-2-取消暂存的文件"><a href="#1-4-2-取消暂存的文件" class="headerlink" title="1.4.2 取消暂存的文件"></a>1.4.2 取消暂存的文件</h2><p>暂存的文件即已执行 <strong>git add</strong> </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git add *</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git status</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> On branch master</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Changes to be committed:</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> (use <span class="string">"git reset HEAD &lt;file&gt;..."</span> to unstage)</span></span><br><span class="line"><span class="meta">#</span><span class="bash"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> modified: README.txt</span></span><br></pre></td></tr></table></figure>
+<p>输出告诉我们应该用 <strong>git reset HEAD \<file> </file></strong> </p>
+<p>例如撤销README.txt</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git reset HEAD README.txt</span></span><br></pre></td></tr></table></figure>
+<h2 id="1-4-3-取消对文件的修改"><a href="#1-4-3-取消对文件的修改" class="headerlink" title="1.4.3 取消对文件的修改"></a>1.4.3 取消对文件的修改</h2><p>撤销单个文件的修改<br><figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">$</span> git checkout --&lt;<span class="keyword">file</span>&gt;</span><br></pre></td></tr></table></figure></p>
+<p>撤销所有文件的修改<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git checkout .</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="1-5-远程仓库的使用"><a href="#1-5-远程仓库的使用" class="headerlink" title="1.5 远程仓库的使用"></a>1.5 远程仓库的使用</h1><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="keyword">clone</span> <span class="title">&lt;url</span>&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="1-5-1-查看当前的远程库"><a href="#1-5-1-查看当前的远程库" class="headerlink" title="1.5.1 查看当前的远程库"></a>1.5.1 查看当前的远程库</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git remote </span></span><br><span class="line">origin</span><br></pre></td></tr></table></figure>
+<p>也可以加上 -v 选项（译注：此为—verbose 的简写，取首字母），显示对应的克隆地址：</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git remote --<span class="keyword">verbose</span></span><br><span class="line">origin  http<span class="variable">s:</span>//github.<span class="keyword">com</span>/qijianguo/git_practice.git (fetch)</span><br><span class="line">origin  http<span class="variable">s:</span>//github.<span class="keyword">com</span>/qijianguo/git_practice.git (push)</span><br></pre></td></tr></table></figure>
+<h2 id="1-5-2-添加远程仓库"><a href="#1-5-2-添加远程仓库" class="headerlink" title="1.5.2 添加远程仓库"></a>1.5.2 添加远程仓库</h2><figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add <span class="string">[shortname]</span> <span class="string">[url]</span></span><br></pre></td></tr></table></figure>
+<p>要添加一个新的远程仓库，可以指定一个简单的名字，以便将来引用<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ git remote</span><br><span class="line">origin</span><br><span class="line">$ git remote <span class="built_in">add</span> pb gi<span class="variable">t:</span>//github.<span class="keyword">com</span>/paulboone/ticgit.git</span><br><span class="line">$ git remote -v</span><br><span class="line">origin gi<span class="variable">t:</span>//github.<span class="keyword">com</span>/schacon/ticgit.git</span><br><span class="line">pb gi<span class="variable">t:</span>//github.<span class="keyword">com</span>/paulboone/ticgit.git</span><br></pre></td></tr></table></figure></p>
+<p>现在可以用字串 pb 指代对应的仓库地址了。比如说，要抓取所有 Paul 有的，但本地仓库没有的信息，可以运行 git fetch pb：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ git fetch pb</span><br><span class="line"><span class="string">remote:</span> Counting <span class="string">objects:</span> <span class="number">58</span>, done.</span><br><span class="line"><span class="string">remote:</span> Compressing <span class="string">objects:</span> <span class="number">100</span>% (<span class="number">41</span>/<span class="number">41</span>), done.</span><br><span class="line"><span class="string">remote:</span> Total <span class="number">44</span> (delta <span class="number">24</span>), reused <span class="number">1</span> (delta <span class="number">0</span>)</span><br><span class="line">Unpacking <span class="string">objects:</span> <span class="number">100</span>% (<span class="number">44</span>/<span class="number">44</span>), done.</span><br><span class="line">From <span class="string">git:</span><span class="comment">//github.com/paulboone/ticgit</span></span><br><span class="line">* [<span class="keyword">new</span> branch] master -&gt; pb/master</span><br><span class="line">* [<span class="keyword">new</span> branch] ticgit -&gt; pb/ticgit</span><br></pre></td></tr></table></figure>
+<p>现在，Paul 的主干分支（master）已经完全可以在本地访问了，对应的名字是 pb/master，你可以将它合并到自己的某个分支，或者切换到这个分支，看看有些什么有趣的更新。</p>
+<h2 id="1-5-3-从远程抓取"><a href="#1-5-3-从远程抓取" class="headerlink" title="1.5.3 从远程抓取"></a>1.5.3 从远程抓取</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git fetch [remote-nam]</span></span><br></pre></td></tr></table></figure>
+<h2 id="1-5-4-推送数据到远程仓库"><a href="#1-5-4-推送数据到远程仓库" class="headerlink" title="1.5.4 推送数据到远程仓库"></a>1.5.4 推送数据到远程仓库</h2><figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git push <span class="string">[remote-name]</span> <span class="string">[branch-name]</span></span><br></pre></td></tr></table></figure>
+<h2 id="1-5-5-查看远程仓库信息"><a href="#1-5-5-查看远程仓库信息" class="headerlink" title="1.5.5 查看远程仓库信息"></a>1.5.5 查看远程仓库信息</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git remote</span></span><br><span class="line">origin</span><br><span class="line"><span class="meta">$</span><span class="bash"> git remote show origin</span></span><br></pre></td></tr></table></figure>
+<h2 id="1-5-6-远程仓库的删除和重命名"><a href="#1-5-6-远程仓库的删除和重命名" class="headerlink" title="1.5.6 远程仓库的删除和重命名"></a>1.5.6 远程仓库的删除和重命名</h2><p>在新版 Git 中可以用 git remote rename 命令修改某个远程仓库的简短名称，比如想把 pb 改成 paul，可以这么运行：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git remote rename pb paul</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git remote</span></span><br><span class="line">origin</span><br><span class="line">paul</span><br></pre></td></tr></table></figure>
+<p>注意，对远程仓库的重命名，也会使对应的分支名称发生变化，原来的 pb/master 分支现在成了<br>paul/master。<br>    碰到远端仓库服务器迁移，或者原来的克隆镜像不再使用，又或者某个参与者不再贡献代码，那么需要移除对应的远端仓库，可以运行 git remote rm 命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git remote rm paul</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git remote</span></span><br><span class="line">origin</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+	
+	<div>
+      
+        
+      
+	</div>
+	
+	<div>
+	  
+		<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+	  
+	</div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/git/" <i class="fa fa-tag"></i> git</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/Tool/2019/04/17/吐血推荐 _ 那些提升开发人员工作效率的在线工具.html" rel="next" title="吐血推荐 _ 那些提升开发人员工作效率的在线工具">
+                <i class="fa fa-chevron-left"></i> 吐血推荐 _ 那些提升开发人员工作效率的在线工具
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/Git/2019/04/17/Git修改已经提交的注释或日志.html" rel="prev" title="Git修改已经提交的注释或日志">
+                Git修改已经提交的注释或日志 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNTc4NS8xMjMyMQ=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="Angus" />
+            
+              <p class="site-author-name" itemprop="name">Angus</p>
+              <p class="site-description motion-element" itemprop="description">有梦为马, 游历天涯!</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">50</span>
+                    <span class="site-state-item-name">Artikel</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">17</span>
+                    <span class="site-state-item-name">Kategorien</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">22</span>
+                    <span class="site-state-item-name">Tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/qijianguo" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-globe"></i>
+                神奇的链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://music.163.com/#/user/home?id=86590096" title="网易云音乐" target="_blank">网易云音乐</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://coldplay.com/" title="Coldplay Official Website" target="_blank">Coldplay Official Website</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://elonmusknews.org/" title="获取 Elon Musk 的新闻" target="_blank">获取 Elon Musk 的新闻</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.bilibili.com/video/av6211226/" title="尼古拉·特斯拉：发明了现代世界的人" target="_blank">尼古拉·特斯拉：发明了现代世界的人</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://reuixiy.github.io/about/" title="关于此博客" target="_blank">关于此博客</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          <div id="days"></div>
+</script>
+<script language="javascript">
+function show_date_time(){
+window.setTimeout("show_date_time()", 1000);
+BirthDay=new Date("04/10/2018 15:00:00");
+today=new Date();
+timeold=(today.getTime()-BirthDay.getTime());
+sectimeold=timeold/1000
+secondsold=Math.floor(sectimeold);
+msPerDay=24*60*60*1000
+e_daysold=timeold/msPerDay
+daysold=Math.floor(e_daysold);
+e_hrsold=(e_daysold-daysold)*24;
+hrsold=setzero(Math.floor(e_hrsold));
+e_minsold=(e_hrsold-hrsold)*60;
+minsold=setzero(Math.floor((e_hrsold-hrsold)*60));
+seconds=setzero(Math.floor((e_minsold-minsold)*60));
+document.getElementById('days').innerHTML="已运行"+daysold+"天"+hrsold+"小时"+minsold+"分"+seconds+"秒";
+}
+function setzero(i){
+if (i<10)
+{i="0" + i};
+return i;
+}
+show_date_time();
+</script>
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-1-获取项目的git仓库"><span class="nav-number">1.</span> <span class="nav-text">1.1 获取项目的git仓库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-1-从当前目录初始化"><span class="nav-number">1.1.</span> <span class="nav-text">1.1.1 从当前目录初始化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-2-从现有仓库克隆"><span class="nav-number">1.2.</span> <span class="nav-text">1.1.2 从现有仓库克隆</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-2-记录更新到仓库"><span class="nav-number">2.</span> <span class="nav-text">1.2 记录更新到仓库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-1-查看文件的状态"><span class="nav-number">2.1.</span> <span class="nav-text">1.2.1 查看文件的状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-2-跟踪新文件"><span class="nav-number">2.2.</span> <span class="nav-text">1.2.2 跟踪新文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-3-忽略文件"><span class="nav-number">2.3.</span> <span class="nav-text">1.2.3 忽略文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-4-查看已暂存和未暂存的更新"><span class="nav-number">2.4.</span> <span class="nav-text">1.2.4 查看已暂存和未暂存的更新</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-5-提交更新"><span class="nav-number">2.5.</span> <span class="nav-text">1.2.5 提交更新</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-6-跳过使用暂存"><span class="nav-number">2.6.</span> <span class="nav-text">1.2.6 跳过使用暂存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-7-移除文件"><span class="nav-number">2.7.</span> <span class="nav-text">1.2.7 移除文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-8-移动文件"><span class="nav-number">2.8.</span> <span class="nav-text">1.2.8 移动文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-查看提交历史"><span class="nav-number">2.9.</span> <span class="nav-text">1.3 查看提交历史</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-4-撤消操作"><span class="nav-number">3.</span> <span class="nav-text">1.4 撤消操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-1-修改最后一次提交"><span class="nav-number">3.1.</span> <span class="nav-text">1.4.1 修改最后一次提交</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-2-取消暂存的文件"><span class="nav-number">3.2.</span> <span class="nav-text">1.4.2 取消暂存的文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-3-取消对文件的修改"><span class="nav-number">3.3.</span> <span class="nav-text">1.4.3 取消对文件的修改</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-5-远程仓库的使用"><span class="nav-number">4.</span> <span class="nav-text">1.5 远程仓库的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-1-查看当前的远程库"><span class="nav-number">4.1.</span> <span class="nav-text">1.5.1 查看当前的远程库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-2-添加远程仓库"><span class="nav-number">4.2.</span> <span class="nav-text">1.5.2 添加远程仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-3-从远程抓取"><span class="nav-number">4.3.</span> <span class="nav-text">1.5.3 从远程抓取</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-4-推送数据到远程仓库"><span class="nav-number">4.4.</span> <span class="nav-text">1.5.4 推送数据到远程仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-5-查看远程仓库信息"><span class="nav-number">4.5.</span> <span class="nav-text">1.5.5 查看远程仓库信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-6-远程仓库的删除和重命名"><span class="nav-number">4.6.</span> <span class="nav-text">1.5.6 远程仓库的删除和重命名</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+	  <div id="days"></div>
+</script>
+<script language="javascript">
+function show_date_time(){
+window.setTimeout("show_date_time()", 1000);
+BirthDay=new Date("04/10/2018 15:00:00");
+today=new Date();
+timeold=(today.getTime()-BirthDay.getTime());
+sectimeold=timeold/1000
+secondsold=Math.floor(sectimeold);
+msPerDay=24*60*60*1000
+e_daysold=timeold/msPerDay
+daysold=Math.floor(e_daysold);
+e_hrsold=(e_daysold-daysold)*24;
+hrsold=setzero(Math.floor(e_hrsold));
+e_minsold=(e_hrsold-hrsold)*60;
+minsold=setzero(Math.floor((e_hrsold-hrsold)*60));
+seconds=setzero(Math.floor((e_minsold-minsold)*60));
+document.getElementById('days').innerHTML="已运行"+daysold+"天"+hrsold+"小时"+minsold+"分"+seconds+"秒";
+}
+function setzero(i){
+if (i<10)
+{i="0" + i};
+return i;
+}
+show_date_time();
+</script>
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Angus</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+<!-- 
+
+-->
+
+  <div class="footer-custom">有梦为马, 游历天涯</div>
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共45.0k字</span>
+</div>
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="true"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.2.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.2.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.2.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.2.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.2.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":"wanko","bottom":-30,"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/"});</script></body>
+</html>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>

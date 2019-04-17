@@ -1,7 +1,8 @@
----
+﻿---
 title: Springboot JPA 实体类添加@Transient
-categories: SpringBoot
-tags: springboot,Java
+categories: Java
+tags: java, springboot
+---
 
 * Hibernate
 > 在实体类与数据库表建立映射关系时添加 ***@Table*** 注解, 当表中不存在实体类中的某个属性的时候, 就需要用到 **@Transient** 注解

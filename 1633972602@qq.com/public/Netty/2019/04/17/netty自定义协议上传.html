@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#fff">
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-center-circle.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.2.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.2.0" color="#fff">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="客户端:123456789101112131415161718192021222324252627import io.netty.bootstrap.Bootstrap;import io.netty.channel.ChannelFuture;import io.netty.channel.EventLoopGroup;import io.netty.channel.nio.NioEventL">
+<meta name="keywords" content="netty">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Netty自定义协议上传">
+<meta property="og:url" content="https://qijianguo.com/Netty/2019/04/17/netty自定义协议上传.html">
+<meta property="og:site_name" content="Angusの博客">
+<meta property="og:description" content="客户端:123456789101112131415161718192021222324252627import io.netty.bootstrap.Bootstrap;import io.netty.channel.ChannelFuture;import io.netty.channel.EventLoopGroup;import io.netty.channel.nio.NioEventL">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-04-17T07:46:38.614Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Netty自定义协议上传">
+<meta name="twitter:description" content="客户端:123456789101112131415161718192021222324252627import io.netty.bootstrap.Bootstrap;import io.netty.channel.ChannelFuture;import io.netty.channel.EventLoopGroup;import io.netty.channel.nio.NioEventL">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Angusの博客" type="application/atom+xml" />
+
+
+
+
+  <link rel="canonical" href="https://qijianguo.com/Netty/2019/04/17/netty自定义协议上传.html"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Netty自定义协议上传 | Angusの博客</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+	
+
+    
+	<a href="https://github.com/qijianguo"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
+
+
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Angusの博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">学习</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Startseite</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archiv<span class="badge">50</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />Kategorien<span class="badge">17</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />Tags<span class="badge">22</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-top">
+    <a href="/top/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-signal"></i> <br />top</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-futbol-o"></i> <br />Über</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://qijianguo.com/Netty/2019/04/17/netty自定义协议上传.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Angus">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Angusの博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Netty自定义协议上传
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-04-17 14:18:44 / Updated at: 15:46:38" itemprop="dateCreated datePublished" datetime="2019-04-17T14:18:44+08:00">2019-04-17</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Netty/" itemprop="url" rel="index"><span itemprop="name">Netty</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <ul>
+<li>客户端:<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"><span class="meta-keyword">import</span> io.netty.bootstrap.Bootstrap;</span></span><br><span class="line"><span class="meta"><span class="meta-keyword">import</span> io.netty.channel.ChannelFuture;</span></span><br><span class="line"><span class="meta"><span class="meta-keyword">import</span> io.netty.channel.EventLoopGroup;</span></span><br><span class="line"><span class="meta"><span class="meta-keyword">import</span> io.netty.channel.nio.NioEventLoopGroup;</span></span><br><span class="line"><span class="meta"><span class="meta-keyword">import</span> io.netty.channel.socket.nio.NioSocketChannel;</span></span><br><span class="line"><span class="meta"><span class="meta-keyword">import</span> io.netty.handler.logging.LogLevel;</span></span><br><span class="line"><span class="meta"><span class="meta-keyword">import</span> io.netty.handler.logging.LoggingHandler;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SocketClient</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(String[] args) throws InterruptedException &#123;</span><br><span class="line">        EventLoopGroup eventLoopGroup = <span class="keyword">new</span> NioEventLoopGroup();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Bootstrap bootstrap = <span class="keyword">new</span> Bootstrap();</span><br><span class="line">            bootstrap.group(eventLoopGroup)</span><br><span class="line">                    .channel(NioSocketChannel.class)</span><br><span class="line">                    .handler(<span class="keyword">new</span> LoggingHandler(LogLevel.INFO))</span><br><span class="line">                    .handler(<span class="keyword">new</span> SocketClientInitializer());</span><br><span class="line"></span><br><span class="line">            ChannelFuture channelFuture = bootstrap.connect(<span class="string">"localhost"</span>, <span class="number">8899</span>).sync();</span><br><span class="line">            channelFuture.channel().closeFuture().sync();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">finally</span> &#123;</span><br><span class="line">            eventLoopGroup.shutdownGracefully();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> io.netty.<span class="built_in">buffer</span>.ByteBuf;</span><br><span class="line"><span class="keyword">import</span> io.netty.<span class="built_in">buffer</span>.UnpooledByteBufAllocator;</span><br><span class="line"><span class="keyword">import</span> io.netty.channel.ChannelHandlerContext;</span><br><span class="line"><span class="keyword">import</span> io.netty.channel.ChannelInboundHandlerAdapter;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> class SocketClientHandler extends ChannelInboundHandlerAdapter &#123;</span><br><span class="line">    @Override</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> channelRead(ChannelHandlerContext ctx, Object msg) throws Exception &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> channelActive(ChannelHandlerContext ctx) throws Exception &#123;</span><br><span class="line">        UnpooledByteBufAllocator allocator = <span class="keyword">new</span> UnpooledByteBufAllocator(false);</span><br><span class="line">        ByteBuf <span class="built_in">buffer</span> = allocator.<span class="built_in">buffer</span>(<span class="number">20</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//        String longMsgBody = "";</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">String</span> device = <span class="string">"T0001"</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">String</span> imgStr = getBytes();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> length = imgStr.length();</span><br><span class="line">        System.out.<span class="built_in">println</span>(<span class="string">"总长度: "</span> + length + device.length() + <span class="number">8</span>);</span><br><span class="line">        <span class="built_in">buffer</span>.writeInt(length + device.length() + <span class="number">8</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//        buffer.writeBytes(new byte[]&#123;0x0a, 0x0d&#125;);</span></span><br><span class="line"></span><br><span class="line">        <span class="built_in">buffer</span>.writeInt(device.length());</span><br><span class="line">        <span class="built_in">buffer</span>.writeInt(imgStr.length());</span><br><span class="line">        <span class="built_in">buffer</span>.writeBytes(device.getBytes());</span><br><span class="line"></span><br><span class="line">        <span class="built_in">buffer</span>.writeBytes(imgStr.getBytes());</span><br><span class="line"></span><br><span class="line">        ctx.writeAndFlush(<span class="built_in">buffer</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">String</span> getBytes() &#123;</span><br><span class="line">        <span class="built_in">try</span> &#123;</span><br><span class="line">            StringBuffer sb = <span class="keyword">new</span> StringBuffer();</span><br><span class="line">            FileInputStream fis = <span class="keyword">new</span> FileInputStream(<span class="string">"D:/mmmm.jpg"</span>);</span><br><span class="line">            BufferedInputStream bis = <span class="keyword">new</span> BufferedInputStream(fis);</span><br><span class="line">            java.io.ByteArrayOutputStream bos = <span class="keyword">new</span> java.io.ByteArrayOutputStream();</span><br><span class="line">            <span class="keyword">byte</span>[] buff = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</span><br><span class="line">            <span class="keyword">int</span> len = <span class="number">0</span>;</span><br><span class="line">            <span class="built_in">while</span> ((len = fis.<span class="built_in">read</span>(buff)) != <span class="number">-1</span>) &#123;</span><br><span class="line">                bos.<span class="built_in">write</span>(buff, <span class="number">0</span>, len);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 得到图片的字节数组</span></span><br><span class="line">            <span class="keyword">byte</span>[] result = bos.toByteArray();</span><br><span class="line">            System.out.<span class="built_in">println</span>(byte2HexStr(result));</span><br><span class="line">            <span class="comment">// 字节数组转成十六进制</span></span><br><span class="line">            <span class="keyword">String</span> str = byte2HexStr(result);</span><br><span class="line"><span class="comment">//            /*</span></span><br><span class="line"><span class="comment">//             * 将十六进制串保存到txt文件中</span></span><br><span class="line"><span class="comment">//                    */</span></span><br><span class="line"><span class="comment">//            PrintWriter pw = new PrintWriter(</span></span><br><span class="line"><span class="comment">//                    new FileWriter("D:/mmmm.txt"));</span></span><br><span class="line"><span class="comment">//            pw.println(str);</span></span><br><span class="line"><span class="comment">//            pw.close();</span></span><br><span class="line">            <span class="built_in">return</span> str;</span><br><span class="line">        &#125; <span class="built_in">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">return</span> <span class="string">""</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * 实现字节数组向十六进制的转换方法一</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">String</span> byte2HexStr(<span class="keyword">byte</span>[] b) &#123;</span><br><span class="line">        <span class="keyword">String</span> hs = <span class="string">""</span>;</span><br><span class="line">        <span class="keyword">String</span> stmp = <span class="string">""</span>;</span><br><span class="line">        <span class="built_in">for</span> (<span class="keyword">int</span> n = <span class="number">0</span>; n &lt; b.length; n++) &#123;</span><br><span class="line">            stmp = (Integer.toHexString(b[n] &amp; <span class="number">0XFF</span>));</span><br><span class="line">            <span class="built_in">if</span> (stmp.length() == <span class="number">1</span>)</span><br><span class="line">                hs = hs + <span class="string">"0"</span> + stmp;</span><br><span class="line">            <span class="built_in">else</span></span><br><span class="line">                hs = hs + stmp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">return</span> hs.toUpperCase();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">byte</span> uniteBytes(<span class="keyword">String</span> src0, <span class="keyword">String</span> src1) &#123;</span><br><span class="line">        <span class="keyword">byte</span> b0 = Byte.decode(<span class="string">"0x"</span> + src0).byteValue();</span><br><span class="line">        b0 = (<span class="keyword">byte</span>) (b0 &lt;&lt; <span class="number">4</span>);</span><br><span class="line">        <span class="keyword">byte</span> b1 = Byte.decode(<span class="string">"0x"</span> + src1).byteValue();</span><br><span class="line">        <span class="keyword">byte</span> ret = (<span class="keyword">byte</span>) (b0 | b1);</span><br><span class="line">        <span class="built_in">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * 实现字节数组向十六进制的转换的方法二</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">String</span> bytesToHexString(<span class="keyword">byte</span>[] src) &#123;</span><br><span class="line">        StringBuilder stringBuilder = <span class="keyword">new</span> StringBuilder(<span class="string">""</span>);</span><br><span class="line">        <span class="built_in">if</span> (src == null || src.length &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="built_in">return</span> null;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; src.length; i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> v = src[i] &amp; <span class="number">0xFF</span>;</span><br><span class="line">            <span class="keyword">String</span> hv = Integer.toHexString(v);</span><br><span class="line">            <span class="built_in">if</span> (hv.length() &lt; <span class="number">2</span>) &#123;</span><br><span class="line">                stringBuilder.append(<span class="number">0</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            stringBuilder.append(hv);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">return</span> stringBuilder.toString();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> io.netty.channel.<span class="type">ChannelInitializer</span>;</span><br><span class="line"><span class="keyword">import</span> io.netty.channel.<span class="type">ChannelPipeline</span>;</span><br><span class="line"><span class="keyword">import</span> io.netty.channel.socket.<span class="type">SocketChannel</span>;</span><br><span class="line"></span><br><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">SocketClientInitializer</span> <span class="keyword">extends</span> <span class="title">ChannelInitializer&lt;SocketChannel&gt;</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> void initChannel(<span class="type">SocketChannel</span> ch) <span class="keyword">throws</span> <span class="type">Exception</span> &#123;</span><br><span class="line">        <span class="type">ChannelPipeline</span> pipeline = ch.pipeline();</span><br><span class="line">        pipeline.addLast(<span class="keyword">new</span> <span class="type">SocketClientHandler</span>());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>服务端 </li>
+</ul>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta"><span class="meta-keyword">import</span> io.netty.bootstrap.ServerBootstrap;</span></span><br><span class="line"><span class="meta"><span class="meta-keyword">import</span> io.netty.channel.ChannelFuture;</span></span><br><span class="line"><span class="meta"><span class="meta-keyword">import</span> io.netty.channel.EventLoopGroup;</span></span><br><span class="line"><span class="meta"><span class="meta-keyword">import</span> io.netty.channel.nio.NioEventLoopGroup;</span></span><br><span class="line"><span class="meta"><span class="meta-keyword">import</span> io.netty.channel.socket.nio.NioServerSocketChannel;</span></span><br><span class="line"><span class="meta"><span class="meta-keyword">import</span> io.netty.handler.logging.LogLevel;</span></span><br><span class="line"><span class="meta"><span class="meta-keyword">import</span> io.netty.handler.logging.LoggingHandler;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SocketServer</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(String[] args) throws InterruptedException &#123;</span><br><span class="line">        EventLoopGroup parentGroup = <span class="keyword">new</span> NioEventLoopGroup();</span><br><span class="line">        EventLoopGroup childGroup = <span class="keyword">new</span> NioEventLoopGroup();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            ServerBootstrap serverBootstrap = <span class="keyword">new</span> ServerBootstrap();</span><br><span class="line">            serverBootstrap.group(parentGroup, childGroup)</span><br><span class="line">                    .channel(NioServerSocketChannel.class)</span><br><span class="line">                    .handler(<span class="keyword">new</span> LoggingHandler(LogLevel.INFO))</span><br><span class="line">                    .childHandler(<span class="keyword">new</span> SocketServerInitializer());</span><br><span class="line"></span><br><span class="line">            ChannelFuture channelFuture = serverBootstrap.bind(<span class="number">8899</span>).sync();</span><br><span class="line">            channelFuture.channel().closeFuture().sync();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">finally</span> &#123;</span><br><span class="line">            parentGroup.shutdownGracefully();</span><br><span class="line">            childGroup.shutdownGracefully();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> io.netty.<span class="built_in">buffer</span>.ByteBuf;</span><br><span class="line"><span class="keyword">import</span> io.netty.<span class="built_in">buffer</span>.ByteBufUtil;</span><br><span class="line"><span class="keyword">import</span> io.netty.<span class="built_in">buffer</span>.Unpooled;</span><br><span class="line"><span class="keyword">import</span> io.netty.channel.ChannelHandlerContext;</span><br><span class="line"><span class="keyword">import</span> io.netty.channel.ChannelInboundHandlerAdapter;</span><br><span class="line"><span class="keyword">import</span> util.Consts;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.<span class="built_in">File</span>;</span><br><span class="line"><span class="keyword">import</span> java.io.FileOutputStream;</span><br><span class="line"><span class="keyword">import</span> java.nio.ByteBuffer;</span><br><span class="line"><span class="keyword">import</span> java.nio.CharBuffer;</span><br><span class="line"><span class="keyword">import</span> java.nio.charset.Charset;</span><br><span class="line"><span class="keyword">import</span> java.nio.charset.CharsetDecoder;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> class BusinessServerHandler extends ChannelInboundHandlerAdapter &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> channelRead(ChannelHandlerContext ctx, Object msg) throws Exception &#123;</span><br><span class="line">        ByteBuf buf = (ByteBuf) msg;</span><br><span class="line"></span><br><span class="line">        Consts.logger.info(<span class="string">"BusinessServerHandler接收的二进制形式指令： "</span> + ByteBufUtil.hexDump(buf));</span><br><span class="line">        Consts.logger.info(<span class="string">"BusinessServerHandler接收的ASCII形式指令： "</span> + buf.toString(Charset.forName(<span class="string">"US-ASCII"</span>)));</span><br><span class="line">        System.out.<span class="built_in">println</span>(<span class="string">"BusinessServerHandler call count="</span> + ++count);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">byte</span>[] req = <span class="keyword">new</span> <span class="keyword">byte</span>[buf.readableBytes()];</span><br><span class="line">        buf.<span class="built_in">readBytes</span>(req);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> total = ByteBuffer.wrap(req, <span class="number">0</span>, <span class="number">4</span>).getInt();</span><br><span class="line">        <span class="keyword">int</span> devLength = ByteBuffer.wrap(req, <span class="number">4</span>, <span class="number">4</span>).getInt();</span><br><span class="line">        <span class="keyword">int</span> imgLength = ByteBuffer.wrap(req, <span class="number">8</span>, <span class="number">4</span>).getInt();</span><br><span class="line">        <span class="keyword">String</span> dev = getString(ByteBuffer.wrap(req, <span class="number">12</span>, devLength));</span><br><span class="line">        <span class="keyword">String</span> img = getString(ByteBuffer.wrap(req, <span class="number">12</span> + devLength, total - <span class="number">12</span> - devLength));</span><br><span class="line"></span><br><span class="line">        Consts.logger.info(<span class="string">"设备号： "</span> + dev);</span><br><span class="line">        Consts.logger.info(<span class="string">"图片： "</span> + img);</span><br><span class="line">        saveToImgFile(img, <span class="string">"D:/nnnn.jpg"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * ByteBuffer 转换 String</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * @param buffer</span></span><br><span class="line"><span class="comment">     * @return</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">String</span> getString(ByteBuffer <span class="built_in">buffer</span>) &#123;</span><br><span class="line">        Charset charset = null;</span><br><span class="line">        CharsetDecoder decoder = null;</span><br><span class="line">        CharBuffer charBuffer = null;</span><br><span class="line">        <span class="built_in">try</span> &#123;</span><br><span class="line">            charset = Charset.forName(<span class="string">"UTF-8"</span>);</span><br><span class="line">            decoder = charset.newDecoder();</span><br><span class="line">            <span class="comment">// charBuffer = decoder.decode(buffer);//用这个的话，只能输出来一次结果，第二次显示为空</span></span><br><span class="line">            charBuffer = decoder.decode(<span class="built_in">buffer</span>.asReadOnlyBuffer());</span><br><span class="line">            <span class="built_in">return</span> charBuffer.toString();</span><br><span class="line">        &#125; <span class="built_in">catch</span> (Exception ex) &#123;</span><br><span class="line">            ex.printStackTrace();</span><br><span class="line">            <span class="built_in">return</span> <span class="string">""</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> saveToImgFile(<span class="keyword">String</span> src, <span class="keyword">String</span> output) &#123;</span><br><span class="line">        <span class="built_in">if</span> (src == null || src.length() == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="built_in">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">try</span> &#123;</span><br><span class="line">            FileOutputStream out = <span class="keyword">new</span> FileOutputStream(<span class="keyword">new</span> <span class="built_in">File</span>(output));</span><br><span class="line">            <span class="keyword">byte</span>[] bytes = src.getBytes();</span><br><span class="line">            <span class="built_in">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; bytes.length; i += <span class="number">2</span>) &#123;</span><br><span class="line">                out.<span class="built_in">write</span>(charToInt(bytes[i]) * <span class="number">16</span> + charToInt(bytes[i + <span class="number">1</span>]));</span><br><span class="line">            &#125;</span><br><span class="line">            out.<span class="built_in">close</span>();</span><br><span class="line">        &#125; <span class="built_in">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> charToInt(<span class="keyword">byte</span> ch) &#123;</span><br><span class="line">        <span class="keyword">int</span> val = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">if</span> (ch &gt;= <span class="number">0x30</span> &amp;&amp; ch &lt;= <span class="number">0x39</span>) &#123;</span><br><span class="line">            val = ch - <span class="number">0x30</span>;</span><br><span class="line">        &#125; <span class="built_in">else</span> <span class="built_in">if</span> (ch &gt;= <span class="number">0x41</span> &amp;&amp; ch &lt;= <span class="number">0x46</span>) &#123;</span><br><span class="line">            val = ch - <span class="number">0x41</span> + <span class="number">10</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">return</span> val;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">import io.netty.<span class="keyword">buffer.ByteBuf;</span></span><br><span class="line"><span class="keyword">import </span>io.netty.<span class="keyword">buffer.ByteBufUtil;</span></span><br><span class="line"><span class="keyword">import </span>io.netty.channel.ChannelHandlerContext<span class="comment">;</span></span><br><span class="line">import io.netty.handler.codec.<span class="keyword">ByteToMessageDecoder;</span></span><br><span class="line"><span class="keyword">import </span>util.Consts<span class="comment">;</span></span><br><span class="line"></span><br><span class="line">import <span class="keyword">java.nio.ByteBuffer;</span></span><br><span class="line"><span class="keyword">import </span><span class="keyword">java.nio.charset.Charset;</span></span><br><span class="line"><span class="keyword">import </span><span class="keyword">java.util.List;</span></span><br><span class="line"><span class="keyword"></span></span><br><span class="line"><span class="keyword">/**</span></span><br><span class="line"><span class="keyword"> </span>*     <span class="number">0</span>a0d  设备号长度<span class="number">4</span>   图片长度<span class="number">4</span>    图片</span><br><span class="line"> */</span><br><span class="line">public class SelfDefineEncodeHandler <span class="keyword">extends </span><span class="keyword">ByteToMessageDecoder </span>&#123;</span><br><span class="line"></span><br><span class="line">    private static int <span class="built_in">count</span> = <span class="number">0</span><span class="comment">;</span></span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void decode(ChannelHandlerContext ctx, <span class="keyword">ByteBuf </span><span class="keyword">bufferIn, </span>List&lt;Object&gt; out) throws Exception &#123;</span><br><span class="line">        Consts.logger.info(<span class="string">"decode接收的二进制形式指令： "</span> + <span class="keyword">ByteBufUtil.hexDump(bufferIn));</span></span><br><span class="line"><span class="keyword"> </span>       Consts.logger.info(<span class="string">"decode接收的ASCII形式指令： "</span> + <span class="keyword">bufferIn.toString(Charset.forName("US-ASCII")));</span></span><br><span class="line"><span class="keyword"> </span>       if (<span class="keyword">bufferIn.readableBytes() </span>&lt; <span class="number">10</span>) &#123;</span><br><span class="line">            return<span class="comment">;</span></span><br><span class="line">        &#125;</span><br><span class="line">        int <span class="keyword">beginIndex </span>= <span class="keyword">bufferIn.readerIndex();</span></span><br><span class="line"><span class="keyword"> </span>       int length = <span class="keyword">bufferIn.readInt();</span></span><br><span class="line"><span class="keyword"></span></span><br><span class="line"><span class="keyword"> </span>       System.out.println(<span class="string">"decode call count="</span>+ ++<span class="built_in">count</span>)<span class="comment">;</span></span><br><span class="line">        System.out.println(<span class="string">"bufferIn.readableBytes()="</span>+<span class="keyword">bufferIn.readableBytes());</span></span><br><span class="line"><span class="keyword"> </span>       System.out.println(<span class="string">"beginIndex="</span>+<span class="keyword">beginIndex);</span></span><br><span class="line"><span class="keyword"></span></span><br><span class="line"><span class="keyword"> </span>       if (<span class="keyword">bufferIn.readableBytes() </span>&lt; length) &#123;</span><br><span class="line">            <span class="keyword">bufferIn.readerIndex(beginIndex);</span></span><br><span class="line"><span class="keyword"> </span>           return<span class="comment">;</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">bufferIn.readerIndex(beginIndex </span>+ length - <span class="number">4</span>)<span class="comment">;</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">ByteBuf </span>otherByteBufRef = <span class="keyword">bufferIn.slice(beginIndex, </span>length)<span class="comment">;</span></span><br><span class="line"></span><br><span class="line">        otherByteBufRef.retain()<span class="comment">;</span></span><br><span class="line"></span><br><span class="line">        out.<span class="keyword">add(otherByteBufRef);</span></span><br><span class="line"><span class="keyword"> </span>   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> io.netty.channel.<span class="type">ChannelInitializer</span>;</span><br><span class="line"><span class="keyword">import</span> io.netty.channel.<span class="type">ChannelPipeline</span>;</span><br><span class="line"><span class="keyword">import</span> io.netty.channel.socket.<span class="type">SocketChannel</span>;</span><br><span class="line"></span><br><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">SocketServerInitializer</span> <span class="keyword">extends</span> <span class="title">ChannelInitializer&lt;SocketChannel&gt;</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> void initChannel(<span class="type">SocketChannel</span> ch) <span class="keyword">throws</span> <span class="type">Exception</span> &#123;</span><br><span class="line">        <span class="type">ChannelPipeline</span> pipeline = ch.pipeline();</span><br><span class="line">        pipeline.addLast(<span class="keyword">new</span> <span class="type">SelfDefineEncodeHandler</span>());</span><br><span class="line">        pipeline.addLast(<span class="keyword">new</span> <span class="type">BusinessServerHandler</span>());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+	
+	<div>
+      
+        
+      
+	</div>
+	
+	<div>
+	  
+		<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+	  
+	</div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/netty/" <i class="fa fa-tag"></i> netty</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/Java/2019/04/17/JAVA中使用openoffice将Excel转PDF再转图片功能实现.html" rel="next" title="JAVA中使用openoffice将Excel转PDF再转图片功能实现">
+                <i class="fa fa-chevron-left"></i> JAVA中使用openoffice将Excel转PDF再转图片功能实现
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/Java/2019/04/17/poi-tl生成Word.html" rel="prev" title="poi-tl生成Word">
+                poi-tl生成Word <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNTc4NS8xMjMyMQ=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="Angus" />
+            
+              <p class="site-author-name" itemprop="name">Angus</p>
+              <p class="site-description motion-element" itemprop="description">有梦为马, 游历天涯!</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">50</span>
+                    <span class="site-state-item-name">Artikel</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">17</span>
+                    <span class="site-state-item-name">Kategorien</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">22</span>
+                    <span class="site-state-item-name">Tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/qijianguo" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-globe"></i>
+                神奇的链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://music.163.com/#/user/home?id=86590096" title="网易云音乐" target="_blank">网易云音乐</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://coldplay.com/" title="Coldplay Official Website" target="_blank">Coldplay Official Website</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://elonmusknews.org/" title="获取 Elon Musk 的新闻" target="_blank">获取 Elon Musk 的新闻</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.bilibili.com/video/av6211226/" title="尼古拉·特斯拉：发明了现代世界的人" target="_blank">尼古拉·特斯拉：发明了现代世界的人</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://reuixiy.github.io/about/" title="关于此博客" target="_blank">关于此博客</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          <div id="days"></div>
+</script>
+<script language="javascript">
+function show_date_time(){
+window.setTimeout("show_date_time()", 1000);
+BirthDay=new Date("04/10/2018 15:00:00");
+today=new Date();
+timeold=(today.getTime()-BirthDay.getTime());
+sectimeold=timeold/1000
+secondsold=Math.floor(sectimeold);
+msPerDay=24*60*60*1000
+e_daysold=timeold/msPerDay
+daysold=Math.floor(e_daysold);
+e_hrsold=(e_daysold-daysold)*24;
+hrsold=setzero(Math.floor(e_hrsold));
+e_minsold=(e_hrsold-hrsold)*60;
+minsold=setzero(Math.floor((e_hrsold-hrsold)*60));
+seconds=setzero(Math.floor((e_minsold-minsold)*60));
+document.getElementById('days').innerHTML="已运行"+daysold+"天"+hrsold+"小时"+minsold+"分"+seconds+"秒";
+}
+function setzero(i){
+if (i<10)
+{i="0" + i};
+return i;
+}
+show_date_time();
+</script>
+        </div>
+      </section>
+
+      
+
+      
+	  <div id="days"></div>
+</script>
+<script language="javascript">
+function show_date_time(){
+window.setTimeout("show_date_time()", 1000);
+BirthDay=new Date("04/10/2018 15:00:00");
+today=new Date();
+timeold=(today.getTime()-BirthDay.getTime());
+sectimeold=timeold/1000
+secondsold=Math.floor(sectimeold);
+msPerDay=24*60*60*1000
+e_daysold=timeold/msPerDay
+daysold=Math.floor(e_daysold);
+e_hrsold=(e_daysold-daysold)*24;
+hrsold=setzero(Math.floor(e_hrsold));
+e_minsold=(e_hrsold-hrsold)*60;
+minsold=setzero(Math.floor((e_hrsold-hrsold)*60));
+seconds=setzero(Math.floor((e_minsold-minsold)*60));
+document.getElementById('days').innerHTML="已运行"+daysold+"天"+hrsold+"小时"+minsold+"分"+seconds+"秒";
+}
+function setzero(i){
+if (i<10)
+{i="0" + i};
+return i;
+}
+show_date_time();
+</script>
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Angus</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+<!-- 
+
+-->
+
+  <div class="footer-custom">有梦为马, 游历天涯</div>
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共45.0k字</span>
+</div>
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="true"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.2.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.2.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.2.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.2.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.2.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":"wanko","bottom":-30,"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/"});</script></body>
+</html>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>

@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#fff">
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-center-circle.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.2.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.2.0" color="#fff">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="ls: 列出工作目录所含的文件及子目录,  可以用dir代替ls语法:   ls [选项] [路径或文件] 12345678910111213141516171819202122232425262728-- 注释: 列出mnt目录下的文件及其子目录--&amp;gt; ls /mntapk-update-service  git-repo-for-redmine  license_capture  lo">
+<meta name="keywords" content="linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux命令[系统管理与维护命令]">
+<meta property="og:url" content="https://qijianguo.com/Linux/2019/04/17/Linux命令[系统管理与维护命令].html">
+<meta property="og:site_name" content="Angusの博客">
+<meta property="og:description" content="ls: 列出工作目录所含的文件及子目录,  可以用dir代替ls语法:   ls [选项] [路径或文件] 12345678910111213141516171819202122232425262728-- 注释: 列出mnt目录下的文件及其子目录--&amp;gt; ls /mntapk-update-service  git-repo-for-redmine  license_capture  lo">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://img-blog.csdn.net/20181008150804369?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1OTc0NzU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/20181008151130846?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1OTc0NzU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/20181008152506209?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1OTc0NzU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:updated_time" content="2019-04-17T07:46:02.028Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux命令[系统管理与维护命令]">
+<meta name="twitter:description" content="ls: 列出工作目录所含的文件及子目录,  可以用dir代替ls语法:   ls [选项] [路径或文件] 12345678910111213141516171819202122232425262728-- 注释: 列出mnt目录下的文件及其子目录--&amp;gt; ls /mntapk-update-service  git-repo-for-redmine  license_capture  lo">
+<meta name="twitter:image" content="https://img-blog.csdn.net/20181008150804369?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1OTc0NzU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Angusの博客" type="application/atom+xml" />
+
+
+
+
+  <link rel="canonical" href="https://qijianguo.com/Linux/2019/04/17/Linux命令[系统管理与维护命令].html"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Linux命令[系统管理与维护命令] | Angusの博客</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+	
+
+    
+	<a href="https://github.com/qijianguo"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
+
+
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Angusの博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">学习</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Startseite</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archiv<span class="badge">50</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />Kategorien<span class="badge">17</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />Tags<span class="badge">22</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-top">
+    <a href="/top/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-signal"></i> <br />top</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-futbol-o"></i> <br />Über</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://qijianguo.com/Linux/2019/04/17/Linux命令[系统管理与维护命令].html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Angus">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Angusの博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Linux命令[系统管理与维护命令]
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-04-17 14:18:44 / Updated at: 15:46:02" itemprop="dateCreated datePublished" datetime="2019-04-17T14:18:44+08:00">2019-04-17</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <ul>
+<li><p>ls: 列出工作目录所含的文件及子目录,  可以用dir代替ls<br>语法:   <strong><em>ls [选项] [路径或文件]</em></strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">-- 注释: 列出mnt目录下的文件及其子目录--</span><br><span class="line">&gt; ls /mnt</span><br><span class="line">apk-update-service  git-repo-for-redmine  license_capture  lost+found  mysql  newprojects  test</span><br><span class="line"></span><br><span class="line">-- 注释: 列出/mnt目录下文件及其子目录的详细信息--</span><br><span class="line">&gt; ls  -l  /mnt</span><br><span class="line">total 40</span><br><span class="line">drwxrwxrwx  2 root root  4096 Jul 22 09:56 apk-update-service</span><br><span class="line">drwxr-xr-x  5 root root  4096 Jun 27  2017 git-repo-for-redmine</span><br><span class="line">drwxr-xr-x  3 root root  4096 Jul 31  2017 license_capture</span><br><span class="line">drwx------  2 root root 16384 Jun  6  2017 lost+found</span><br><span class="line">drwxr-xr-x  3 root root  4096 Jun 10  2017 mysql</span><br><span class="line">drwxr-xr-x  6 root root  4096 Oct 10  2017 newprojects</span><br><span class="line">drwxr-xr-x 10 root root  4096 Nov  6  2017 test</span><br><span class="line"></span><br><span class="line">-- 注释: 显示mnt目录下的所有文件及其目录的详细信息, 并显示文件类型标记--</span><br><span class="line">&gt; ls -alF /mnt</span><br><span class="line"> ls -alF /mnt </span><br><span class="line">total 48</span><br><span class="line">drwxr-xr-x   9 root root  4096 Jul 31  2017 ./</span><br><span class="line">dr-xr-xr-x. 25 root root  4096 Jun  8 15:30 ../</span><br><span class="line">drwxrwxrwx   2 root root  4096 Jul 22 09:56 apk-update-service/</span><br><span class="line">drwxr-xr-x   5 root root  4096 Jun 27  2017 git-repo-for-redmine/</span><br><span class="line">drwxr-xr-x   3 root root  4096 Jul 31  2017 license_capture/</span><br><span class="line">drwx------   2 root root 16384 Jun  6  2017 lost+found/</span><br><span class="line">drwxr-xr-x   3 root root  4096 Jun 10  2017 mysql/</span><br><span class="line">drwxr-xr-x   6 root root  4096 Oct 10  2017 newprojects/</span><br><span class="line">drwxr-xr-x  10 root root  4096 Nov  6  2017 test/</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>pwd: 显示当前的工作目录, 即当前所在的工作目录的绝对路径名称<br>语法: <strong><em>pwd</em></strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; pwd</span><br><span class="line">/root</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>cd: 改变当前的工作目录<br>语法: cd  [目录名]</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; cd  /mnt</span><br><span class="line">&gt; pwd</span><br><span class="line">/mnt</span><br></pre></td></tr></table></figure>
+<p>语法: <strong>cd</strong> 返回根目录中<br>语法: <strong>cd - </strong>返回上次调整的目录中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt; pwd    -- 当前目录</span><br><span class="line">/mnt       </span><br><span class="line">&gt; cd       -- 跳到根目录</span><br><span class="line">/root</span><br><span class="line">&gt; cd -     -- 跳到最近一次跳转的目录中</span><br><span class="line">/mnt</span><br></pre></td></tr></table></figure>
+<ul>
+<li>date: 显示或修改系统时间和日期(只有超级用户才能使用date命令修改时间, 一般用户只能用date命令显示时间)<br>语法: <strong><em>date [选项] ‘+时间格式’</em></strong></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; date &apos;+%y-%m-%d&apos;         </span><br><span class="line">18-10-08</span><br></pre></td></tr></table></figure>
+<p>语法: <strong><em>date ‘%x’ 或  ‘%X’</em></strong> 显示日期/时间</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; date &apos;+today is %x %X&apos;</span><br><span class="line">today is 10/08/2018 02:21:41 PM</span><br></pre></td></tr></table></figure>
+<p>语法: <strong><em>date -s yyyyMMdd HH:mm:ss</em></strong>或 <strong><em>date -s yyyyMMdd</em></strong> 或 <strong><em>date  -s HH:mm:ss</em></strong> 设置系统时间</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; date -s &quot;20180715 17:25&quot;</span><br><span class="line">Tue Jul 15 17:25:00 CST 2018</span><br></pre></td></tr></table></figure>
+<p>语法: <strong><em>date -d “num years/months/days ago” %y-%m-%d</em></strong>当前时间的前年/月/日的时间<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; date +%y-%m-%d                 </span><br><span class="line">18-10-08</span><br><span class="line">&gt; date -d &quot;10 days ago&quot; +%y-%m-%d</span><br><span class="line">18-09-28</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>clear : 清除屏幕信息<br>语法: clear</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; clear</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>man:  显示命令的帮助信息<br>语法: <strong><em>man [命令名称]</em></strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&gt; man  clear</span><br><span class="line"></span><br><span class="line">clear(1)                                                              clear(1)</span><br><span class="line"></span><br><span class="line">NAME</span><br><span class="line">       clear - clear the terminal screen</span><br><span class="line"></span><br><span class="line">SYNOPSIS</span><br><span class="line">       clear</span><br><span class="line"></span><br><span class="line">DESCRIPTION</span><br><span class="line">       clear clears your screen if this is possible.  It looks in the environment for the terminal type and then in the terminfo database to figure out how to clear the screen.</span><br><span class="line"></span><br><span class="line">       clear ignores any command-line parameters that may be present.</span><br><span class="line"></span><br><span class="line">SEE ALSO</span><br><span class="line">       tput(1), terminfo(5)</span><br><span class="line"></span><br><span class="line">       This describes ncurses version 5.7 (patch 20090207).</span><br><span class="line"></span><br><span class="line">                                                                      clear(1)</span><br><span class="line">(END)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>who: 显示当前登录到系统的用户<br>语法: who</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&gt; who</span><br><span class="line">root     pts/0        2018-10-08 13:26 (203.110.178.83)</span><br><span class="line">-- 注释: 输出格式为</span><br><span class="line">名称 [状态] 终端 时间 [活动] [进程标识]（主机名）</span><br><span class="line">    * 名称：用户的登录名。</span><br><span class="line">    * 状态：表明终端是否对用户都是可写的。</span><br><span class="line">    * 终端：类似于pts/1、pts/2等，此终端标识在/dev目录中可找到。</span><br><span class="line">    * 时间：用户登录系统的时间。</span><br><span class="line">    * 活动：某个用户在自己的终端上最后一次活动发生以来到现在的时间，如果此项是个“.”，就表示一分钟内的终端活动；如果终端保持静止已经超过24小时或自从系统启动以来还没有被使用过，那么此项标记为“old”。</span><br><span class="line">    * 进程标识：用户登录shell的进程id。</span><br><span class="line">    * 主机名：登录到Linux系统上的客户端机器标识。</span><br><span class="line">--</span><br><span class="line"></span><br><span class="line">-- 注释: 查看运行级别-- </span><br><span class="line">&gt; who -r  </span><br><span class="line">         run-level 3  2017-07-15 15:26</span><br><span class="line">&gt; who  -w</span><br><span class="line">root     + pts/0        2018-10-08 13:26 (203.110.178.83)</span><br><span class="line"></span><br><span class="line">&gt;  who -buT</span><br><span class="line">           system boot  2017-07-15 15:26</span><br><span class="line">root     + pts/0        2018-10-08 13:26   .          2887 (203.110.178.83)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>free: 显示内存状态(系统物理内存、虚拟内存、共享内存和系统缓存)<br>语法: free [选项] [-s (间隔秒数)]<figure class="highlight tap"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; free</span><br><span class="line">             total       used       free     shared    buffers     cached</span><br><span class="line">Mem:      <span class="number"> 8061108 </span>  <span class="number"> 7875964 </span>   <span class="number"> 185144 </span>   <span class="number"> 146236 </span>   <span class="number"> 201324 </span>    558792</span><br><span class="line">-/+ buffers/cache:   <span class="number"> 7115848 </span>    945260</span><br><span class="line">Swap:           <span class="number"> 0 </span>        <span class="number"> 0 </span>         0</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><img src="https://img-blog.csdn.net/20181008150804369?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1OTc0NzU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="free参数说明"></p>
+<ul>
+<li>ps: 系统进程瞬间的运行状态, 非常常用, 可通过组合选项(-ef、aux)准确定位系统运行的状态<br>语法: <strong><em>ps [选项]</em></strong><br><img src="https://img-blog.csdn.net/20181008151130846?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1OTc0NzU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="ps参数"></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&gt; ps</span><br><span class="line">  PID TTY          TIME CMD</span><br><span class="line"> 2887 pts/0    00:00:00 zsh</span><br><span class="line">24884 pts/0    00:00:00 ps</span><br><span class="line"></span><br><span class="line">-- 注释: (输出说明)</span><br><span class="line">pid: 进程的标识符</span><br><span class="line">tty: 进程所属的终端控制台</span><br><span class="line">time: 进程所使用的总的cpu时间</span><br><span class="line">cmd: 列出正在执行的命令行</span><br><span class="line">-- </span><br><span class="line"></span><br><span class="line">&gt; ps -aux </span><br><span class="line">&gt; ps -ef</span><br></pre></td></tr></table></figure>
+<ul>
+<li>top: 类型windows中的任务管理器, 能够实时显示进程的资源占用情况, 可以按照cpu使用情况或内存占用情况进行排序<br><img src="https://img-blog.csdn.net/20181008152506209?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1OTc0NzU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="top参数"></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">&gt; top</span><br><span class="line">top - 15:31:25 up 450 days, 4 min,  1 user,  load average: 0.00, 0.00, 0.00</span><br><span class="line">Tasks: 403 total,   1 running, 402 sleeping,   0 stopped,   0 zombie</span><br><span class="line">Cpu(s):  0.9%us,  0.4%sy,  0.0%ni, 98.7%id,  0.0%wa,  0.0%hi,  0.0%si,  0.0%st</span><br><span class="line">Mem:   8061108k total,  7873600k used,   187508k free,   201444k buffers</span><br><span class="line">Swap:        0k total,        0k used,        0k free,   538576k cached</span><br><span class="line"></span><br><span class="line">  PID USER      PR  NI  VIRT  RES  SHR S %CPU %MEM    TIME+  COMMAND                                                                                                                                                           </span><br><span class="line"> 3687 git       20   0 1460m 760m  11m S  1.0  9.7 509:44.69 bundle                                                                                                                                                             </span><br><span class="line">15635 gitlab-r  20   0  241m  12m  912 S  1.0  0.2 366:27.19 redis-server </span><br><span class="line"></span><br><span class="line">-- 注释: </span><br><span class="line">&gt; 第一行:  </span><br><span class="line">15:31:25 当前系统的时间；</span><br><span class="line">up 450 days 表示系统已启动450天4分钟；</span><br><span class="line">1 user当前在线的用户数为1人；</span><br><span class="line">load average:0.00,0.00,0.00表示系统平均负载,3个数分别为1分钟/5分钟/15分钟前到现在的系统平均负载.</span><br><span class="line"></span><br><span class="line">&gt; 第二、三行</span><br><span class="line">Tasks：403 total总共有403个进程；</span><br><span class="line">1 running： 1个运行</span><br><span class="line">402 sleeping：402个处于休眠状态</span><br><span class="line">0 stopped：0个停止</span><br><span class="line">0 zombie：0个僵死</span><br><span class="line">Cpu(s)：0.9% us：表示用戶進程占用CPU的百分比。</span><br><span class="line">0.1% sy：系统进程占用CPU的百分比。</span><br><span class="line">0.0% ni：用户进程空间內改变过优先级的进程占用CPU的百分比。</span><br><span class="line">99.3% id：空闲CPU占用的百分比。</span><br><span class="line">0.2% wa：等待输入、输出的进程占用CPU的百分比。</span><br><span class="line"></span><br><span class="line">&gt; 最后两行</span><br><span class="line">Mem：4059952k total：系統的物理內存大小。</span><br><span class="line">4009540k used：已經使用的物理內存大小。</span><br><span class="line">50412k free：目前空余內存大小。</span><br><span class="line">468964k buffers：用作內核緩沖區的內存大小。</span><br><span class="line">Swap：8193108k total：交換分區內存大小。</span><br><span class="line">0k used：已經使用的交換分區大小。</span><br><span class="line">8193108k free：空閑的交換分區大小。</span><br><span class="line">2320396k cached：緩存大小。</span><br><span class="line"></span><br><span class="line">&gt; 进程信息区</span><br><span class="line">進程信息區</span><br><span class="line"></span><br><span class="line">進程信息區顯示了每個進程的運行狀態，我們先來看一下每列輸出的含義。</span><br><span class="line"></span><br><span class="line">PID：进程的id。</span><br><span class="line">USER：进程所有者的用户名。</span><br><span class="line">pr：进程优先级。</span><br><span class="line">NI：nice值。负值表示高优先级，正值表示低优先级。</span><br><span class="line">VIRT：进程使用的虚拟内存总量，单位KB。VIRT=SWAP+RES。</span><br><span class="line">RES：进程使用的、未被换出的物理內存大小，单位KB。RES=CODE+DATA，其中，CODE为执行代码占用的物理內存大小，DATA为数据占用的內存大小。</span><br><span class="line">SHR：共享內存大小，单位KB。</span><br><span class="line">S：进程状态，D表示不可中断的睡眠状态，R表示运行状态，S表示睡眠状态，T表示跟踪/停止，Z表示僵死进程。</span><br><span class="line">%CPU：上次更新到现在的CPU时间占用百分比。</span><br><span class="line">%MEM：进程占用的物理內存百分比。</span><br><span class="line">TIME+：进程總計使用的CPU时间，单位为1/100秒。</span><br><span class="line">COMMAND：正在运行进程的命令名或者命令路经。</span><br><span class="line">--</span><br></pre></td></tr></table></figure>
+<ul>
+<li>find: 查找文件<br>语法: find [路径]  </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">-- 注释: 查找大于100M的文件, 但是这样无法看文件的大小/属性等 --</span><br><span class="line">&gt; find . -type f -size +100M</span><br><span class="line">./Downloads/root@cq.hbjk.com.cn</span><br><span class="line">./Downloads/jdk-8u131-linux-x64.rpm</span><br><span class="line"></span><br><span class="line">-- 注释: 查找大于100M的文件, 可以看到文件的大小/属性 --</span><br><span class="line">&gt;  find . -type f -size +100M -print0 | xargs -0 ls -l</span><br><span class="line">-rw-r--r-- 1 root root 169983496 Mar 16  2017 ./Downloads/jdk-8u131-linux-x64.rpm</span><br><span class="line">-rw-r--r-- 1 root root 169983496 Oct 18  2017 ./Downloads/root@cq.hbjk.com.cn</span><br><span class="line"></span><br><span class="line">-- 注释: 查找大于100M的文件, 只看大小 --</span><br><span class="line">&gt; find . -type f -size +100M  -print0 | xargs -0 du -h</span><br><span class="line">163M	./Downloads/root@cq.hbjk.com.cn</span><br><span class="line">163M	./Downloads/jdk-8u131-linux-x64.rpm</span><br><span class="line"></span><br><span class="line">-- 注释: 查找大于100M的文件, 只看大小,  并排序 --</span><br><span class="line">&gt; find . -type f -size +100M -print0 | xargs -0 du -h | sort -nr</span><br><span class="line">163M	./Downloads/root@cq.hbjk.com.cn</span><br><span class="line">163M	./Downloads/jdk-8u131-linux-x64.rpm</span><br></pre></td></tr></table></figure>
+<ul>
+<li>du: 查看当前指定文件或目录(会递归显示子目录)占用磁盘空间大小</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">-- 注释: 查询depth为1的所有文件, 并显示文件大小--</span><br><span class="line">&gt; du -h --max-depth=1</span><br><span class="line">69M	./.m2</span><br><span class="line">60K	./.cache</span><br><span class="line">1.4G	./Downloads</span><br><span class="line">12K	./.oracle_jre_usage</span><br><span class="line">8.0K	./.pki</span><br><span class="line">170M	./.nvm</span><br><span class="line">208M	./.npm</span><br><span class="line">3.6M	./.gem</span><br><span class="line">8.0K	./.pip</span><br><span class="line">112K	./tmp</span><br><span class="line">28M	./.bundle</span><br><span class="line">56K	./.java</span><br><span class="line">276K	./.ssh</span><br><span class="line">4.9M	./.oh-my-zsh</span><br><span class="line">296K	./.vue-templates</span><br><span class="line">1.9G	.</span><br><span class="line"></span><br><span class="line">-- 注释: 查询depth为1的所有文件, 并将文件大小单位用M, 并排序 --</span><br><span class="line">&gt; du -hm --max-depth=1 | sort -n</span><br><span class="line">1	./.cache</span><br><span class="line">1	./.java</span><br><span class="line">1	./.oracle_jre_usage</span><br><span class="line">1	./.pip</span><br><span class="line">1	./.pki</span><br><span class="line">1	./.ssh</span><br><span class="line">1	./tmp</span><br><span class="line">1	./.vue-templates</span><br><span class="line">4	./.gem</span><br><span class="line">5	./.oh-my-zsh</span><br><span class="line">28	./.bundle</span><br><span class="line">69	./.m2</span><br><span class="line">170	./.nvm</span><br><span class="line">208	./.npm</span><br><span class="line">1400	./Downloads</span><br><span class="line">1883	.</span><br><span class="line"></span><br><span class="line">-- 注释: 查询depth为1的所有文件, 并将文件大小单位用M, 排序, 取前12个--</span><br><span class="line">&gt;du -hm --max-depth=2 | sort -nr | head -12</span><br><span class="line">1883	.</span><br><span class="line">1400	./Downloads</span><br><span class="line">383	./Downloads/ruby-2.3.3</span><br><span class="line">377	./Downloads/ruby-2.4.1</span><br><span class="line">208	./.npm</span><br><span class="line">170	./.nvm</span><br><span class="line">167	./.nvm/versions</span><br><span class="line">73	./Downloads/redis-4.0.1</span><br><span class="line">69	./.m2/repository</span><br><span class="line">69	./.m2</span><br><span class="line">47	./Downloads/zookeeper-3.4.9</span><br><span class="line">45	./Downloads/kafka_2.11-0.11.0.0</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+	
+	<div>
+      
+        
+      
+	</div>
+	
+	<div>
+	  
+		<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+	  
+	</div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/linux/" <i class="fa fa-tag"></i> linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/Java/2019/04/17/Arrays.asList()返回ArrayList调用remove()或add()出现 java.lang.UnsupportedOperationException异常.html" rel="next" title="Arrays.asList()返回ArrayList调用remove()或add()出现 java.lang.UnsupportedOperationException异常">
+                <i class="fa fa-chevron-left"></i> Arrays.asList()返回ArrayList调用remove()或add()出现 java.lang.UnsupportedOperationException异常
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/Java/2019/04/17/数字格式化工具类     持续更新.html" rel="prev" title="数字格式化工具类     持续更新">
+                数字格式化工具类     持续更新 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNTc4NS8xMjMyMQ=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="Angus" />
+            
+              <p class="site-author-name" itemprop="name">Angus</p>
+              <p class="site-description motion-element" itemprop="description">有梦为马, 游历天涯!</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">50</span>
+                    <span class="site-state-item-name">Artikel</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">17</span>
+                    <span class="site-state-item-name">Kategorien</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">22</span>
+                    <span class="site-state-item-name">Tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/qijianguo" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-globe"></i>
+                神奇的链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://music.163.com/#/user/home?id=86590096" title="网易云音乐" target="_blank">网易云音乐</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://coldplay.com/" title="Coldplay Official Website" target="_blank">Coldplay Official Website</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://elonmusknews.org/" title="获取 Elon Musk 的新闻" target="_blank">获取 Elon Musk 的新闻</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.bilibili.com/video/av6211226/" title="尼古拉·特斯拉：发明了现代世界的人" target="_blank">尼古拉·特斯拉：发明了现代世界的人</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://reuixiy.github.io/about/" title="关于此博客" target="_blank">关于此博客</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          <div id="days"></div>
+</script>
+<script language="javascript">
+function show_date_time(){
+window.setTimeout("show_date_time()", 1000);
+BirthDay=new Date("04/10/2018 15:00:00");
+today=new Date();
+timeold=(today.getTime()-BirthDay.getTime());
+sectimeold=timeold/1000
+secondsold=Math.floor(sectimeold);
+msPerDay=24*60*60*1000
+e_daysold=timeold/msPerDay
+daysold=Math.floor(e_daysold);
+e_hrsold=(e_daysold-daysold)*24;
+hrsold=setzero(Math.floor(e_hrsold));
+e_minsold=(e_hrsold-hrsold)*60;
+minsold=setzero(Math.floor((e_hrsold-hrsold)*60));
+seconds=setzero(Math.floor((e_minsold-minsold)*60));
+document.getElementById('days').innerHTML="已运行"+daysold+"天"+hrsold+"小时"+minsold+"分"+seconds+"秒";
+}
+function setzero(i){
+if (i<10)
+{i="0" + i};
+return i;
+}
+show_date_time();
+</script>
+        </div>
+      </section>
+
+      
+
+      
+	  <div id="days"></div>
+</script>
+<script language="javascript">
+function show_date_time(){
+window.setTimeout("show_date_time()", 1000);
+BirthDay=new Date("04/10/2018 15:00:00");
+today=new Date();
+timeold=(today.getTime()-BirthDay.getTime());
+sectimeold=timeold/1000
+secondsold=Math.floor(sectimeold);
+msPerDay=24*60*60*1000
+e_daysold=timeold/msPerDay
+daysold=Math.floor(e_daysold);
+e_hrsold=(e_daysold-daysold)*24;
+hrsold=setzero(Math.floor(e_hrsold));
+e_minsold=(e_hrsold-hrsold)*60;
+minsold=setzero(Math.floor((e_hrsold-hrsold)*60));
+seconds=setzero(Math.floor((e_minsold-minsold)*60));
+document.getElementById('days').innerHTML="已运行"+daysold+"天"+hrsold+"小时"+minsold+"分"+seconds+"秒";
+}
+function setzero(i){
+if (i<10)
+{i="0" + i};
+return i;
+}
+show_date_time();
+</script>
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Angus</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+<!-- 
+
+-->
+
+  <div class="footer-custom">有梦为马, 游历天涯</div>
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共45.0k字</span>
+</div>
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="true"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.2.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.2.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.2.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.2.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.2.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":"wanko","bottom":-30,"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/"});</script></body>
+</html>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>

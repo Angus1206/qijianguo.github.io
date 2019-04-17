@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#fff">
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-center-circle.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.2.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.2.0" color="#fff">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="准备更新yum1&amp;gt; yum update 安装wget 1&amp;gt; yum install wget 下载EPEL1&amp;gt; wget http：//dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm 安装EPEL 1&amp;gt; rpm -ivh epel-release-6-8.noarch.rpm  知识点：">
+<meta name="keywords" content="linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux有趣（无用）的命令">
+<meta property="og:url" content="https://qijianguo.com/Linux/2019/04/17/Linux有趣（无用）的命令.html">
+<meta property="og:site_name" content="Angusの博客">
+<meta property="og:description" content="准备更新yum1&amp;gt; yum update 安装wget 1&amp;gt; yum install wget 下载EPEL1&amp;gt; wget http：//dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm 安装EPEL 1&amp;gt; rpm -ivh epel-release-6-8.noarch.rpm  知识点：">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20181122101424177.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1OTc0NzU5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20181122104258532.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1OTc0NzU5,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2018112211354044.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1OTc0NzU5,size_16,color_FFFFFF,t_70">
+<meta property="og:updated_time" content="2019-04-17T07:46:05.442Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux有趣（无用）的命令">
+<meta name="twitter:description" content="准备更新yum1&amp;gt; yum update 安装wget 1&amp;gt; yum install wget 下载EPEL1&amp;gt; wget http：//dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm 安装EPEL 1&amp;gt; rpm -ivh epel-release-6-8.noarch.rpm  知识点：">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20181122101424177.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1OTc0NzU5,size_16,color_FFFFFF,t_70">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Angusの博客" type="application/atom+xml" />
+
+
+
+
+  <link rel="canonical" href="https://qijianguo.com/Linux/2019/04/17/Linux有趣（无用）的命令.html"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Linux有趣（无用）的命令 | Angusの博客</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+	
+
+    
+	<a href="https://github.com/qijianguo"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
+
+
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Angusの博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">学习</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Startseite</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archiv<span class="badge">50</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />Kategorien<span class="badge">17</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />Tags<span class="badge">22</span></a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-top">
+    <a href="/top/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-signal"></i> <br />top</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-futbol-o"></i> <br />Über</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://qijianguo.com/Linux/2019/04/17/Linux有趣（无用）的命令.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Angus">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Angusの博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Linux有趣（无用）的命令
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 2019-04-17 14:18:44 / Updated at: 15:46:05" itemprop="dateCreated datePublished" datetime="2019-04-17T14:18:44+08:00">2019-04-17</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">in</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h3><p>更新yum<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash"> yum update</span></span><br></pre></td></tr></table></figure></p>
+<p>安装wget</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash"> yum install wget</span></span><br></pre></td></tr></table></figure>
+<p>下载EPEL<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; wget http：<span class="regexp">//</span>dl.fedoraproject.org<span class="regexp">/pub/</span>epel<span class="regexp">/6/</span>x86_64<span class="regexp">/epel-release-6-8.noarch.rpm</span></span><br></pre></td></tr></table></figure></p>
+<p>安装EPEL</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; rpm -ivh epel-release-<span class="number">6</span>-<span class="number">8</span><span class="selector-class">.noarch</span><span class="selector-class">.rpm</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>知识点： 什么是EPEL？<br><a href="http://www.cnblogs.com/gaoyuechen/p/7683471.html" target="_blank" rel="noopener">什么是EPEL 及 Centos上安装EPEL</a></p>
+</blockquote>
+<h3 id="sl-命令"><a href="#sl-命令" class="headerlink" title="sl 命令"></a>sl 命令</h3><p>一列火车呼啸而过</p>
+<p>安装sl</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash"> wget install sl</span></span><br></pre></td></tr></table></figure>
+<p>运行sl</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash"> sl</span></span><br></pre></td></tr></table></figure>
+<p>结果：<br><img src="https://img-blog.csdnimg.cn/20181122101424177.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1OTc0NzU5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="fortune-命令"><a href="#fortune-命令" class="headerlink" title="fortune 命令"></a>fortune 命令</h3><p>给你一句名言警句</p>
+<p>下载 fortune<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; wget http:<span class="regexp">//</span>springdale.math.ias.edu<span class="regexp">/data/</span>puias<span class="regexp">/7/</span>x86_64<span class="regexp">/os/</span>Addons<span class="regexp">/Packages/</span>fortune-mod-<span class="number">1.99</span>.<span class="number">1</span>-<span class="number">17</span>.sdl7.x86_64.rpm</span><br></pre></td></tr></table></figure></p>
+<p>安装 fortune</p>
+<figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;  rpm -ivh fortune-mod<span class="string">-1</span>.99.1<span class="string">-17</span>.sdl7.x86_64.rpm</span><br><span class="line"></span><br><span class="line">warning: fortune-mod<span class="string">-1</span>.99.1<span class="string">-17</span>.sdl7.x86_64.rpm: Header V3 RSA/SHA256 Signature, key ID 41a40948: NOKEY</span><br><span class="line"><span class="keyword">error: </span>Failed dependencies:</span><br><span class="line">	librecode.so.0()(64bit) is needed by fortune-mod<span class="string">-1</span>.99.1<span class="string">-17</span>.sdl7.x86_64</span><br></pre></td></tr></table></figure>
+<p>如果出现error， 则需要安装依赖</p>
+<p>下载librecode(<a href="https://altlinux.pkgs.org/sisyphus/classic-x86_64/librecode-3.6-alt11.1.1.x86_64.rpm.html" target="_blank" rel="noopener">网站传送门</a>)</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; wget http:<span class="regexp">//</span>ftp.altlinux.org<span class="regexp">/pub/</span>distributions<span class="regexp">/ALTLinux/</span>Sisyphus<span class="regexp">/x86_64/</span>RPMS.classic<span class="regexp">//</span>librecode-<span class="number">3.6</span>-alt11.<span class="number">1.1</span>.x86_64.rpm</span><br></pre></td></tr></table></figure>
+<p>安装 librecode<br><figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; rpm -ivh librecode<span class="number">-3.6</span>-alt11<span class="number">.1</span><span class="number">.1</span>.x86_64.rpm</span><br><span class="line">Preparing...                          ################################# [<span class="number">100</span>%]</span><br><span class="line">Updating / installing...</span><br><span class="line">   <span class="number">1</span>:librecode<span class="number">-3.6</span>-alt11<span class="number">.1</span><span class="number">.1</span>          ################################# [<span class="number">100</span>%]</span><br></pre></td></tr></table></figure></p>
+<p>重新安装 fortune</p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;  rpm -ivh fortune-mod<span class="number">-1.99</span><span class="number">.1</span><span class="number">-17.</span>sdl7.x86_64.rpm</span><br><span class="line">Preparing...                          ################################# [<span class="number">100</span>%]</span><br><span class="line">Updating / installing...</span><br><span class="line">   <span class="number">1</span>:fortune-mod<span class="number">-1.99</span><span class="number">.1</span><span class="number">-17.</span>sdl7       ################################# [<span class="number">100</span>%]</span><br></pre></td></tr></table></figure>
+<p>效果：<br><img src="https://img-blog.csdnimg.cn/20181122104258532.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1OTc0NzU5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h3 id="cowsay-命令"><a href="#cowsay-命令" class="headerlink" title="cowsay 命令"></a>cowsay 命令</h3><p>一头很好玩的牛<br>安装</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash"> yum installl cowsay -y</span></span><br></pre></td></tr></table></figure>
+<p>运行：</p>
+<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&gt; cowsay <span class="string">"牛逼浑浑"</span></span><br><span class="line"> ______</span><br><span class="line"><span class="variable">&lt; 牛逼浑浑 &gt;</span></span><br><span class="line"> ------</span><br><span class="line">        \   ^__^</span><br><span class="line">         \  (oo)\_______</span><br><span class="line">            (__)\       )\/\</span><br><span class="line">                ||<span class="string">----w </span>|</span><br><span class="line">                ||<span class="string">     </span>||</span><br></pre></td></tr></table></figure>
+<p>查看其它支持的动物<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt; cowsay -l</span><br><span class="line">Cow files <span class="keyword">in</span> /usr/share/cowsay:</span><br><span class="line">beavis.zen blowfish bong bud-frogs bunny cheese cower<span class="built_in"> default </span>dragon</span><br><span class="line">dragon-and-cow elephant elephant-in-snake eyes flaming-sheep ghostbusters</span><br><span class="line">head-in hellokitty kiss kitty koala kosh luke-koala mech-and-cow meow milk</span><br><span class="line">moofasa moose mutilated ren satanic sheep skeleton small sodomized</span><br><span class="line">stegosaurus stimpy supermilker surgery telebears three-eyes turkey turtle</span><br><span class="line">tux udder vader vader-koala www</span><br></pre></td></tr></table></figure></p>
+<p>切换其它图案（如下：kiss）</p>
+<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&gt; cowsay -f kiss  <span class="string">"I LOVE YOU"</span></span><br><span class="line"> ____________</span><br><span class="line"><span class="variable">&lt; I LOVE YOU &gt;</span></span><br><span class="line"> ------------</span><br><span class="line">     \</span><br><span class="line">      \</span><br><span class="line">             ,;;;;;;;,</span><br><span class="line">            ;;;;;;;;;;;,</span><br><span class="line">           ;;;;;'_____;'</span><br><span class="line">           ;;;(/))))|<span class="string">((\</span></span><br><span class="line"><span class="string">           _;;((((((</span>|<span class="string">))))</span></span><br><span class="line"><span class="string">          / </span>|<span class="string">_\\\\\\\\\\\\</span></span><br><span class="line"><span class="string">     .--~(  \ ~))))))))))))</span></span><br><span class="line"><span class="string">    /     \  `\-(((((((((((\\</span></span><br><span class="line"><span class="string">    </span>|<span class="string">    </span>|<span class="string"> `\   ) </span>|<span class="string">\       /</span>|<span class="string">)</span></span><br><span class="line"><span class="string">     </span>|<span class="string">    </span>|<span class="string">  `. _/  \_____/ </span>|</span><br><span class="line">      |<span class="string">    , `\~            /</span></span><br><span class="line"><span class="string">       </span>|<span class="string">    \  \           /</span></span><br><span class="line"><span class="string">      </span>|<span class="string"> `.   `\</span>|<span class="string">          /</span></span><br><span class="line"><span class="string">      </span>|<span class="string">   ~-   `\        /</span></span><br><span class="line"><span class="string">       \____~._/~ -_,   (\</span></span><br><span class="line"><span class="string">        </span>|<span class="string">-----</span>|<span class="string">\   \    ';;</span></span><br><span class="line"><span class="string">       </span>|<span class="string">      </span>|<span class="string"> :;;;'     \</span></span><br><span class="line"><span class="string">      </span>|<span class="string">  /    </span>|<span class="string">            </span>|</span><br><span class="line">      |<span class="string">       </span>|<span class="string">            </span>|</span><br></pre></td></tr></table></figure>
+<p>让cowsay说出fortune的内容</p>
+<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&gt; fortune |<span class="string"> cowsay -f kiss</span></span><br><span class="line"><span class="string"> _____________________________________</span></span><br><span class="line"><span class="string">/ NEWS FLASH!! Today the East German  \</span></span><br><span class="line">|<span class="string"> pole-vault champion became the West </span>|</span><br><span class="line">\ German pole-vault champion.         /</span><br><span class="line"> -------------------------------------</span><br><span class="line">     \</span><br><span class="line">      \</span><br><span class="line">             ,;;;;;;;,</span><br><span class="line">            ;;;;;;;;;;;,</span><br><span class="line">           ;;;;;'_____;'</span><br><span class="line">           ;;;(/))))|<span class="string">((\</span></span><br><span class="line"><span class="string">           _;;((((((</span>|<span class="string">))))</span></span><br><span class="line"><span class="string">          / </span>|<span class="string">_\\\\\\\\\\\\</span></span><br><span class="line"><span class="string">     .--~(  \ ~))))))))))))</span></span><br><span class="line"><span class="string">    /     \  `\-(((((((((((\\</span></span><br><span class="line"><span class="string">    </span>|<span class="string">    </span>|<span class="string"> `\   ) </span>|<span class="string">\       /</span>|<span class="string">)</span></span><br><span class="line"><span class="string">     </span>|<span class="string">    </span>|<span class="string">  `. _/  \_____/ </span>|</span><br><span class="line">      |<span class="string">    , `\~            /</span></span><br><span class="line"><span class="string">       </span>|<span class="string">    \  \           /</span></span><br><span class="line"><span class="string">      </span>|<span class="string"> `.   `\</span>|<span class="string">          /</span></span><br><span class="line"><span class="string">      </span>|<span class="string">   ~-   `\        /</span></span><br><span class="line"><span class="string">       \____~._/~ -_,   (\</span></span><br><span class="line"><span class="string">        </span>|<span class="string">-----</span>|<span class="string">\   \    ';;</span></span><br><span class="line"><span class="string">       </span>|<span class="string">      </span>|<span class="string"> :;;;'     \</span></span><br><span class="line"><span class="string">      </span>|<span class="string">  /    </span>|<span class="string">            </span>|</span><br><span class="line">      |<span class="string">       </span>|<span class="string">            </span>|</span><br></pre></td></tr></table></figure>
+<h3 id="cmatrix-命令"><a href="#cmatrix-命令" class="headerlink" title="cmatrix 命令"></a>cmatrix 命令</h3><p>可以做酷炫的屏保</p>
+<p>下载cmatrix<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; wget https:<span class="regexp">//</span>jaist.dl.sourceforge.net<span class="regexp">/project/</span>cmatrix<span class="regexp">/cmatrix/</span><span class="number">1.2</span>a<span class="regexp">/cmatrix-1.2a.tar.gz</span></span><br></pre></td></tr></table></figure></p>
+<p>解压并进入cmatrix<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash"> tar -zxvf cmatrix-1.2a.tar.gz</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> <span class="built_in">cd</span> cmatrix-1.2a</span></span><br></pre></td></tr></table></figure></p>
+<p>安装依赖</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash"> yum install ncurses-devel</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&gt;./configure &amp;&amp; make &amp;&amp; make install   </span><br><span class="line">如果出现以下提示，则说明未安装gcc</span><br><span class="line">loading cache ./config.cache</span><br><span class="line">checking for a BSD compatible install... /usr/bin/install -c</span><br><span class="line">checking whether <span class="keyword">build</span> environment <span class="keyword">is</span> sane... yes</span><br><span class="line">checking whether make sets $&#123;MAKE&#125;... yes</span><br><span class="line">checking <span class="keyword">for</span> working aclocal... <span class="literal">missing</span></span><br><span class="line">checking <span class="keyword">for</span> working autoconf... <span class="literal">missing</span></span><br><span class="line">checking <span class="keyword">for</span> working automake... <span class="literal">missing</span></span><br><span class="line">checking <span class="keyword">for</span> working autoheader... <span class="literal">missing</span></span><br><span class="line">checking <span class="keyword">for</span> working makeinfo... <span class="literal">missing</span></span><br><span class="line">checking <span class="keyword">for</span> gcc... no</span><br><span class="line">checking <span class="keyword">for</span> cc... no</span><br><span class="line">configure: error: no acceptable cc found <span class="keyword">in</span> $<span class="keyword">PATH</span></span><br></pre></td></tr></table></figure>
+<p>安装gcc<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash"> yum -y install gcc</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> yum -y install gcc-c++</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">  yum install make</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">&gt;./configure &amp;&amp; make &amp;&amp; make install   </span><br><span class="line">loading cache ./config.cache</span><br><span class="line">checking <span class="keyword">for</span> a BSD compatible install<span class="built_in">..</span>. (cached) /usr/bin/install -c</span><br><span class="line">checking whether build environment is sane<span class="built_in">..</span>. <span class="literal">yes</span></span><br><span class="line">checking whether make sets <span class="variable">$&#123;MAKE&#125;</span><span class="built_in">..</span>. (cached) <span class="literal">yes</span></span><br><span class="line">checking <span class="keyword">for</span> working aclocal<span class="built_in">..</span>. missing</span><br><span class="line">checking <span class="keyword">for</span> working autoconf<span class="built_in">..</span>. missing</span><br><span class="line">checking <span class="keyword">for</span> working automake<span class="built_in">..</span>. missing</span><br><span class="line">checking <span class="keyword">for</span> working autoheader<span class="built_in">..</span>. missing</span><br><span class="line">checking <span class="keyword">for</span> working makeinfo<span class="built_in">..</span>. missing</span><br><span class="line">checking <span class="keyword">for</span> gcc<span class="built_in">..</span>. (cached) gcc</span><br><span class="line">checking whether the C compiler (gcc  ) works<span class="built_in">..</span>. <span class="literal">yes</span></span><br><span class="line">checking whether the C compiler (gcc  ) is a cross-compiler<span class="built_in">..</span>. <span class="literal">no</span></span><br><span class="line">checking whether we are using GNU C<span class="built_in">..</span>. (cached) <span class="literal">yes</span></span><br><span class="line">checking whether gcc accepts -g<span class="built_in">..</span>. (cached) <span class="literal">yes</span></span><br><span class="line">checking <span class="keyword">for</span> a BSD compatible install<span class="built_in">..</span>. /usr/bin/install -c</span><br><span class="line">checking whether make sets <span class="variable">$&#123;MAKE&#125;</span><span class="built_in">..</span>. (cached) <span class="literal">yes</span></span><br><span class="line">checking <span class="keyword">for</span> main <span class="keyword">in</span> -lncurses<span class="built_in">..</span>. (cached) <span class="literal">yes</span></span><br><span class="line">checking how <span class="keyword">to</span> <span class="builtin-name">run</span> the C preprocessor<span class="built_in">..</span>. (cached) gcc -E</span><br><span class="line">checking <span class="keyword">for</span> ANSI C header files<span class="built_in">..</span>. (cached) <span class="literal">yes</span></span><br><span class="line">checking <span class="keyword">for</span> fcntl.h<span class="built_in">..</span>. (cached) <span class="literal">yes</span></span><br><span class="line">checking <span class="keyword">for</span> sys/ioctl.h<span class="built_in">..</span>. (cached) <span class="literal">yes</span></span><br><span class="line">checking <span class="keyword">for</span> unistd.h<span class="built_in">..</span>. (cached) <span class="literal">yes</span></span><br><span class="line">checking <span class="keyword">for</span> termios.h<span class="built_in">..</span>. (cached) <span class="literal">yes</span></span><br><span class="line">checking <span class="keyword">for</span> termio.h<span class="built_in">..</span>. (cached) <span class="literal">yes</span></span><br><span class="line">checking return<span class="built_in"> type </span>of signal handlers<span class="built_in">..</span>. (cached) void</span><br><span class="line">checking <span class="keyword">for</span> putenv<span class="built_in">..</span>. (cached) <span class="literal">yes</span></span><br><span class="line">checking <span class="keyword">for</span> curses.h<span class="built_in">..</span>. (cached) <span class="literal">yes</span></span><br><span class="line">checking <span class="keyword">for</span> ncurses.h<span class="built_in">..</span>. (cached) <span class="literal">yes</span></span><br><span class="line">checking <span class="keyword">for</span> tgetent <span class="keyword">in</span> -lncurses<span class="built_in">..</span>. (cached) <span class="literal">yes</span></span><br><span class="line">Using ncurses as the termcap library</span><br><span class="line">checking <span class="keyword">for</span> use_default_colors <span class="keyword">in</span> -lncurses<span class="built_in">..</span>. (cached) <span class="literal">yes</span></span><br><span class="line">checking <span class="keyword">for</span> resizeterm <span class="keyword">in</span> -lncurses<span class="built_in">..</span>. (cached) <span class="literal">yes</span></span><br><span class="line">checking <span class="keyword">for</span> wresize <span class="keyword">in</span> -lncurses<span class="built_in">..</span>. (cached) <span class="literal">yes</span></span><br><span class="line">checking <span class="keyword">for</span> consolechars<span class="built_in">..</span>. (cached) <span class="literal">no</span></span><br><span class="line">checking <span class="keyword">for</span> setfont<span class="built_in">..</span>. (cached) /usr/bin/setfont</span><br><span class="line">checking <span class="keyword">for</span> /usr/lib/kbd/consolefonts<span class="built_in">..</span>. (cached) <span class="literal">yes</span></span><br><span class="line">checking <span class="keyword">for</span> /usr/share/consolefonts<span class="built_in">..</span>. (cached) <span class="literal">no</span></span><br><span class="line">checking <span class="keyword">for</span> mkfontdir<span class="built_in">..</span>. (cached) /usr/bin/mkfontdir</span><br><span class="line">checking <span class="keyword">for</span> /usr/lib/X11/fonts/misc<span class="built_in">..</span>. (cached) <span class="literal">no</span></span><br><span class="line">checking <span class="keyword">for</span> /usr/X11R6/lib/X11/fonts/misc<span class="built_in">..</span>. (cached) <span class="literal">no</span></span><br><span class="line">configure: warning:  </span><br><span class="line"></span><br><span class="line">*** You <span class="keyword">do</span> <span class="keyword">not</span> appear <span class="keyword">to</span> have an X window fonts directory <span class="keyword">in</span> the standard</span><br><span class="line">*** locations (/usr/lib/X11/fonts/misc <span class="keyword">or</span> /usr/X11R6/lib/X11/fonts/misc). The</span><br><span class="line">*** mtx.pcf font will <span class="keyword">not</span> be installed.  This means you will probably <span class="keyword">not</span></span><br><span class="line">*** be able <span class="keyword">to</span> use the mtx fonts <span class="keyword">in</span> your x terminals, <span class="keyword">and</span> hence be unable</span><br><span class="line">*** <span class="keyword">to</span> use the -x command line switch.  Sorry about that<span class="built_in">..</span>.</span><br><span class="line"></span><br><span class="line">creating ./config.status</span><br><span class="line">creating Makefile</span><br><span class="line">creating cmatrix.spec</span><br><span class="line">creating config.h</span><br><span class="line">config.h is unchanged</span><br><span class="line">make[1]: Entering directory `/root/cmatrix-1.2a'</span><br><span class="line">/bin/sh ./mkinstalldirs /usr/local/bin</span><br><span class="line">  /usr/bin/install -c  cmatrix /usr/local/bin/cmatrix</span><br><span class="line">make  install-man1</span><br><span class="line">make[2]: Entering directory `/root/cmatrix-1.2a'</span><br><span class="line">/bin/sh ./mkinstalldirs /usr/local/man/man1</span><br><span class="line"> /usr/bin/install -c -m 644 ./cmatrix.1 /usr/local/man/man1/cmatrix.1</span><br><span class="line">make[2]: Leaving directory `/root/cmatrix-1.2a'</span><br><span class="line"> Installing matrix fonts <span class="keyword">in</span> /usr/lib/kbd/consolefonts<span class="built_in">..</span>.</span><br><span class="line">make[1]: Leaving directory `/root/cmatrix-1.2a'</span><br></pre></td></tr></table></figure>
+<p>运行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash"> cmatrix -b</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/2018112211354044.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1OTc0NzU5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>常用命令</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">cmatrix-<span class="string">a :</span>异步滚动（默认）</span><br><span class="line"></span><br><span class="line">cmatrix-<span class="string">b :</span>随机粗体</span><br><span class="line"></span><br><span class="line">cmatrix-<span class="string">B :</span>全部粗体</span><br><span class="line"></span><br><span class="line">cmatrix-<span class="string">o :</span>使用旧风格滚动</span><br><span class="line"></span><br><span class="line">cmatrix-<span class="string">x :</span>X window 模式</span><br><span class="line"></span><br><span class="line">cmatrix-<span class="string">V :</span>显示版本信息</span><br><span class="line"></span><br><span class="line">cmatrix-<span class="string">u :</span>刷新频率，<span class="number">0</span><span class="number">-9</span>，也就是滚动的快慢</span><br><span class="line"></span><br><span class="line">cmatrix-<span class="string">C :</span>显示的颜色，支持green(默认),red,blue,white,yellow,cyan,</span><br><span class="line">        magenta and black</span><br><span class="line"></span><br><span class="line">例如:使用红色</span><br><span class="line"></span><br><span class="line">cmatrix -b -C red</span><br><span class="line"></span><br><span class="line">使用蓝色</span><br><span class="line"></span><br><span class="line">cmatrix -b -C blue</span><br></pre></td></tr></table></figure>
+<p>参考：<a href="http://blog.51cto.com/5232821/2146115" target="_blank" rel="noopener">http://blog.51cto.com/5232821/2146115</a></p>
+<h3 id="figlet命令"><a href="#figlet命令" class="headerlink" title="figlet命令"></a>figlet命令</h3><p>生成艺术字<br>安装</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash"> yum install figlet</span></span><br></pre></td></tr></table></figure>
+<p>运行</p>
+<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt; figlet I MISS YOU</span><br><span class="line"> ___   __  __ ___ ____ ____   __   _____  _   _ </span><br><span class="line">|<span class="string">_ _</span>|<span class="string"> </span>|<span class="string">  \/  </span>|<span class="string">_ _/ ___/ ___</span>|<span class="string">  \ \ / / _ \</span>|<span class="string"> </span>|<span class="string"> </span>|<span class="string"> </span>|</span><br><span class="line"> |<span class="string"> </span>|<span class="string">  </span>|<span class="string"> </span>|<span class="string">\/</span>|<span class="string"> </span>||<span class="string"> </span>|<span class="string">\___ \___ \   \ V / </span>|<span class="string"> </span>|<span class="string"> </span>|<span class="string"> </span>|<span class="string"> </span>|<span class="string"> </span>|</span><br><span class="line"> |<span class="string"> </span>|<span class="string">  </span>|<span class="string"> </span>|<span class="string">  </span>|<span class="string"> </span>||<span class="string"> </span>|<span class="string"> ___) </span>|<span class="string">__) </span>|<span class="string">   </span>|<span class="string"> </span>||<span class="string"> </span>|<span class="string">_</span>|<span class="string"> </span>|<span class="string"> </span>|<span class="string">_</span>|<span class="string"> </span>|</span><br><span class="line">|<span class="string">___</span>|<span class="string"> </span>|<span class="string">_</span>|<span class="string">  </span>|<span class="string">_</span>|<span class="string">___</span>|<span class="string">____/____/    </span>|<span class="string">_</span>|<span class="string"> \___/ \___/</span></span><br></pre></td></tr></table></figure>
+<p>参考：<a href="https://mp.weixin.qq.com/s/HXJ25E1b3J-zcVeI_Q2E7Q" target="_blank" rel="noopener">微信公众号：Java技术栈</a></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+	
+	<div>
+      
+        
+      
+	</div>
+	
+	<div>
+	  
+		<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+	  
+	</div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/linux/" <i class="fa fa-tag"></i> linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/Java/2019/04/17/Java正确获取客户端真实IP方法整理.html" rel="next" title="Java正确获取客户端真实IP方法整理">
+                <i class="fa fa-chevron-left"></i> Java正确获取客户端真实IP方法整理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/Java/2019/04/17/Java工具类.html" rel="prev" title="Java工具类">
+                Java工具类 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNTc4NS8xMjMyMQ=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.gif"
+                alt="Angus" />
+            
+              <p class="site-author-name" itemprop="name">Angus</p>
+              <p class="site-description motion-element" itemprop="description">有梦为马, 游历天涯!</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">50</span>
+                    <span class="site-state-item-name">Artikel</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">17</span>
+                    <span class="site-state-item-name">Kategorien</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">22</span>
+                    <span class="site-state-item-name">Tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/qijianguo" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-globe"></i>
+                神奇的链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://music.163.com/#/user/home?id=86590096" title="网易云音乐" target="_blank">网易云音乐</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://coldplay.com/" title="Coldplay Official Website" target="_blank">Coldplay Official Website</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://elonmusknews.org/" title="获取 Elon Musk 的新闻" target="_blank">获取 Elon Musk 的新闻</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.bilibili.com/video/av6211226/" title="尼古拉·特斯拉：发明了现代世界的人" target="_blank">尼古拉·特斯拉：发明了现代世界的人</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://reuixiy.github.io/about/" title="关于此博客" target="_blank">关于此博客</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          <div id="days"></div>
+</script>
+<script language="javascript">
+function show_date_time(){
+window.setTimeout("show_date_time()", 1000);
+BirthDay=new Date("04/10/2018 15:00:00");
+today=new Date();
+timeold=(today.getTime()-BirthDay.getTime());
+sectimeold=timeold/1000
+secondsold=Math.floor(sectimeold);
+msPerDay=24*60*60*1000
+e_daysold=timeold/msPerDay
+daysold=Math.floor(e_daysold);
+e_hrsold=(e_daysold-daysold)*24;
+hrsold=setzero(Math.floor(e_hrsold));
+e_minsold=(e_hrsold-hrsold)*60;
+minsold=setzero(Math.floor((e_hrsold-hrsold)*60));
+seconds=setzero(Math.floor((e_minsold-minsold)*60));
+document.getElementById('days').innerHTML="已运行"+daysold+"天"+hrsold+"小时"+minsold+"分"+seconds+"秒";
+}
+function setzero(i){
+if (i<10)
+{i="0" + i};
+return i;
+}
+show_date_time();
+</script>
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#准备"><span class="nav-number">1.</span> <span class="nav-text">准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sl-命令"><span class="nav-number">2.</span> <span class="nav-text">sl 命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fortune-命令"><span class="nav-number">3.</span> <span class="nav-text">fortune 命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cowsay-命令"><span class="nav-number">4.</span> <span class="nav-text">cowsay 命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cmatrix-命令"><span class="nav-number">5.</span> <span class="nav-text">cmatrix 命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#figlet命令"><span class="nav-number">6.</span> <span class="nav-text">figlet命令</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+	  <div id="days"></div>
+</script>
+<script language="javascript">
+function show_date_time(){
+window.setTimeout("show_date_time()", 1000);
+BirthDay=new Date("04/10/2018 15:00:00");
+today=new Date();
+timeold=(today.getTime()-BirthDay.getTime());
+sectimeold=timeold/1000
+secondsold=Math.floor(sectimeold);
+msPerDay=24*60*60*1000
+e_daysold=timeold/msPerDay
+daysold=Math.floor(e_daysold);
+e_hrsold=(e_daysold-daysold)*24;
+hrsold=setzero(Math.floor(e_hrsold));
+e_minsold=(e_hrsold-hrsold)*60;
+minsold=setzero(Math.floor((e_hrsold-hrsold)*60));
+seconds=setzero(Math.floor((e_minsold-minsold)*60));
+document.getElementById('days').innerHTML="已运行"+daysold+"天"+hrsold+"小时"+minsold+"分"+seconds+"秒";
+}
+function setzero(i){
+if (i<10)
+{i="0" + i};
+return i;
+}
+show_date_time();
+</script>
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Angus</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+<!-- 
+
+-->
+
+  <div class="footer-custom">有梦为马, 游历天涯</div>
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共45.0k字</span>
+</div>
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="true"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.2.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.2.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.2.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.2.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.2.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":"wanko","bottom":-30,"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/"});</script></body>
+</html>
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
