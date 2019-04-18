@@ -5,6 +5,7 @@ tags: linux
 ---
 
 * 查看Linux中maven地址
+<!-- more -->
 > [root@iZbp1cj4z3w66bw25x346qZ Portal]# mvn -v
 Apache Maven 3.3.1 (cab6659f9874fa96462afef40fcf6bc033d58c1c; 2015-03-14T04:10:27+08:00)
 Maven home: ***/usr/local/maven***

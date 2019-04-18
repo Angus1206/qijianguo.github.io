@@ -6,7 +6,7 @@ tags: mysql
 
 
 * 【很实用】mysql慢查询 https://www.cnblogs.com/sunke/p/5779230.html
-
+<!-- more -->
 > 
 > SHOW VARIABLES LIKE '%slow%'
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20181116173750352.png)

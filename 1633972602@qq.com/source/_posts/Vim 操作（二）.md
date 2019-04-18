@@ -14,6 +14,8 @@ tags: vim
 > :wprevious 保存并切换到上一个文件
 > :hide e file 切换到file文件，当完成操作wq后按entry会切换回来
 
+<!-- more -->
+
 #### 保存
 > :w file 将修改后的文件另存为file2，源文件内容不更改
 > :20,$w file 将文件20行到末尾的另存为file

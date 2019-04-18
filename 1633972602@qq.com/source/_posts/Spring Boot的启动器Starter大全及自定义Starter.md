@@ -3,7 +3,7 @@ title: Spring Boot的启动器Starter大全及自定义Starter
 categories: Java
 tags: java, springboot
 ---
-
+<!-- more -->
 转载自：https://www.cnblogs.com/shamo89/p/8051966.html
 
 现有启动器Starter目录

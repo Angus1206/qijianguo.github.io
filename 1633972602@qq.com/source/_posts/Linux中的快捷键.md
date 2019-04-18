@@ -12,6 +12,7 @@ tags: linux
 > 光标移到命令行结尾
 ### ctrl u
 > 删除光标以前的内容
+<!-- more -->
 ### ctrl k
 > 删除光标后的内容
 ### ctrl d

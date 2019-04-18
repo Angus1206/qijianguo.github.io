@@ -3,7 +3,7 @@ title: No accelerator found - failed to create HAX VM
 categories: Java
 tags: java
 ---
-
+<!-- more -->
 ```
 
 13:56	Executing tasks: [:app:assembleDebug]

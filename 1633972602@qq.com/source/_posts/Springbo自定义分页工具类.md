@@ -4,6 +4,8 @@ categories: SpringBoot
 tags: springboot
 ---
 
+<!-- more -->
+
 ```
 
 import org.springframework.data.domain.Page;

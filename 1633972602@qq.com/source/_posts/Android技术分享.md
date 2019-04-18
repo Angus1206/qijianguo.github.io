@@ -9,6 +9,8 @@ tags: android
 > Android是基于Linux内核开发、主要以Java为开发语言的一个开源的操作系统，主要用于移动设备，如智能手机和平板电脑、可穿戴设备等，当然还有更多的领域使用到了Android系统，例如电视、机顶盒等
 [为什么选用Linux内核](https://www.cnblogs.com/hejing-swust/articles/7821968.html)
 
+<!-- more -->
+
 #### Android的历史
 （这儿把红框内容做成一个图片，例如乔布斯图、Linux图、Java图）
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20190108173528186.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1OTc0NzU5,size_16,color_FFFFFF,t_70)** [Steve Jobs – “No One Is Going To Buy A Big Phone”](https://www.talkandroid.com/6793-steve-jobs-no-one-is-going-to-buy-a-big-phone/)

@@ -3,7 +3,7 @@ title: Netty中的ChannelHandler
 categories: Netty
 tags: netty
 ---
-
+<!-- more -->
 #### FixedLengthFrameDecoder
 > 数据包长度固定，解决拆包粘包
 例如：一个modbus协议， 指令为如下，有 ***12个*** 字节 

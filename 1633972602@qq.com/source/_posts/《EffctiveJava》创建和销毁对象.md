@@ -2,6 +2,7 @@
 title: 《EffctiveJava》创建和销毁对象
 categories: EffctiveJava学习
 tags: java
+date: 2017-07-14 21:34:14
 ---
 
 # 创建和销毁对象
@@ -16,6 +17,9 @@ tags: java
 	// 用静态工厂方法实现
 	Map<String, String> map = HashMap.newInstence();
 	```
+	
+<!-- more --> 
+
 相比构造器的**缺点**：
 -	类如果不含共有的或者受保护的构造器，将不能被子类化。
 -	与其他的静态方法没任何区别。

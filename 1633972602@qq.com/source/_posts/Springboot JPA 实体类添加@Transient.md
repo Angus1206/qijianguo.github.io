@@ -5,11 +5,15 @@ tags: java, springboot
 ---
 
 * Hibernate
+
 > 在实体类与数据库表建立映射关系时添加 ***@Table*** 注解, 当表中不存在实体类中的某个属性的时候, 就需要用到 **@Transient** 注解
 
 * 用法: 添加在需要忽略的实体类属性上
+
 > ***@Transient***
 >  private String columeName;
+
+<!-- more -->
 
 * 实体类
 ```
@@ -65,4 +69,5 @@ at com.bbs.service.impl.OrderServiceImpl.selectOrdersByOne(OrderServiceImpl.java
 at com.bbs.service.impl.OrderServiceImpl
 
 * 解决方法
+
 > 在实体类上添加 ***@Transient*** 注解

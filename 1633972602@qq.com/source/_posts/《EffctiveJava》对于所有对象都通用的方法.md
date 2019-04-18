@@ -12,6 +12,8 @@ tags: java
 * 类具有自己的 “逻辑相等”，通常属于“值类（value class）”，例如Integer和Date，必须覆盖equals方法，而且可以用作映射表（map)的键（key），或者集合（set）的元素。
 * 有一种“值类”不需要覆盖equals方法，即用实例受控确保“每个值至多只存在一个对象”的类。例如枚举，对于这样的类，逻辑相同与对象相同是一回事，因此Object的equals方法等同于逻辑意义上的equals方法。
 
+<!-- more -->
+
 覆盖equals需要注意哪些约定？
 * 自反性（reflexive）：if  x != null ，x.equals(x) == true；
 * 对称性（symmetric）：x.equals(y) == y.equals(x)

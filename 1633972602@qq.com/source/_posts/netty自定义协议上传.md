@@ -3,7 +3,7 @@ title: Netty自定义协议上传
 categories: Netty
 tags: netty
 ---
-
+<!-- more -->
 * 客户端:
 ```
 import io.netty.bootstrap.Bootstrap;

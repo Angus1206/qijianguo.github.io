@@ -6,6 +6,8 @@ tags: winsw
 
 查询端口号占用的进程
 
+<!-- more -->
+
 ```
 C:\Users\Administrator>netstat -ano | findstr 8080
   TCP    0.0.0.0:8080           0.0.0.0:0              LISTENING       9172

@@ -6,7 +6,7 @@ tags: kafka
 
 ### 什么是Kafka
 由LinkedIn在11年开源，还有例如：分布式数据同步系统Databus、高性能计算引擎Cubert、Java异步处理框架ParSeq。 
-
+<!-- more -->
 ![* streaming platform has three key capabilities:
 	* Publish and subscribe to streams of records, similar to a message queue or enterprise messaging system.
 	* Store streams of records in a fault-tolerant durable way.
@@ -24,12 +24,15 @@ tags: kafka
 * ReplicaManager：负责管理当前broker所有分区和副本的信息，处理KafkaController发起的一些请求，副本状态的切换、添加/读取消息等。
 
 ## Kafka基本结构
+
 ![ ](https://img-blog.csdnimg.cn/20190331210155617.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1OTc0NzU5,size_16,color_FFFFFF,t_70)
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20190331210315693.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1OTc0NzU5,size_16,color_FFFFFF,t_70)
 
 ## Kafka消息结构
+
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20190331210426387.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1OTc0NzU5,size_16,color_FFFFFF,t_70)
 ## Kafka的特点
+
 分布式
 * 多分区
 * 多副本
@@ -49,6 +52,7 @@ tags: kafka
 * 消息自动平衡
 
 ## Kafka应用场景
+
 * 消息队列
 * 行为跟踪
 * 元信息监控

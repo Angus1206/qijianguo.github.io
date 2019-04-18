@@ -5,7 +5,11 @@ tags: android
 ---
 
 * JAVA
+
 > 自定义类继承EditText or AppCompatEditText
+
+<!-- more -->
+
 ```
 import android.content.Context;
 import android.graphics.Paint;
@@ -126,6 +130,7 @@ public class SearchText extends AppCompatEditText {
 ```
 
 * 图标
+
 > ![search](https://img-blog.csdn.net/20180716152058577?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1OTc0NzU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70) ![search2x](https://img-blog.csdn.net/20180716152122751?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1OTc0NzU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)![这里写图片描述](https://img-blog.csdn.net/2018071615215058?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1OTc0NzU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
 
 * dimon 

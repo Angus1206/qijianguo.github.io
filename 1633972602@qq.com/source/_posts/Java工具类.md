@@ -18,6 +18,7 @@ tags: java
 > closeQuietly 关闭流
 
 ***pom.xml***
+<!-- more -->
 ```
 <dependency>
 	 <groupId>org.apache.commons</groupId>

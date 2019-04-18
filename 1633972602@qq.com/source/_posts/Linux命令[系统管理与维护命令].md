@@ -21,7 +21,7 @@ drwx------  2 root root 16384 Jun  6  2017 lost+found
 drwxr-xr-x  3 root root  4096 Jun 10  2017 mysql
 drwxr-xr-x  6 root root  4096 Oct 10  2017 newprojects
 drwxr-xr-x 10 root root  4096 Nov  6  2017 test
-
+<!-- more -->
 -- 注释: 显示mnt目录下的所有文件及其目录的详细信息, 并显示文件类型标记--
 > ls -alF /mnt
  ls -alF /mnt 

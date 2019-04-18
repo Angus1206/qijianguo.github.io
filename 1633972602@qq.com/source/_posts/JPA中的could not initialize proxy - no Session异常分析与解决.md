@@ -7,8 +7,8 @@ tags: java
 转载自：https://blog.csdn.net/blueheart20/article/details/52912023
 
 引言： JPA是一种非常流行和常用的持久化框架标准，其下可以对接若干种不同的实现，在不同的父子表管理中，经常会碰到no Session的问题，该如何解决呢？
-
-1. 问题的引出
+<!-- more -->
+## 问题的引出
 
   在进行基于JPA的单元测试中，我们使用JUnit来进行测试数据库的关联表信息读取，结果得到如下错误信息：
   
@@ -53,7 +53,7 @@ org.hibernate.LazyInitializationException: failed to lazily initialize a collect
 ```
   经过分析，其中的关键词是： could not initialize proxy - no Session; 基于JPA的实现来分析，就是在进行数据库访问之时，当前针对数据库的访问与操作session已经关闭且释放了，故提示no Session可用。
 
-2.  代码实现分析
+## 代码实现分析
 
     让我们来看看具体的代码吧
 
@@ -143,11 +143,11 @@ Repository相关的代码都是空代码，无实际的实现，这里再次忽�
     	log.info(jsonStr);
     }
 ```
-3. 问题分析
+## 问题分析
 
   基于对Hibernate和JPA的理解，在ORM中，其为了提升性能使用了Lazy加载，就是在使用的时候，才会加载额外的数据，故导致了在使用之时再加载数据之时， session失效的问题出现。所以问题的目标点实现提前加载数据。
 
-4. 问题的解决
+## 问题的解决
 
     尝试1：  在Service方法中新增了@Transactional进行事务添加
 
@@ -197,7 +197,7 @@ spring.jpa.open-in-view=true
 
   其实是之前的openEntityManagerInViewInterceptor，解决在Spring MVC与JPA之间Session的声明周期问题
 
-5. 总结
+## 总结
 
     核心问题在于解决延迟加载为及时加载，及时加载会消耗一定的资源，将其程序的性能，请注意这个问题。
 

@@ -5,8 +5,9 @@ tags: java,openoffice
 ---
 
 * 需求
-> 公司一个小项目要结尾了, 有非常多的表格, 而且非常复杂, 例如
 
+> 公司一个小项目要结尾了, 有非常多的表格, 而且非常复杂, 例如
+<!-- more -->
 ![在这里插入图片描述](https://img-blog.csdn.net/20181018170207617?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1OTc0NzU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
 例如：（这表格, 有想死的心...）
 ![在这里插入图片描述](https://img-blog.csdn.net/20181018171047385?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1OTc0NzU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
@@ -15,6 +16,7 @@ tags: java,openoffice
 平台提供Excel模版下载，客户下载填写完再提交Excel，平台再将Excel转PDF，顺便将PDF转成图片，给前端展示，想法简单，方案可行，开工！
 
 * 方案:
+
 1. windows server下用 jacob, windows上可完美运行, 但是！！！Linux上不支持jacob！！！（非常重要！！）
 2. poi + iText，貌似不错
 3. openoffice，跨平台
@@ -23,6 +25,7 @@ tags: java,openoffice
 
 * 安装软件：[下载传送门](http://www.openoffice.org/download/index.html)
 4. win：
+
 ![win版本](https://img-blog.csdn.net/2018101817373025?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1OTc0NzU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
 下载完成后，一路next，最好默认路径安装，免得折腾
 完成后 ***Win + R*** 填入 ***Dcomcnfg***  打开组件服务
@@ -40,7 +43,8 @@ windows下安装完毕！
 
 参考： https://blog.csdn.net/qq_30987095/article/details/78789103
 
-2. linux：[下载传送门](http://www.openoffice.org/download/index.html)
+2.Linux：[下载传送门](http://www.openoffice.org/download/index.html)
+
 ![在这里插入图片描述](https://img-blog.csdn.net/20181018175750307?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1OTc0NzU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
 根据自己的Linux系统选择RPM包或者DEB，如果是Ubuntu则选DEB，其他就选RPM包，查看当前操作系统是ubuntu还是centos
 

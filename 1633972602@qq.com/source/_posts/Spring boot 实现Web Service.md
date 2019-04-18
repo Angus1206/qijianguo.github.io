@@ -3,7 +3,7 @@ title: Spring boot 实现Web Service
 categories: Java
 tags: java, springboot
 ---
-
+<!-- more -->
 @[TOC](Spring boot 实现Web Service)
 # 为什么要用Web service？
 最近公司跟其他公司有个数据对接，按照对方的传输方式来做，用的是**web service**方式，数据包格式为**xml**，业务需要双向通信，即我能发送给对方，对方也会发送给我。另外，用的是比较流行的spring boot，不了解的可以自行谷歌。

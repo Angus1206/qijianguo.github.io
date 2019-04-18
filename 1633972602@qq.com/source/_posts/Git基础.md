@@ -11,6 +11,8 @@ tags: git
 # 创建项目文件夹
 > mkdir  git_practice
 
+<!-- more -->
+
 # 进入文件夹下
 > cd git_practice
 

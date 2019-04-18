@@ -3,7 +3,7 @@ title: Nginx启动、重启、关闭
 categories: Nginx
 tags: nginx
 ---
-
+<!-- more -->
 转载自： https://blog.csdn.net/helloxiaozhe/article/details/80596138
 
 #### 方式一：传统方法

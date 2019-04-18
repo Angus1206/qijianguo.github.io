@@ -1,5 +1,6 @@
 ---
-title: Kafka
-date: 2018-04-27 09:21:45
-type: "tags"
+layout: "tags"
+title: "Tags"
+description: "Hey, this is Tags."
+header-img: "/img/header_img/tag.png"
 ---

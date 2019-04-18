@@ -5,6 +5,9 @@ tags: java
 ---
 
 * Iterator和ListIterator可以对集合遍历同时可以做remove操作, 但在调用Arrays.asList()转化为ArrayList的过程中并不能调用remove()
+
+<!-- more -->
+
 ```
 public class Test {
 

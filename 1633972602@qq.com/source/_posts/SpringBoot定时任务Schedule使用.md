@@ -6,6 +6,8 @@ tags: java, schedule
 
 在开发中很多时候会用到定时任务, 以前用自定义类继承***TimerTask***
 
+<!-- more -->
+
 ```
 public class CustomTask extends TimerTask{
 	@Override
@@ -93,5 +95,3 @@ public void oneMinuteTask() {
 	log.info("-----开始执行定时任务-----");
 }
 ```
-
-#### 大功告成 !

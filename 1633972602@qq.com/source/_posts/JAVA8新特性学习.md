@@ -8,6 +8,7 @@ tags: java,java8
 >lambda简称闭包，类似Groovy，Scala等的函数式编程，即将函数作为方法的参数。
 > 一个简单的Lambda表达式由逗号分隔开的参数列表、-> 及函数体组成
 
+<!-- more -->
 例如：
 ```
 List<String> strList = Arrays.asList("a", "b", "c");

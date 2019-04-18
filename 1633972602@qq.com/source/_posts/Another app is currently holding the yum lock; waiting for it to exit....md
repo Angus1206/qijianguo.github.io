@@ -4,6 +4,8 @@ categories: Linux
 tags: linux
 ---
 
+<!-- more -->
+
 * yum 安装时出现如下错误:
 
 ```

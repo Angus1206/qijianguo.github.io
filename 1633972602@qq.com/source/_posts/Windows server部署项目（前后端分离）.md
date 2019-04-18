@@ -10,6 +10,8 @@ tags: winsw
 > 安装 nginx，并配置代理模式
 > 安装Git
 
+<!-- more -->
+
 #### 前端：
 > 安装node， cnpm， 配置node及cnpm环境变量
 
@@ -21,18 +23,26 @@ tags: winsw
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20181218112315361.png)
 添加环境变量
 我的电脑 ->  属性 -> 高级系统设置 -> 环境变量 -> 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181218112544357.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1OTc0NzU5,size_16,color_FFFFFF,t_70)![在这里插入图片描述](https://img-blog.csdnimg.cn/20181218112902711.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1OTc0NzU5,size_16,color_FFFFFF,t_70)新建JAVA_HOME
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20181218112711795.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1OTc0NzU5,size_16,color_FFFFFF,t_70)添加JAVA_HOME到Path中
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20181218112544357.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1OTc0NzU5,size_16,color_FFFFFF,t_70)![在这里插入图片描述](https://img-blog.csdnimg.cn/20181218112902711.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1OTc0NzU5,size_16,color_FFFFFF,t_70)
+
+新建JAVA_HOME
+
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20181218112711795.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1OTc0NzU5,size_16,color_FFFFFF,t_70)
+
+添加JAVA_HOME到Path中
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20181218112821321.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1OTc0NzU5,size_16,color_FFFFFF,t_70)
+
 测试：
+
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20181218113102778.png)#### 
 
 #### 安装Maven （略）[参考](https://blog.csdn.net/cs4380/article/details/79158268)
+
 #### 安装MySQL （略）[参考](https://blog.csdn.net/weixin_40396510/article/details/79277731)
 
-
 #### 安装Nginx 
+
 参考的两篇文章
 [Windows2012中安装Nginx并创建为Windows服务](https://www.cnblogs.com/edward2013/p/5506588.html)
 [Windows下Nginx的启动、停止等命令](http://www.cnblogs.com/qianzf/p/6809427.html)

@@ -15,6 +15,8 @@ tags: netty
  4. Netty解析json包，处理特殊情况，例如 ***拆包***、***粘包***。
  5. Gson按照配置文件处理json文件，并转换成JavaBeen
  6. 入库。
+ 
+ <!-- more -->
 
 项目结构（下载即可：[传送门](https://download.csdn.net/download/qq_35974759/10850042)）
 

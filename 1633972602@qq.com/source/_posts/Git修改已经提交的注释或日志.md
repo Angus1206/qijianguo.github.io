@@ -4,6 +4,8 @@ categories: Git
 tags: git
 ---
 
+<!-- more -->
+
 转自：http://www.cnblogs.com/tocy/p/git_commit_log_modify.html
 
 > 对于已经修改提交过的注释，如果需要修改，可以借助 git commit --amend 来进行。（注意：修改日志的功能在svn中需要server支持，在git中可以独立修改）

@@ -4,23 +4,27 @@ categories: Android
 tags: android
 ---
 
-> 说明: cordova编译生成的android源码在Android Studio中运行, 无法找到
+## 说明: cordova编译生成的android源码在Android Studio中运行, 无法找到
 ```
 Gradle 'android' project refresh failed
 Error:No installed build tools found. Install the Android build tools version 19.1.0 or higher.
 ```
-解决方式一:
+<!-- more -->
+## 解决方式一:
+
 1. 全局搜索  availableBuildToolsVersions = getAvailableBuildTools()
 ![修改前的照片](https://img-blog.csdn.net/20180921102547408?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1OTc0NzU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+
 修改为
 ```
 availableBuildToolsVersions  = ['21.0.0','20.0.0','19.1.0','19.0.3'] as String[]
 ```
+
 ![修改后的源码截图](https://img-blog.csdn.net/20180921102905659?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1OTc0NzU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
-分析:
+
+## 分析:
 
 ```
-
 String doFindLatestInstalledBuildTools(String minBuildToolsVersion) {
     def availableBuildToolsVersions
     try {
@@ -94,7 +98,6 @@ String getAndroidSdkDir() {
     }
     androidSdkDir
 }
-
 ```
 
 

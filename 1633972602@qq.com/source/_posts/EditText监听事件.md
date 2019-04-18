@@ -1,8 +1,11 @@
 ﻿---
 title: EditText监听事件
 categories: Android
-tags: android,EditText
+tags: EditText
+date: 2015-01-19 00:34:14
 ---
+
+<!-- more -->
 
 * 源码
 ```[源码]
