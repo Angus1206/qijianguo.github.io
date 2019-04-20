@@ -1,7 +1,8 @@
-﻿---
+---
 title: 从Java内存模型讲双重检查锁原理
 categories: Java
 tags: java
+date: 2018-02-19 21:34:14
 ---
 
 转载： 超赞的两篇文章 

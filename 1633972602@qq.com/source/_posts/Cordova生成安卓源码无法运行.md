@@ -1,7 +1,8 @@
-﻿---
+---
 title: Cordova生成安卓源码无法运行
 categories: Android
 tags: android
+date: 2018-12-28 16:21:01
 ---
 
 ## 说明: cordova编译生成的android源码在Android Studio中运行, 无法找到

@@ -1,7 +1,8 @@
-﻿---
+---
 title: Linux中部署Maven项目, 自定义setting.xml文件
 categories: Linux
 tags: linux
+date: 2018-10-11 19:50:21
 ---
 
 * 查看Linux中maven地址

@@ -1,7 +1,8 @@
-﻿---
+---
 title: 自定义EditText设置图片文字居中
 categories: Android
 tags: android
+date: 2017-10-21 20:44:14
 ---
 
 * JAVA

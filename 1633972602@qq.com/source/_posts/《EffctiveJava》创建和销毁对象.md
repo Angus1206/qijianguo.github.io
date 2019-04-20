@@ -1,8 +1,8 @@
-﻿---
+---
 title: 《EffctiveJava》创建和销毁对象
 categories: EffctiveJava学习
 tags: java
-date: 2017-07-14 21:34:14
+date: 2018-07-14 21:34:14
 ---
 
 # 创建和销毁对象

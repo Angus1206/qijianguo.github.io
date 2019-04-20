@@ -1,7 +1,8 @@
-﻿---
+---
 title: JAVA8新特性学习
 categories: Java
-tags: java,java8
+tags: java
+date: 2018-03-11 22:14:14
 ---
 
 ### Lambda表达式

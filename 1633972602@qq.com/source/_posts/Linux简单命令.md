@@ -1,7 +1,8 @@
-﻿---
+---
 title: Linux简单命令
 categories: Linux
 tags: linux
+date: 2018-08-30 14:01:00
 ---
 
 ## 查看磁盘量 du

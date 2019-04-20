@@ -1,7 +1,8 @@
-﻿---
+---
 title: Java工具类
 categories: Java
 tags: java
+date: 2018-12-04 22:01:12
 ---
 
 ### IOUtils

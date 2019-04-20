@@ -1,7 +1,8 @@
-﻿---
+---
 title: 《EffctiveJava》对于所有对象都通用的方法
 categories: EffctiveJava学习
 tags: java
+date: 2018-08-14 21:34:14
 ---
 
 # 对于所有对象都通用的方法

@@ -1,7 +1,8 @@
-﻿---
+---
 title: JPA中的could not initialize proxy - no Session异常分析与解决
 categories: Java
 tags: java
+date: 2018-09-22 16:20:19
 ---
 
 转载自：https://blog.csdn.net/blueheart20/article/details/52912023

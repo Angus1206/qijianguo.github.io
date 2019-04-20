@@ -1,7 +1,8 @@
-﻿---
+---
 title: Linux命令[系统管理与维护命令]
 categories: Linux
 tags: linux
+date: 2018-09-02 20:57:09
 ---
 
 * ls: 列出工作目录所含的文件及子目录,  可以用dir代替ls

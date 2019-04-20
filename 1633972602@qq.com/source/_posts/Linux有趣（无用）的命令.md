@@ -1,7 +1,8 @@
-﻿---
+---
 title: Linux有趣（无用）的命令
 categories: Linux
 tags: linux
+date: 2018-09-04 23:33:21
 ---
 
 ### 准备

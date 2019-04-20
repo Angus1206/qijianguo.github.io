@@ -141,14 +141,14 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -211,29 +211,34 @@
 
 <div class="post-preview">
 
-    <a href="/Java/Arrays.asList()返回ArrayList调用remove()或add()出现 java.lang.UnsupportedOperationException异常/">
+    <a href="/Java多线程编程核心技术/Java多线程技能/">
         <h2 class="post-title">
-            Arrays.asList()返回ArrayList调用remove()或add()出现 java.lang.UnsupportedOperationException异常
+            Java多线程技能
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            
-Iterator和ListIterator可以对集合遍历同时可以做remove操作, 但在调用Arrays.asList()转化为ArrayList的过程中并不能调用remove()
-
-
-12345678910111213141516171819202122public class Test &#123;    public static void main(String[] args) ......
+            进程和多线程的概念及线程的优点
+进程
+操作系统的基础；是一次程序的执行；是系统进行资源分配和调度的一个独立单位。
+线程
+进程中独立运行的子任务。
+多线程的优点
+可以极大的利用CPU的空闲时间来处理其他的任务，即同一时间内运行更多不同种类的任务。
+使用多线程
+一个进程中至少有一个线程在运行
+12345public class MainThread &#123;    public static......
         </div>
     </a>
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by 漆建国 on
-            2019-04-18
+            2019-04-20
         </p>
         <div class="tags">
             
-              <a href="/tags/#java" title="java">java</a>
+              <a href="/tags/#多线程" title="多线程">多线程</a>
             
         </div>
     
@@ -243,9 +248,9 @@ Iterator和ListIterator可以对集合遍历同时可以做remove操作, 但在�
 
 <div class="post-preview">
 
-    <a href="/Linux/Another app is currently holding the yum lock; waiting for it to exit.../">
+    <a href="/Java/poi-tl生成Word/">
         <h2 class="post-title">
-            Another app is currently holding the yum lock; waiting for it to exit...
+            poi-tl生成Word
         </h2>
         <h3 class="post-subtitle">
             
@@ -253,19 +258,28 @@ Iterator和ListIterator可以对集合遍历同时可以做remove操作, 但在�
         <div class="post-content-preview">
             
 
-yum 安装时出现如下错误:
+文档: http://deepoove.com/poi-tl/
 
-123456789101112131415161718[root@localhost gitrepo]#  yum install gitlab-ceLoaded plugins: fastestmirror, langpacksExisting lock /var/run/yum.pid: another copy is running as pid 6......
+
+添加依赖
+
+
+
+poi 版本必须大于3.14(我用的是3.17)
+ooxml 版本必须大于1.2(我用的是1.3)
+
+
+123456789101112131415161718192021222324252627282930&lt;!-- 模版引擎用到的jar包 --&gt;   &lt;dependency&gt;   ......
         </div>
     </a>
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by 漆建国 on
-            2019-04-18
+            2019-04-20
         </p>
         <div class="tags">
             
-              <a href="/tags/#linux" title="linux">linux</a>
+              <a href="/tags/#java, poi-tl" title="java, poi-tl">java, poi-tl</a>
             
         </div>
     
@@ -275,27 +289,104 @@ yum 安装时出现如下错误:
 
 <div class="post-preview">
 
-    <a href="/Android/Android中ViewPager/">
+    <a href="/nginx/nginx启动、重启、关闭/">
         <h2 class="post-title">
-            Android中ViewPager
+            Nginx启动、重启、关闭
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            参考：ViewPager 详解（一）—基本入门传送门
-参考：ViewPager 全面剖析及使用详解传送门
+            
+转载自： https://blog.csdn.net/helloxiaozhe/article/details/80596138
+方式一：传统方法
+启动
+12cd usr/local/nginx/sbin./nginx
+重启
+更改配置重启nginx
+1234kill -HUP 主进程号或进程号文件路径或者使用cd /usr/local/nginx/sbin./nginx -s reload......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by 漆建国 on
+            2019-04-20
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#nginx" title="nginx">nginx</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/Vim/Vim 操作（二）/">
+        <h2 class="post-title">
+            Vim 操作（二）
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            操作多文件
+
+vi 1.txt  2.txt  3.txt 同时打开或创建多个文件
+:next 切换到下一个文件
+:previous 切换到上一个文件
+:last 切换到最后一个文件
+:first 切换到第一个文件
+:wnext 保存并切换到下一个文件
+:wprevious 保存并切换到上一个文件
+:hide e file 切换到file文件，当完成操作wq后按entry会切换回来
+
+
+保存......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by 漆建国 on
+            2019-04-20
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#vim" title="vim">vim</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/Vue/Vue学习中踩的坑/">
+        <h2 class="post-title">
+            Vue学习中踩的坑
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            
+ERROR in Cannot find module 'node-sass’
+参考： https://blog.csdn.net/Nalaluky/article/details/82598300
+
 ...
         </div>
     </a>
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by 漆建国 on
-            2019-04-18
+            2019-04-20
         </p>
         <div class="tags">
             
-              <a href="/tags/#android" title="android">android</a>
+              <a href="/tags/#vue" title="vue">vue</a>
             
         </div>
     
@@ -305,33 +396,50 @@ yum 安装时出现如下错误:
 
 <div class="post-preview">
 
-    <a href="/EffctiveJava学习/《EffctiveJava》对于所有对象都通用的方法/">
+    <a href="/Vim/Vim 操作（一）/">
         <h2 class="post-title">
-            《EffctiveJava》对于所有对象都通用的方法
+            Vim 操作（一）
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            对于所有对象都通用的方法
-覆盖equals
+            上下左右
 
-不覆盖equals方法，每个类只与他本身相等
+左 h 	下 j	上 k	右 l
 
-什么时候应该覆盖equals方法呢？
 
-类具有自己的 “逻辑相等”，通常属于“值类（value class）”，例如Integer和Date，必须覆盖equals方法，而且可以用作映射表（map)的键（key），或者集合（set）的元素。
-有一种“值类”不需要覆盖equals方法，即用实例受控确保“......
+翻页
+
+向下翻一页：ctrl  f
+想下翻半页：ctrl  d
+向上翻一页：ctrl  b
+向上翻半页：ctrl  u
+
+
+移动光标
+
+w 移到下一个单词的开始
+W 移到下一个单词的开始（以空格区分是否到上一个单词）
+
+
+b 移到上一个单词的开始
+B  移到上一个单词的开始（以空格区分是否到上一个单词）
+
+
+0(零）移到行首
+$ 移到到行末
+......
         </div>
     </a>
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by 漆建国 on
-            2019-04-18
+            2019-04-20
         </p>
         <div class="tags">
             
-              <a href="/tags/#java" title="java">java</a>
+              <a href="/tags/#vim" title="vim">vim</a>
             
         </div>
     
@@ -341,34 +449,35 @@ yum 安装时出现如下错误:
 
 <div class="post-preview">
 
-    <a href="/Android/Android技术分享/">
+    <a href="/Netty/Springboot项目Netty做服务端并自定义Gson配置类解析数据包/">
         <h2 class="post-title">
-            Android技术分享
+            Springboot项目Netty做服务端并自定义Gson配置类解析数据包
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            Android入门实践
-什么是Android
+            简述
 
-Android是基于Linux内核开发、主要以Java为开发语言的一个开源的操作系统，主要用于移动设备，如智能手机和平板电脑、可穿戴设备等，当然还有更多的领域使用到了Android系统，例如电视、机顶盒等
-为什么选用Linux内核
+Springboot项目中使用 Netty 作为服务端，接收并处理其他平台发送的 Json数据包，处理拆包、粘包及数据包中时间类型是 long 类型需转成 Date的情况。
 
+项目流程
 
-Android的历史
-（这儿把红框内容做成一个图片，例如乔布斯图、Linux图、Java图）
-** Steve......
+启动项目，开启Netty服务端口11111
+加载Bean
+本地开启socket tool，模拟发送惊悚数据包
+Netty解析json包，处理特殊情况，例如 拆包、粘包。
+Gson按照配置文件处理js......
         </div>
     </a>
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by 漆建国 on
-            2019-04-18
+            2019-04-20
         </p>
         <div class="tags">
             
-              <a href="/tags/#android" title="android">android</a>
+              <a href="/tags/#netty" title="netty">netty</a>
             
         </div>
     
@@ -378,30 +487,42 @@ Android的历史
 
 <div class="post-preview">
 
-    <a href="/Tool/吐血推荐 _ 那些提升开发人员工作效率的在线工具/">
+    <a href="/Java/Springboot JPA 实体类添加@Transient/">
         <h2 class="post-title">
-            吐血推荐 _ 那些提升开发人员工作效率的在线工具
+            Springboot JPA 实体类添加@Transient
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            转自：https://mp.weixin.qq.com/s/AJKA1LYR6TgqGMbsclC6wQ
-作为一个Java开发人员，经常要和各种各样的工具打交道，除了我们常用的IDE工具以外，其实还有很多工具是我们在日常开发及学习过程中要经常使用到的。
+            
+Hibernate
 
-Hollis偏爱使用在线工具，因为个人觉得这样比较方便。本文就总结了一下我常用的在线工具。欢迎纠正及补充。
-Java源代码搜索
-1http......
+
+在实体类与数据库表建立映射关系时添加 @Table 注解, 当表中不存在实体类中的某个属性的时候, 就需要用到 @Transient 注解
+
+
+用法: 添加在需要忽略的实体类属性上
+
+
+@Transient
+private String columeName;
+
+
+
+实体类
+
+123456789101112131415161718192021import com.f......
         </div>
     </a>
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by 漆建国 on
-            2019-04-18
+            2019-04-20
         </p>
         <div class="tags">
             
-              <a href="/tags/#tool" title="tool">tool</a>
+              <a href="/tags/#java, springboot" title="java, springboot">java, springboot</a>
             
         </div>
     
@@ -411,32 +532,26 @@ Java源代码搜索
 
 <div class="post-preview">
 
-    <a href="/Android/自定义EditText设置图片文字居中/">
+    <a href="/SpringBoot/Springbo自定义分页工具类/">
         <h2 class="post-title">
-            自定义EditText设置图片文字居中
+            Springboot自定义分页工具类
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
             
-JAVA
-
-
-自定义类继承EditText or AppCompatEditText
-
-
-1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980......
+123456789101112131415161718192021222324252627282930313233import org.springframework.data.domain.Page;import org.springframework.data.domain.PageImpl;import org.springframework.data.domain.PageRequ......
         </div>
     </a>
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by 漆建国 on
-            2019-04-18
+            2019-04-20
         </p>
         <div class="tags">
             
-              <a href="/tags/#android" title="android">android</a>
+              <a href="/tags/#springboot" title="springboot">springboot</a>
             
         </div>
     
@@ -446,91 +561,30 @@ JAVA
 
 <div class="post-preview">
 
-    <a href="/Other/书签/">
+    <a href="/Java/Spring boot 实现Web Service/">
         <h2 class="post-title">
-            书签
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            Json格式化
-很全的json工具 http://www.bejson.com
-比较智能的json工具https://www.json.cn/
-
-Java
-Java8 API https://docs.oracle.com/javase/8/docs/api/
-MongoDB API https://docs.spring.io/spring-data/data-mongo/docs/1.7......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by 漆建国 on
-            2019-04-18
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#other" title="other">other</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/Java/数字格式化工具类     持续更新/">
-        <h2 class="post-title">
-            数字格式化工具类     持续更新
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989910010110......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by 漆建国 on
-            2019-04-18
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#java" title="java">java</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/Java/阿里Java开发手册/">
-        <h2 class="post-title">
-            阿里Java开发手册
+            Spring boot 实现Web Service
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
             
-传送门
-pdf 阿里巴巴Java开发手册
-github 阿里巴巴Java开发手册（详尽版）.pdf 
-...
+@[TOC](Spring boot 实现Web Service)
+为什么要用Web service？
+最近公司跟其他公司有个数据对接，按照对方的传输方式来做，用的是web service方式，数据包格式为xml，业务需要双向通信，即我能发送给对方，对方也会发送给我。另外，用的是比较流行的spring boot，不了解的可以自行谷歌。
+什么是Web service？
+百度百科：Web se......
         </div>
     </a>
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by 漆建国 on
-            2019-04-18
+            2019-04-20
         </p>
         <div class="tags">
             
-              <a href="/tags/#java" title="java">java</a>
+              <a href="/tags/#java, springboot" title="java, springboot">java, springboot</a>
             
         </div>
     
@@ -587,13 +641,17 @@ github 阿里巴巴Java开发手册（详尽版）.pdf
             
         
             
-            <a href="/tags/#java" title="java" rel="10">java</a>
+            <a href="/tags/#java" title="java" rel="11">java</a>
             
         
             
         
             
             <a href="/tags/#git" title="git" rel="2">git</a>
+            
+        
+            
+        
             
         
             
@@ -621,15 +679,9 @@ github 阿里巴巴Java开发手册（详尽版）.pdf
             
         
             
+        
+            
             <a href="/tags/#vim" title="vim" rel="2">vim</a>
-            
-        
-            
-        
-            
-            <a href="/tags/#winsw" title="winsw" rel="2">winsw</a>
-            
-        
             
         
             
@@ -697,23 +749,23 @@ github 阿里巴巴Java开发手册（详尽版）.pdf
     <ul>
       
         <li>
-          <a href="/Java/Arrays.asList()返回ArrayList调用remove()或add()出现 java.lang.UnsupportedOperationException异常/">Arrays.asList()返回ArrayList调用remove()或add()出现 java.lang.UnsupportedOperationException异常</a>
+          <a href="/Java多线程编程核心技术/Java多线程技能/">Java多线程技能</a>
         </li>
       
         <li>
-          <a href="/Linux/Another app is currently holding the yum lock; waiting for it to exit.../">Another app is currently holding the yum lock; waiting for it to exit...</a>
+          <a href="/Java/poi-tl生成Word/">poi-tl生成Word</a>
         </li>
       
         <li>
-          <a href="/Android/Android中ViewPager/">Android中ViewPager</a>
+          <a href="/nginx/nginx启动、重启、关闭/">Nginx启动、重启、关闭</a>
         </li>
       
         <li>
-          <a href="/EffctiveJava学习/《EffctiveJava》对于所有对象都通用的方法/">《EffctiveJava》对于所有对象都通用的方法</a>
+          <a href="/Vim/Vim 操作（二）/">Vim 操作（二）</a>
         </li>
       
         <li>
-          <a href="/Android/Android技术分享/">Android技术分享</a>
+          <a href="/Vue/Vue学习中踩的坑/">Vue学习中踩的坑</a>
         </li>
       
     </ul>
@@ -740,7 +792,7 @@ github 阿里巴巴Java开发手册（详尽版）.pdf
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">48</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">1</span></li></ul>
     </div>
 
         <hr>
