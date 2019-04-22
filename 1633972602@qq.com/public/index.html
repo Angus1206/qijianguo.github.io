@@ -211,6 +211,40 @@
 
 <div class="post-preview">
 
+    <a href="/Java多线程编程核心技术/对象及变量的并发访问/">
+        <h2 class="post-title">
+            对象及变量的并发访问
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            synchronized同步方法
+“非线程安全”会在多个线程中的同一对象的实例变量在并发访问时发生，产生的后果就是“脏读”，即读到的数据其实是被更改过的。
+“线程安全”就是以获得的实例变量的值是经过同步处理过的，不会出现“脏读”现象。
+方法内的变量为线程安全
+“非线程安全”问题存在与“实例变量”中，如果是方法内部的私有变量，则不存在“非线程安全”问题，即线程安全。
+实例变量非线程安全
+如果多......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by 漆建国 on
+            2019-04-22
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#多线程" title="多线程">多线程</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/Java多线程编程核心技术/Java多线程技能/">
         <h2 class="post-title">
             Java多线程技能
@@ -449,25 +483,16 @@ $ 移到到行末
 
 <div class="post-preview">
 
-    <a href="/Netty/Springboot项目Netty做服务端并自定义Gson配置类解析数据包/">
+    <a href="/SpringBoot/Springbo自定义分页工具类/">
         <h2 class="post-title">
-            Springboot项目Netty做服务端并自定义Gson配置类解析数据包
+            Springboot自定义分页工具类
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            简述
-
-Springboot项目中使用 Netty 作为服务端，接收并处理其他平台发送的 Json数据包，处理拆包、粘包及数据包中时间类型是 long 类型需转成 Date的情况。
-
-项目流程
-
-启动项目，开启Netty服务端口11111
-加载Bean
-本地开启socket tool，模拟发送惊悚数据包
-Netty解析json包，处理特殊情况，例如 拆包、粘包。
-Gson按照配置文件处理js......
+            
+123456789101112131415161718192021222324252627282930313233import org.springframework.data.domain.Page;import org.springframework.data.domain.PageImpl;import org.springframework.data.domain.PageRequ......
         </div>
     </a>
     
@@ -477,7 +502,7 @@ Gson按照配置文件处理js......
         </p>
         <div class="tags">
             
-              <a href="/tags/#netty" title="netty">netty</a>
+              <a href="/tags/#springboot" title="springboot">springboot</a>
             
         </div>
     
@@ -532,16 +557,25 @@ private String columeName;
 
 <div class="post-preview">
 
-    <a href="/SpringBoot/Springbo自定义分页工具类/">
+    <a href="/Netty/Springboot项目Netty做服务端并自定义Gson配置类解析数据包/">
         <h2 class="post-title">
-            Springboot自定义分页工具类
+            Springboot项目Netty做服务端并自定义Gson配置类解析数据包
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            
-123456789101112131415161718192021222324252627282930313233import org.springframework.data.domain.Page;import org.springframework.data.domain.PageImpl;import org.springframework.data.domain.PageRequ......
+            简述
+
+Springboot项目中使用 Netty 作为服务端，接收并处理其他平台发送的 Json数据包，处理拆包、粘包及数据包中时间类型是 long 类型需转成 Date的情况。
+
+项目流程
+
+启动项目，开启Netty服务端口11111
+加载Bean
+本地开启socket tool，模拟发送惊悚数据包
+Netty解析json包，处理特殊情况，例如 拆包、粘包。
+Gson按照配置文件处理js......
         </div>
     </a>
     
@@ -551,40 +585,7 @@ private String columeName;
         </p>
         <div class="tags">
             
-              <a href="/tags/#springboot" title="springboot">springboot</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/Java/Spring boot 实现Web Service/">
-        <h2 class="post-title">
-            Spring boot 实现Web Service
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            
-@[TOC](Spring boot 实现Web Service)
-为什么要用Web service？
-最近公司跟其他公司有个数据对接，按照对方的传输方式来做，用的是web service方式，数据包格式为xml，业务需要双向通信，即我能发送给对方，对方也会发送给我。另外，用的是比较流行的spring boot，不了解的可以自行谷歌。
-什么是Web service？
-百度百科：Web se......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by 漆建国 on
-            2019-04-20
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#java, springboot" title="java, springboot">java, springboot</a>
+              <a href="/tags/#netty" title="netty">netty</a>
             
         </div>
     
@@ -633,15 +634,17 @@ private String columeName;
     <div class="tags">
         
             
-            <a href="/tags/#android" title="android" rel="5">android</a>
-            
-        
-            
             <a href="/tags/#linux" title="linux" rel="7">linux</a>
             
         
             
             <a href="/tags/#java" title="java" rel="11">java</a>
+            
+        
+            
+            <a href="/tags/#android" title="android" rel="5">android</a>
+            
+        
             
         
             
@@ -655,19 +658,19 @@ private String columeName;
             
         
             
-        
-            
-        
-            
             <a href="/tags/#kafka" title="kafka" rel="2">kafka</a>
             
         
             
-            <a href="/tags/#mysql" title="mysql" rel="2">mysql</a>
+            <a href="/tags/#多线程" title="多线程" rel="2">多线程</a>
             
         
             
             <a href="/tags/#netty" title="netty" rel="3">netty</a>
+            
+        
+            
+            <a href="/tags/#mysql" title="mysql" rel="2">mysql</a>
             
         
             
@@ -677,11 +680,11 @@ private String columeName;
             
         
             
-        
-            
-        
-            
             <a href="/tags/#vim" title="vim" rel="2">vim</a>
+            
+        
+            
+        
             
         
             
@@ -749,6 +752,10 @@ private String columeName;
     <ul>
       
         <li>
+          <a href="/Java多线程编程核心技术/对象及变量的并发访问/">对象及变量的并发访问</a>
+        </li>
+      
+        <li>
           <a href="/Java多线程编程核心技术/Java多线程技能/">Java多线程技能</a>
         </li>
       
@@ -762,10 +769,6 @@ private String columeName;
       
         <li>
           <a href="/Vim/Vim 操作（二）/">Vim 操作（二）</a>
-        </li>
-      
-        <li>
-          <a href="/Vue/Vue学习中踩的坑/">Vue学习中踩的坑</a>
         </li>
       
     </ul>
@@ -792,7 +795,7 @@ private String columeName;
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">20</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">1</span></li></ul>
     </div>
 
         <hr>
