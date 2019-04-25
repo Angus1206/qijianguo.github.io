@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          Java多线程技能 - 漆建国 | Blog
+        
+    </title>
+
+    <link rel="canonical" href="http://www.qijianguo.com/Java多线程编程核心技术/Java多线程技能/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+
+    <link rel="stylesheet" href="/css/donate.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+	<link rel="icon" type="image/x-icon" href="favicon.ico">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('/img/article_header/article_bg.jpg')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#多线程" title="多线程">多线程</a>
+                            
+                        </div>
+                        <h1>Java多线程技能</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by 漆建国 on
+                            2019-04-25
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">漆建国</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h1 id="进程和多线程的概念及线程的优点">进程和多线程的概念及线程的优点</h1>
+<h2 id="进程">进程</h2>
+<p>操作系统的基础；是一次程序的执行；是系统进行资源分配和调度的一个独立单位。</p>
+<h2 id="线程">线程</h2>
+<p>进程中独立运行的子任务。</p>
+<h2 id="多线程的优点">多线程的优点</h2>
+<p>可以极大的利用CPU的空闲时间来处理其他的任务，即同一时间内运行更多不同种类的任务。</p>
+<h1 id="使用多线程">使用多线程</h1>
+<p>一个进程中至少有一个线程在运行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public class MainThread &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        System.out.println(Thread.currentThread().getName());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="实现多线程的两种方式">实现多线程的两种方式</h2>
+<p>1⃣️继承Thread           2⃣️实现Runnable</p>
+<h3 id="继承thread类">继承Thread类</h3>
+<p>类只能单根继承，不可多继承</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public class MyThread extends Thread &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void run() &#123;</span><br><span class="line">        super.run();</span><br><span class="line">        System.out.println(&quot;MyThread&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        MyThread myThread = new MyThread();</span><br><span class="line">        myThread.start();</span><br><span class="line">        System.out.println(&quot;运行结束！&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">运行结束！</span><br><span class="line">MyThread</span><br></pre></td></tr></table></figure>
+<p>结论：在执行多线程时，代码的运行结果与代码执行顺序或调用顺序是无关的。（线程的随机性）</p>
+<h3 id="实现runnable接口">实现Runnable接口</h3>
+<p>接口可以多实现<br>
+Thread实现了Runnable接口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public class MyRunnable implements Runnable &#123;</span><br><span class="line">    public void run() &#123;</span><br><span class="line">        System.out.println(&quot;MyRunnable&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        new Thread(new MyRunnable()).start();</span><br><span class="line">        System.out.println(&quot;执行了&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">MyRunnable</span><br><span class="line">执行了</span><br></pre></td></tr></table></figure>
+<p>结论：推荐使用Runnable接口，因为Java类只能单继承</p>
+<h3 id="实例变量和线程安全">实例变量和线程安全</h3>
+<p>自定义线程中的实例变量针对其他线程有共享和不共享之分。</p>
+<h4 id="不共享">不共享</h4>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">public class NoSharedThread extends Thread&#123;</span><br><span class="line"></span><br><span class="line">    private int count = 5;</span><br><span class="line"></span><br><span class="line">    public NoSharedThread(String name) &#123;</span><br><span class="line">        this.setName(name);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void run() &#123;</span><br><span class="line">        super.run();</span><br><span class="line"></span><br><span class="line">        while (count &gt; 0) &#123;</span><br><span class="line">            System.out.println(Thread.currentThread().getName() + &quot;: &quot; + count);</span><br><span class="line">            count --;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        new NoSharedThread(&quot;线程1&quot;).start();</span><br><span class="line">        new NoSharedThread(&quot;线程2&quot;).start();</span><br><span class="line">        new NoSharedThread(&quot;线程3&quot;).start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">线程1: 5</span><br><span class="line">线程2: 5</span><br><span class="line">线程2: 4</span><br><span class="line">线程2: 3</span><br><span class="line">线程2: 2</span><br><span class="line">线程2: 1</span><br><span class="line">线程1: 4</span><br><span class="line">线程1: 3</span><br><span class="line">线程1: 2</span><br><span class="line">线程1: 1</span><br><span class="line">线程3: 5</span><br><span class="line">线程3: 4</span><br><span class="line">线程3: 3</span><br><span class="line">线程3: 2</span><br><span class="line">线程3: 1</span><br></pre></td></tr></table></figure>
+<p>结论：每个线程使用各自的count变量</p>
+<h4 id="共享">共享</h4>
+<p>分析 <strong><em>i - -</em></strong> ：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1. 取得原有i的值</span><br><span class="line">2. 计算 i - 1</span><br><span class="line">3. 将 i - 1 的值赋给 i</span><br><span class="line"></span><br><span class="line">结论：如果有多个线程同时访问i，那么会垂岸非线程安全问题</span><br></pre></td></tr></table></figure>
+<p>未加锁</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">public class SharedThread extends Thread&#123;</span><br><span class="line"></span><br><span class="line">    private int count = 5;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void run() &#123;</span><br><span class="line">        super.run();</span><br><span class="line">        count--;		// 1⃣️ 线程安全出现在这儿！！！</span><br><span class="line">        System.out.println(Thread.currentThread().getName() + &quot;: &quot; + count);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        SharedThread sharedThread = new SharedThread();</span><br><span class="line">        Thread t1 = new Thread(sharedThread, &quot;a&quot;);</span><br><span class="line">        Thread t2 = new Thread(sharedThread, &quot;b&quot;);</span><br><span class="line">        Thread t3 = new Thread(sharedThread, &quot;c&quot;);</span><br><span class="line">        Thread t4 = new Thread(sharedThread, &quot;d&quot;);</span><br><span class="line">        Thread t5 = new Thread(sharedThread, &quot;e&quot;);</span><br><span class="line"></span><br><span class="line">        t1.start();</span><br><span class="line">        t2.start();</span><br><span class="line">        t3.start();</span><br><span class="line">        t4.start();</span><br><span class="line">        t5.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">b: 3</span><br><span class="line">a: 3</span><br><span class="line">c: 2</span><br><span class="line">d: 1</span><br><span class="line">e: 0</span><br></pre></td></tr></table></figure>
+<p>结论： 出现了a、b两个读到相同的值3，造成线程不安全。</p>
+<p>解决方式：</p>
+<p>给 run方法加锁</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">synchronized  public void run() &#123;</span><br><span class="line">     super.run();</span><br><span class="line">     count--;		// 1⃣️ 线程安全出现在这儿！！！</span><br><span class="line">     System.out.println(Thread.currentThread().getName() + &quot;: &quot; + count);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>分析：多个线程访问run方法时，以排队的方式进行处理，当一个线程调用run方法前，先检查run方法是否被上锁，如果是则等待其他线程执行完释放锁后才能执行。如果否则对run方法加锁，执行结束后释放锁。加锁的这块代码称为<strong>互斥区</strong>或<strong>临界区</strong>。</p>
+<h3 id="留意i-与systemoutprintln的异常">留意i- -与System.out.println()的异常</h3>
+<p>结论：println()方法在内部是同步的，但i- -的操作确实在进入println()之前发生的，所以有发生非线程安全问题的概率。<br>
+所以为了防止发生非线程安全问题，还是应继续使用同步方法。</p>
+<h2 id="currentthread-方法">currentThread() 方法</h2>
+<p>currentThread()可返回代码段被哪个线程调用的信息</p>
+<p>例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">public class CurrentThread extends Thread &#123;</span><br><span class="line"></span><br><span class="line">    public CurrentThread() &#123;</span><br><span class="line">        System.out.println(&quot;构造方法执行：&quot; + Thread.currentThread().getName());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void run() &#123;</span><br><span class="line">        super.run();</span><br><span class="line">        System.out.println(&quot;run方法执行：&quot; + Thread.currentThread().getName());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        CurrentThread currentThread = new CurrentThread();</span><br><span class="line">        // 自动调用run方法</span><br><span class="line">        currentThread.start();</span><br><span class="line">        // 手动调用run方法</span><br><span class="line">        currentThread.run();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">构造方法执行：main</span><br><span class="line">run方法执行：Thread-0</span><br><span class="line">run方法执行：main</span><br></pre></td></tr></table></figure>
+<p>结论：<br>
+1.构造方法被main线程调用，run方法被Thread-0线程调用，run方法是自动调用的方法，<br>
+如果手动调用run方法，则是被main线程调用的<br>
+2.构造方法优先执行与run方法</p>
+<h2 id="isalive方法">isAlive()方法</h2>
+<p>isAlive()是检查线程是否处于活动状态<br>
+活动状态指的是线程已经启动且尚未终止。线程处于正在运行或准备开始运行的状态，就认为是“存活的”。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public class IsAliveThread extends Thread &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void run() &#123;</span><br><span class="line">        super.run();</span><br><span class="line">        System.out.println(&quot;run:&quot; + Thread.currentThread().isAlive());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        IsAliveThread isAliveThread = new IsAliveThread();</span><br><span class="line">        System.out.println(&quot;begin: &quot; + isAliveThread.isAlive());</span><br><span class="line">        isAliveThread.start();</span><br><span class="line">        System.out.println(&quot;end: &quot; + isAliveThread.isAlive());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">begin: false</span><br><span class="line">end: true</span><br><span class="line">run:true</span><br></pre></td></tr></table></figure>
+<p>或</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">begin: false</span><br><span class="line">end: true</span><br><span class="line">run:false</span><br></pre></td></tr></table></figure>
+<p>结论：start方法后线程状态可能存活可能不存活</p>
+<h2 id="sleep方法">sleep()方法</h2>
+<p>在指定的毫秒数内让当前执行的线程休眠（暂停执行），当前执行的线程是指this.currentThread()返回的线程。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public class SleepThread extends Thread &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void run() &#123;</span><br><span class="line">        super.run();</span><br><span class="line">        try &#123;</span><br><span class="line">            System.out.println(&quot;run :&quot; + this.currentThread().getName() + &quot; begin&quot;);</span><br><span class="line">            sleep(10);</span><br><span class="line">            System.out.println(&quot;run :&quot; + this.currentThread().getName() + &quot; end&quot;);</span><br><span class="line">        &#125; catch (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        SleepThread sleepThread = new SleepThread();</span><br><span class="line">        System.out.println(&quot;begin: &quot; + System.currentTimeMillis());</span><br><span class="line">        sleepThread.start();</span><br><span class="line">        System.out.println(&quot;end: &quot; + System.currentTimeMillis());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">begin: 1555750009067</span><br><span class="line">end: 1555750009074</span><br><span class="line">run :Thread-0 begin</span><br><span class="line">run :Thread-0 end</span><br></pre></td></tr></table></figure>
+<p>分析： 由于main和Thread-0是异步的，所以先打印begin和end，而SleepThread是随后运行的，所以打印出run begin和run end</p>
+<h2 id="getid-方法">getId() 方法</h2>
+<p>获取线程的唯一标识</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">        System.out.println(Thread.currentThread().getName() + &quot; : &quot;+ currentThread().getId());</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">main : 1</span><br></pre></td></tr></table></figure>
+<p>分析：当前线程名为main，id为1。</p>
+<h2 id="停止线程">停止线程</h2>
+<p>在线程执行完成之前停止正在做的操作。禁止用Thread.stop()方法，因为是不安全（unsafe）的，并且已经被废弃（deprecated）了。<br>
+大多数停止线程使用Thread.interrupt()方法，但是这个方法不会终止一个正在运行的线程，还需要加入一个判断才可以完成线程的停止。<br>
+Java中有3个终止线程的方法：<br>
+1.使用退出标志，使线程正常退出，也就是当run方法完成后线程终止<br>
+2.使用stop强行终止，不推荐<br>
+3.使用interrupt方法中断线程</p>
+<h3 id="停止不了的线程">停止不了的线程</h3>
+<p>interrupt方法并不像for-break一样马上停止执行，而是仅仅在当前线程中打了一个停止的标记，并不是真正的停止线程。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public class InterruptThread extends Thread &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void run() &#123;</span><br><span class="line">        super.run();</span><br><span class="line">        for (int i = 0; i &lt; 1000000; i ++ ) &#123;</span><br><span class="line">            System.out.println(&quot;i = &quot; + (i + 1));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) throws InterruptedException &#123;</span><br><span class="line">        InterruptThread interruptThread = new InterruptThread();</span><br><span class="line">        interruptThread.start();</span><br><span class="line">        sleep(5000);</span><br><span class="line">        interruptThread.interrupt();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">省略...</span><br><span class="line">i = 999990</span><br><span class="line">i = 999991</span><br><span class="line">i = 999992</span><br><span class="line">i = 999993</span><br><span class="line">i = 999994</span><br><span class="line">i = 999995</span><br><span class="line">i = 999996</span><br><span class="line">i = 999997</span><br><span class="line">i = 999998</span><br><span class="line">i = 999999</span><br><span class="line">i = 1000000</span><br></pre></td></tr></table></figure>
+<p>分析：调用interrupt方法并没有让线程停下来！！</p>
+<h3 id="判断线程是否是停止状态">判断线程是否是停止状态</h3>
+<p>Thread.java类中提供了两种方法<br>
+1.boolean   this.interrupted()：测试当前线程是否已经中断<br>
+2.boolean   this.isInterrupted()：测试线程是否已经中断</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public class InterruptThread extends Thread &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void run() &#123;</span><br><span class="line">        super.run();</span><br><span class="line">        for (int i = 0; i &lt; 1000; i ++ ) &#123;</span><br><span class="line">            System.out.println(&quot;i = &quot; + (i + 1));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) throws InterruptedException &#123;</span><br><span class="line">        InterruptThread interruptThread = new InterruptThread();</span><br><span class="line">        interruptThread.start();</span><br><span class="line">        sleep(1000);</span><br><span class="line">        interruptThread.interrupt();</span><br><span class="line">        System.out.println(&quot;是否停止1？&quot;+ interruptThread.interrupted());</span><br><span class="line">        System.out.println(&quot;是否停止2？&quot;+ interruptThread.interrupted());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">省略...</span><br><span class="line">i = 994</span><br><span class="line">i = 995</span><br><span class="line">i = 996</span><br><span class="line">i = 997</span><br><span class="line">i = 998</span><br><span class="line">i = 999</span><br><span class="line">i = 1000</span><br><span class="line">是否停止1？false</span><br><span class="line">是否停止2？false</span><br></pre></td></tr></table></figure>
+<p>分析：判断interruptThread对象是否停止，但控制台打印的结果显示，并未停止。验证了interrupted()方法的定义：测试当前线程是否已经中断，而当前线程是 main，从未中断过。所以打印的是两个false。</p>
+<p>如何在当前线程中产生中断效果呢？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public class IsInterruptThread &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        System.out.println(&quot;begin&quot;);</span><br><span class="line">        Thread.currentThread().interrupt();</span><br><span class="line">        System.out.println(&quot;是否停止1？&quot; + Thread.interrupted());</span><br><span class="line">        System.out.println(&quot;是否停止2？&quot; + Thread.interrupted());</span><br><span class="line">        System.out.println(&quot;end&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">begin</span><br><span class="line">是否停止1？true</span><br><span class="line">是否停止2？false</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<p>分析：interrupted方法的确判断出当前线程是否停止状态。<br>
+为什么第二个会是false呢？因为interrupted有解除功能，线程的中断由interrupted方法解除。所以两次连续调用则第二次返回false。</p>
+<p>isInterrupted()方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public class IsInterruptThread &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        System.out.println(&quot;begin&quot;);</span><br><span class="line">        Thread.currentThread().interrupt();</span><br><span class="line">        System.out.println(&quot;是否停止1？&quot; + Thread.currentThread().isInterrupted());</span><br><span class="line">        System.out.println(&quot;是否停止2？&quot; + Thread.currentThread().isInterrupted());</span><br><span class="line">        System.out.println(&quot;end&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>执行结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">begin</span><br><span class="line">是否停止1？true</span><br><span class="line">是否停止2？true</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<p>分析：能判断线程是否是中断状态，但连续调用不清除状态标志。</p>
+<p>总结：<br>
+interrupted方法测试当前线程是否是中断状态，执行后具有将状态标志清除为false的功能；<br>
+isInterrupted方法测试当前线程是否是中断状态，但不清除状态标志。</p>
+<h3 id="能停止的线程异常法">能停止的线程——异常法</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">public class InterruptThread extends Thread &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void run() &#123;</span><br><span class="line">        super.run();</span><br><span class="line">        for (int i = 0; i &lt; 500000; i ++ ) &#123;</span><br><span class="line">            if (this.isInterrupted()) &#123;</span><br><span class="line">                // 已经是中断状态了，要退出了！</span><br><span class="line">                System.out.println(&quot;已经是中断状态了，要退出了！&quot;);</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println(&quot;i = &quot; + (i + 1));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) throws InterruptedException &#123;</span><br><span class="line">        InterruptThread interruptThread = new InterruptThread();</span><br><span class="line">        interruptThread.start();</span><br><span class="line">        sleep(1000);</span><br><span class="line">        interruptThread.interrupt();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">省略...</span><br><span class="line">i = 117746</span><br><span class="line">i = 117747</span><br><span class="line">i = 117748</span><br><span class="line">i = 117749</span><br><span class="line">i = 117750</span><br><span class="line">i = 117751</span><br><span class="line">i = 117752</span><br><span class="line">i = 117753</span><br><span class="line">已经是中断状态了，要退出了！</span><br></pre></td></tr></table></figure>
+<h3 id="在沉睡中停止">在沉睡中停止</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public class SleepBeforeInterrupt extends Thread&#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void run() &#123;</span><br><span class="line">        super.run();</span><br><span class="line">        try &#123;</span><br><span class="line">            System.out.println(&quot;before:&quot; + this.isInterrupted());</span><br><span class="line">            Thread.sleep(200000);</span><br><span class="line">            System.out.println(&quot;....&quot;);</span><br><span class="line">        &#125; catch (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(&quot;end:&quot; + this.isInterrupted());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        SleepBeforeInterrupt sleepBeforeInterrupt = new SleepBeforeInterrupt();</span><br><span class="line">        sleepBeforeInterrupt.start();</span><br><span class="line">        sleepBeforeInterrupt.interrupt();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">java.lang.InterruptedException: sleep interrupted</span><br><span class="line">	at java.lang.Thread.sleep(Native Method)</span><br><span class="line">	at chapter1.SleepBeforeInterrupt.run(SleepBeforeInterrupt.java:10)</span><br><span class="line">before:true</span><br><span class="line">end:false</span><br></pre></td></tr></table></figure>
+<p>分析：如果在sleep状态下停止某一状态，会进入catch语句，并且清除停止状态值，使之变成false。<br>
+简单说：先执行interrupt再运行sleep会出现异常。</p>
+<h3 id="能停止的线程暴力停止">能停止的线程——暴力停止</h3>
+<p>使用stop()停止线程是非常暴力的。</p>
+<h3 id="方法stop与javalangthreaddeath异常">方法stop()与java.lang.ThreadDeath异常</h3>
+<p>stop方法已被作废，强制让线程停止有可能使一些清理性的工作得不到完成。另一情况就是对锁定的对象进行了“解锁”，导致数据得不到同步的处理，出现数据不一致的问题。</p>
+<h3 id="释放锁的不良后果">释放锁的不良后果</h3>
+<p>使用stop()释放锁将会给数据造成不一致性的后果。</p>
+<h3 id="使用return停止线程">使用return停止线程</h3>
+<p>将方法interrupt和return结合使用也能实现停止线程的效果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">public class InterruptReturn extends Thread &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void run() &#123;</span><br><span class="line">        super.run();</span><br><span class="line">        while (true) &#123;</span><br><span class="line">            if (this.isInterrupted()) &#123;</span><br><span class="line">                System.out.println(&quot;执行interrupted了&quot;);</span><br><span class="line">                return;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        InterruptReturn interruptReturn = new InterruptReturn();</span><br><span class="line">        interruptReturn.start();</span><br><span class="line">        try &#123;</span><br><span class="line">            Thread.sleep(2000);</span><br><span class="line">            interruptReturn.interrupt();</span><br><span class="line">        &#125; catch (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">执行interrupted了</span><br></pre></td></tr></table></figure>
+<h1 id="暂停线程">暂停线程</h1>
+<p>暂停线程意味着暂停后还可以恢复运行；<br>
+经常使用suspend()方法暂停，用resume()方法恢复线程的执行。</p>
+<h2 id="suspend和resume方法的使用">suspend和resume方法的使用</h2>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">public class SuspendResume extends Thread &#123;</span><br><span class="line"></span><br><span class="line">    private int i;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void run() &#123;</span><br><span class="line">        super.run();</span><br><span class="line">        while (true) &#123;</span><br><span class="line">            i ++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public int getI() &#123;</span><br><span class="line">        return i;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setI(int i) &#123;</span><br><span class="line">        this.i = i;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            SuspendResume suspendResume = new SuspendResume();</span><br><span class="line">            suspendResume.start();</span><br><span class="line">            Thread.sleep(5000);</span><br><span class="line"></span><br><span class="line">            suspendResume.suspend();</span><br><span class="line">            System.out.println(&quot;A:&quot; + System.currentTimeMillis() + &quot; i=&quot; + suspendResume.getI());</span><br><span class="line">            suspendResume.resume();</span><br><span class="line">            Thread.sleep(5000);</span><br><span class="line"></span><br><span class="line">            suspendResume.suspend();</span><br><span class="line">            System.out.println(&quot;A:&quot; + System.currentTimeMillis() + &quot; i=&quot; + suspendResume.getI());</span><br><span class="line">            suspendResume.resume();</span><br><span class="line">        &#125; catch (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">A:1555760257178 i=-2049930246</span><br><span class="line">A:1555760262182 i=506892209</span><br></pre></td></tr></table></figure>
+<h2 id="suspend和resume方法的缺点独占">suspend和resume方法的缺点——独占</h2>
+<h2 id="suspend和resume方法的缺点不同步">suspend和resume方法的缺点——不同步</h2>
+<h1 id="yield方法">yield()方法</h1>
+<p>yield方法的作用是放弃当前的CPU资源，让给其他任务区占用CPU执行时间，但放弃的时间不确定，有可能刚放弃又重新获得CPU时间片。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">public class YieldThread extends Thread &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void run() &#123;</span><br><span class="line">        super.run();</span><br><span class="line">        int count = 0;</span><br><span class="line">        long begin = System.currentTimeMillis();</span><br><span class="line">        System.out.println(&quot;开始时间：&quot; + begin);</span><br><span class="line">        for (int i = 0; i &lt; 5000000; i++) &#123;</span><br><span class="line">        	// Thread.yield();</span><br><span class="line">            count = count + i;</span><br><span class="line">        &#125;</span><br><span class="line">        long end = System.currentTimeMillis();</span><br><span class="line">        System.out.println(&quot;结束时间：&quot; + end);</span><br><span class="line">        System.out.println(&quot;相差：&quot; + (end - begin));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        YieldThread yieldThread = new YieldThread();</span><br><span class="line">        yieldThread.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果：<br>
+1⃣️不用yield方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">开始时间：1555760862508</span><br><span class="line">结束时间：1555760862515</span><br><span class="line">相差：7</span><br></pre></td></tr></table></figure>
+<p>2⃣️用yield，打开注释</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">开始时间：1555760940292</span><br><span class="line">结束时间：1555760945941</span><br><span class="line">相差：5649</span><br></pre></td></tr></table></figure>
+<h1 id="线程的优先级">线程的优先级</h1>
+<p>在操作系统中，线程可以划分优先级，优先级较高的线程得到的CPU的资源较多，也就是CPU优先执行优先级较高的线程对象中的任务。<br>
+设置线程的优先级有助于帮“线程规划器”确定下一次选择哪个线程来优先执行。<br>
+设置线程的优先级使用setPriority()方法</p>
+<p>JDK源码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public final void setPriority(int newPriority) &#123;</span><br><span class="line">        ThreadGroup g;</span><br><span class="line">        checkAccess();</span><br><span class="line">        if (newPriority &gt; MAX_PRIORITY || newPriority &lt; MIN_PRIORITY) &#123;</span><br><span class="line">            throw new IllegalArgumentException();</span><br><span class="line">        &#125;</span><br><span class="line">        if((g = getThreadGroup()) != null) &#123;</span><br><span class="line">            if (newPriority &gt; g.getMaxPriority()) &#123;</span><br><span class="line">                newPriority = g.getMaxPriority();</span><br><span class="line">            &#125;</span><br><span class="line">            setPriority0(priority = newPriority);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>优先级分为1-10。</p>
+<h2 id="线程优先级的继承特性">线程优先级的继承特性</h2>
+<p>线程的优先级具有继承性。例如：A线程启动B线程，则B的优先级和A是一样的。</p>
+<h2 id="优先级具有规则性">优先级具有规则性</h2>
+<p>线程的优先级具有规则性，即CPU会尽量将执行资源分配给优先级高的线程。<br>
+高优先级的线程总是大部分执行完，但不保证高优先级的线程全部先执行完。</p>
+<h2 id="优先级具有随机性">优先级具有随机性</h2>
+<p>优先级高的不一定最先执行完。</p>
+<h2 id="优先级高的运行得快">优先级高的运行得快</h2>
+<h1 id="守护线程">守护线程</h1>
+<p>在Java中线程分两种，一种是用户线程，一种是守护线程（daemon）。<br>
+守护线程：是一种特殊的线程，它的特性有陪伴的意思，当进程中不存在非守护线程时，守护线程自动销毁。典型的是垃圾回收线程。</p>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/Java多线程编程核心技术/线程间通信/" data-toggle="tooltip" data-placement="top" title="对象及变量的并发访问">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <br>
+
+                <!--打赏-->
+                
+                <!--打赏-->
+
+                <br>
+                <!--分享-->
+                
+                    <div class="social-share"  data-wechat-qrcode-helper="" align="center"></div>
+                    <!--  css & js -->
+                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+                
+                <!--分享-->
+                <br>                       
+                
+                <!-- require APlayer -->
+                
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+
+                
+
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#多线程" title="多线程">多线程</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="#" target="_blank">CSDN Blog 漆建国</a></li>
+                    
+                        <li><a href="#" target="_blank">DockOne 漆建国</a></li>
+                    
+                        <li><a href="#" target="_blank">阿里云栖社区 漆建国</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/qijianguo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 漆建国 2019 
+                    <br>
+                    <!-- 
+					Theme by <a href="http://beantech.org">BeanTech</a>  
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://www.huweihuang.com">胡伟煌</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=huweihuang&repo=hexo-theme-huweihuang&type=star&count=true" >
+                    </iframe>
+					-->
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://www.qijianguo.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = 'xxx';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="http://www.qijianguo.com/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

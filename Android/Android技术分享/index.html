@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          Android技术分享 - 漆建国 | Blog
+        
+    </title>
+
+    <link rel="canonical" href="http://www.qijianguo.com/Android/Android技术分享/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+
+    <link rel="stylesheet" href="/css/donate.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+	<link rel="icon" type="image/x-icon" href="favicon.ico">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('/img/article_header/article_bg.jpg')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#android" title="android">android</a>
+                            
+                        </div>
+                        <h1>Android技术分享</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by 漆建国 on
+                            2019-02-26
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">漆建国</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h2 id="android入门实践">Android入门实践</h2>
+<h4 id="什么是android">什么是Android</h4>
+<blockquote>
+<p>Android是基于Linux内核开发、主要以Java为开发语言的一个开源的操作系统，主要用于移动设备，如智能手机和平板电脑、可穿戴设备等，当然还有更多的领域使用到了Android系统，例如电视、机顶盒等<br>
+<a href="https://www.cnblogs.com/hejing-swust/articles/7821968.html" target="_blank" rel="noopener">为什么选用Linux内核</a></p>
+</blockquote>
+<a id="more"></a>
+<h4 id="android的历史">Android的历史</h4>
+<p>（这儿把红框内容做成一个图片，例如乔布斯图、Linux图、Java图）<br>
+<img src="https://img-blog.csdnimg.cn/20190108173528186.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1OTc0NzU5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述">** <a href="https://www.talkandroid.com/6793-steve-jobs-no-one-is-going-to-buy-a-big-phone/" target="_blank" rel="noopener">Steve Jobs – “No One Is Going To Buy A Big Phone”</a><br>
+** <a href="http://www.cnblogs.com/hoys/archive/2012/02/17/2356446.html" target="_blank" rel="noopener">Linux团队从Linux内核主线中除名</a><br>
+** Oracle起诉Google，称未取得授权。</p>
+<blockquote>
+<p>你可能看到今日辉煌的Android，移动操作系统市场90%的占有率，他的历史可谓是相当曲折、一言难尽的<br>
+关键字： 2003年、Andy Rubin、Linux内核、Java、 google、2007开源、2008发布第一个版本</p>
+</blockquote>
+<h4 id="android的架构">Android的架构</h4>
+<p><img src="https://img-blog.csdnimg.cn/2019010817373248.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1OTc0NzU5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h4 id="android版本">Android版本</h4>
+<p><a href="http://developer.android.com/abort/dashboards/" target="_blank" rel="noopener">http://developer.android.com/abort/dashboards/</a><br>
+<img src="https://img-blog.csdnimg.cn/20190108174634497.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1OTc0NzU5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><a href="https://developer.android.com/about/dashboards/?hl=zh-cn" target="_blank" rel="noopener">统计</a></p>
+<h4 id="android系统提供了哪些东西给developer">Android系统提供了哪些东西给developer？</h4>
+<h6 id="四大组件">四大组件</h6>
+<ul>
+<li>Activity 活动</li>
+</ul>
+<blockquote></blockquote>
+<ul>
+<li>Service服务</li>
+</ul>
+<blockquote>
+<p>塞班挂QQ，IOS和Windows Phone期初是不支持后台运行的，后来慢慢的认识到其重要性所以后台慢慢加入了，而安卓从一开始就支持后台功能，既使应用程序在关闭的情况下也会在后台运行。</p>
+</blockquote>
+<ul>
+<li>Broadcast Receiver广播接收器</li>
+</ul>
+<blockquote></blockquote>
+<ul>
+<li>内容提供器</li>
+</ul>
+<blockquote>
+<p>用于在不同的程序之间共享数据，即将一些数据共享给他应用，这些数据是一些可以进行二次开发的基础数据，例如：电话簿、短信、多媒体等的数据，他们都实现了跨程序数据共享的功能</p>
+</blockquote>
+<h5 id="丰富的系统组件">丰富的系统组件</h5>
+<blockquote>
+<p>Android为开发者提供了丰富的系统组件，可以帮助开发者设计出漂亮的界面，当然，随着也可以定制属于自己的控件。</p>
+</blockquote>
+<h4 id="sqlite-数据库">SQLite 数据库</h4>
+<blockquote>
+<p>Andrid 自带的数据库，支持SQL语法，也有封装好的API，存储和读取非常方便。（在这加代码，记住用户名和密码）</p>
+</blockquote>
+<h4 id="强大的多媒体">强大的多媒体</h4>
+<blockquote>
+<p>音乐、视频、录音、拍照等，可以用代码进行控制。<br>
+连接真机。<br>
+通知</p>
+</blockquote>
+<h4 id="地理位置定位">地理位置定位</h4>
+<blockquote>
+<p>移动设备相对于PC，地理定位功能应该可以算是一个很大的亮点，结合强大的地图功能，<a href="https://baike.baidu.com/item/LBS/1742?fr=aladdin" target="_blank" rel="noopener">LBS</a> 这一领域潜力非常大。例如外卖、打车、团购、社交、侦查等。</p>
+</blockquote>
+<h4 id="环境搭建">环境搭建</h4>
+<ol>
+<li>挑选一个顺手的开发工具。开发工具有Eclipse和Android Studio，Android项目早期是用Eclipse开发的，需要安装很多插件，开发Android需要安装ADT。而Android Studio是基于Intellij IDEA开发的，插件安装非常简单，还集成了很多工具。比较推荐<a href="https://developer.android.google.cn/studio/" target="_blank" rel="noopener">Android Studio</a></li>
+<li><a href="https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank" rel="noopener">JDK</a>：Java开发工具包</li>
+<li><a href="https://blog.csdn.net/zzy1078689276/article/details/80380118#sdk%E5%8F%8A%E5%85%B6%E7%9B%B8%E5%85%B3%E8%B5%84%E6%BA%90%E7%9A%84%E4%B8%8B%E8%BD%BD%E5%9C%B0%E5%9D%80" target="_blank" rel="noopener">Android SDK</a>：谷歌提供的Android开发工具包。在开发时我们需要引入该工具包来使用相关API</li>
+</ol>
+<h2 id="hello-world">Hello World</h2>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	printf(&quot;Hello,World!\n&quot;);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>开始Hello World之路</p>
+<ul>
+<li>分析Hello World案例</li>
+<li>项目结构分析</li>
+<li>Android Studio使用</li>
+</ul>
+<h2 id="详细介绍">详细介绍</h2>
+<h4 id="ui开发">UI开发</h4>
+<ol>
+<li>如何编写程序界面</li>
+<li>常用控件的使用<br>
+2.1 TextView<br>
+2.2 Button<br>
+2.3 EditView<br>
+2.4 ImageView<br>
+2.5 ListView<br>
+2.6 …</li>
+<li>4种基本布局<br>
+3.1 线性<br>
+3.2 相对<br>
+3.3 帧布局<br>
+3.4 百分比布局</li>
+</ol>
+<p>####0【‘<br>
+Activity</p>
+<ol>
+<li>TextView 、Button、EditText、Spinner、LinearLayout、自定义View等</li>
+<li>活动的生命周期</li>
+<li>活动间的信息传递</li>
+</ol>
+<h4 id="boardcast">Boardcast</h4>
+<ol>
+<li>静态活动</li>
+<li>动态活动</li>
+<li>自定义活动</li>
+</ol>
+<h4 id="content-provider">Content Provider</h4>
+<h4 id="service">Service</h4>
+<h4 id="网络">网络</h4>
+<ul>
+<li>子线程</li>
+</ul>
+<blockquote>
+<p>将耗时的操作放到子线程中去，这里就需要用到java的多线程操作</p>
+</blockquote>
+<ul>
+<li>更新UI</li>
+</ul>
+<blockquote>
+<p>不允许在子线程中更新UI，因为UI是线程不安全的，必须在主线程中更新，否则会异常。</p>
+</blockquote>
+<ul>
+<li>异步消息处理机制<br>
+<img src="https://img-blog.csdnimg.cn/20190109151332630.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1OTc0NzU5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
+<li>AsyncTask</li>
+</ul>
+<h4 id=""></h4>
+<h4 id="权限">权限</h4>
+<p><a href="http://developer.android.com/reference/android/Manifest.permission.html" target="_blank" rel="noopener">http://developer.android.com/reference/android/Manifest.permission.html</a></p>
+<h2 id="应用上线">应用上线</h2>
+<p>Android系统要求所有的应用软件必须有一个签名文件，直接通过AS运行程序会使用一个默认的签名文件(仅仅适用于开发阶段)<br>
+<img src="https://img-blog.csdnimg.cn/2019011814113460.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1OTc0NzU5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述">AS生成签名<br>
+<img src="https://img-blog.csdnimg.cn/20190118141413206.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1OTc0NzU5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述">Gradle生成签名<br>
+<img src="https://img-blog.csdnimg.cn/20190118141739246.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1OTc0NzU5,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="分享">分享</h2>
+<h2 id="总结">总结</h2>
+<h3 id="提问">提问</h3>
+<ul>
+<li><a href="https://www.cnblogs.com/zhuwenlubin/p/5483046.html" target="_blank" rel="noopener">安卓为什么会越来越卡</a><br>
+超出了硬件的范畴，</li>
+</ul>
+<p>一方面：<br>
+IOS 是基于Unix的，而Unix不是开源的操作系统，iOS同样也没有开源。 iPhone之所以不会出现“越用越卡”的情况，是因为苹果公司对它的手机从硬件到软件拥有最高的管理权限，在封闭式的环境中，来自第三方的应用程序无法调用超过iPhone承受限度的指令，自然也不可能造成持续性的系统损伤。</p>
+<p>而安卓是基于LInux，由于Linux核心设定应用在调取系统功能时一定要取得ROOT权限，这也导致大量应用因为单一功能的实现需求而获得整个ROOT层面的支配，可以在Android手机的任意储存位置进行读写，这种高自由度无异于开启了潘多拉魔盒，让Android手机无法对恶意App事先设防</p>
+<p>另一方面：<br>
+一个是宏内核，一个是微内核，宏内核会把每个应用程序当成是系统自身的一部分，而微内核会将CPU分为几部分，当分配的CPU足够支撑应用时其他空闲CPU不会参与。房子的模型。。</p>
+<p>如何解决：</p>
+<ol>
+<li>android在4.4后将应用程序的运行模式由Dalvik换成了ART，简单理解就是预编译。在安装的时候就编译成本地的机器码，减少了启动和运行中的时间</li>
+<li>定制系统，例如小米的MIUI、华为的。。都是在Linux内核上打补丁。</li>
+</ol>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/Linux/Linux中的快捷键/" data-toggle="tooltip" data-placement="top" title="Linux中的快捷键">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/Android/Android中ViewPager/" data-toggle="tooltip" data-placement="top" title="Android中ViewPager">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <br>
+
+                <!--打赏-->
+                
+                <!--打赏-->
+
+                <br>
+                <!--分享-->
+                
+                    <div class="social-share"  data-wechat-qrcode-helper="" align="center"></div>
+                    <!--  css & js -->
+                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+                
+                <!--分享-->
+                <br>                       
+                
+                <!-- require APlayer -->
+                
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+
+                
+
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#android" title="android">android</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="#" target="_blank">CSDN Blog 漆建国</a></li>
+                    
+                        <li><a href="#" target="_blank">DockOne 漆建国</a></li>
+                    
+                        <li><a href="#" target="_blank">阿里云栖社区 漆建国</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/qijianguo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 漆建国 2019 
+                    <br>
+                    <!-- 
+					Theme by <a href="http://beantech.org">BeanTech</a>  
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://www.huweihuang.com">胡伟煌</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=huweihuang&repo=hexo-theme-huweihuang&type=star&count=true" >
+                    </iframe>
+					-->
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://www.qijianguo.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = 'xxx';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="http://www.qijianguo.com/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          Linux简单命令 - 漆建国 | Blog
+        
+    </title>
+
+    <link rel="canonical" href="http://www.qijianguo.com/Linux/Linux简单命令/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+
+    <link rel="stylesheet" href="/css/donate.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+	<link rel="icon" type="image/x-icon" href="favicon.ico">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('/img/article_header/article_bg.jpg')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#linux" title="linux">linux</a>
+                            
+                        </div>
+                        <h1>Linux简单命令</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by 漆建国 on
+                            2018-08-30
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">漆建国</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h2 id="查看磁盘量-du">查看磁盘量 du</h2>
+<p>参数</p>
+<blockquote>
+<p>-a或-all 显示目录中个别文件的大小。<br>
+-b或-bytes 显示目录或文件大小时，以byte为单位。<br>
+-c或–total 除了显示个别目录或文件的大小外，同时也显示所有目录或文件的总和。<br>
+-k或–kilobytes 以KB(1024bytes)为单位输出。<br>
+-m或–megabytes 以MB为单位输出。<br>
+-s或–summarize 仅显示总计，只列出最后加总的值。<br>
+-h或–human-readable 以K，M，G为单位，提高信息的可读性。<br>
+-x或–one-file-xystem 以一开始处理时的文件系统为准，若遇上其它不同的文件系统目录则略过。<br>
+-L&lt;符号链接&gt;或–dereference&lt;符号链接&gt; 显示选项中所指定符号链接的源文件大小。<br>
+-S或–separate-dirs 显示个别目录的大小时，并不含其子目录的大小。<br>
+-X&lt;文件&gt;或–exclude-from=&lt;文件&gt; 在&lt;文件&gt;指定目录或文件。<br>
+–exclude=&lt;目录或文件&gt; 略过指定的目录或文件。<br>
+-D或–dereference-args 显示指定符号链接的源文件大小。<br>
+-H或–si 与-h参数相同，但是K，M，G是以1000为换算单位。<br>
+-l或–count-links 重复计算硬件链接的文件。</p>
+</blockquote>
+<a id="more"></a>
+<p>示例</p>
+<p>查看当前目录中文件或目录所占空间</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">du</span><br></pre></td></tr></table></figure>
+<p>以指定单位显示，不加任何参数则为k(1k = 1024byte)， -m 兆</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">du -m</span><br></pre></td></tr></table></figure>
+<p>输出，最下面的一行是当前目录的总大小</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">2	./.openoffice/4/user</span><br><span class="line">2	./.openoffice/4</span><br><span class="line">2	./.openoffice</span><br><span class="line">1	./.pki/nssdb</span><br><span class="line">1	./.pki</span><br><span class="line">1	./.ure</span><br><span class="line">506	.</span><br></pre></td></tr></table></figure>
+<p>指定目录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">du etc</span><br></pre></td></tr></table></figure>
+<p>指定多个文件, 并以兆显示</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">du file1 file2  -m</span><br></pre></td></tr></table></figure>
+<p>只显示总和的大小</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">du -s</span><br></pre></td></tr></table></figure>
+<h2 id="文件权限-chmod">文件权限 chmod</h2>
+<p>chmod [cfvR] [–help] [–version] [ugoa] [±] [rwxX][…]</p>
+<blockquote>
+<p>-c : 若该档案权限确实已经更改，才显示其更改动作<br>
+-f : 若该档案权限无法被更改也不要显示错误讯息<br>
+-v : 显示权限变更的详细资料<br>
+-R : 对目前目录下的所有档案与子目录进行相同的权限变更(即以递回的方式逐个变更)<br>
+–help : 显示辅助说明<br>
+–version : 显示版本<br>
+u 表示该档案的拥有者，g 表示与该档案的拥有者属于同一个群体(group)者，o 表示其他以外的人，a 表示这三者皆是。<br>
+±增加或减去权限<br>
+r 表示可读取，w 表示可写入，x 表示可执行，X 表示只有当该档案是个子目录或者该档案已经被设定过为可执行。</p>
+</blockquote>
+<p>示例<br>
+将 text.txt 设为所有人可读</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod a+r text.txt</span><br></pre></td></tr></table></figure>
+<p>或</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod ugo+r text.txt</span><br></pre></td></tr></table></figure>
+<p>将text1.txt、text2.txt设为拥有者和同一组的人可写，其他人不可写</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod ug+w,o-w text1.txt text2.txt</span><br></pre></td></tr></table></figure>
+<p>将当前目录下的所有文件及子文件设为所有人可读</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod -R a+w *</span><br></pre></td></tr></table></figure>
+<p>用数字表示</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-rw------- (600) -- 只有属主有读写权限。 </span><br><span class="line">-rw-r--r-- (644) -- 只有属主有读写权限；而属组用户和其他用户只有读权限。 </span><br><span class="line">-rwx------ (700) -- 只有属主有读、写、执行权限。 </span><br><span class="line">-rwxr-xr-x (755) -- 属主有读、写、执行权限；而属组用户和其他用户只有读、执行权限。 </span><br><span class="line">-rwx--x--x (711) -- 属主有读、写、执行权限；而属组用户和其他用户只有执行权限。 </span><br><span class="line">-rw-rw-rw- (666) -- 所有用户都有文件读、写权限。这种做法不可取。 </span><br><span class="line">-rwxrwxrwx (777) -- 所有用户都有读、写、执行权限。更不可取的做法。</span><br></pre></td></tr></table></figure>
+<p>可执行文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">chmod -x deploy.sh</span><br><span class="line"></span><br><span class="line">./deploy.sh</span><br></pre></td></tr></table></figure>
+<h2 id="探测给定文件的类型-file">探测给定文件的类型 file</h2>
+<blockquote>
+<p>-b：列出辨识结果时，不显示文件名称；<br>
+-c：详细显示指令执行过程，便于排错或分析程序执行的情形；<br>
+-f&lt;名称文件&gt;：指定名称文件，其内容有一个或多个文件名称时，让file依序辨识这些文件，格式为每列一个文件名称；<br>
+-L：直接显示符号连接所指向的文件类别；<br>
+-m&lt;魔法数字文件&gt;：指定魔法数字文件；<br>
+-v：显示版本信息；<br>
+-z：尝试去解读压缩文件的内容。</p>
+</blockquote>
+<h2 id="查找文件-find">查找文件 find</h2>
+<blockquote>
+<p>-amin&lt;分钟&gt;：查找在指定时间曾被存取过的文件或目录，单位以分钟计算；<br>
+-anewer&lt;参考文件或目录&gt;：查找其存取时间较指定文件或目录的存取时间更接近现在的文件或目录；<br>
+-atime&lt;24小时数&gt;：查找在指定时间曾被存取过的文件或目录，单位以24小时计算；<br>
+-cmin&lt;分钟&gt;：查找在指定时间之时被更改过的文件或目录；<br>
+-cnewer&lt;参考文件或目录&gt;查找其更改时间较指定文件或目录的更改时间更接近现在的文件或目录；<br>
+-ctime&lt;24小时数&gt;：查找在指定时间之时被更改的文件或目录，单位以24小时计算；<br>
+-daystart：从本日开始计算时间；<br>
+-depth：从指定目录下最深层的子目录开始查找；<br>
+-expty：寻找文件大小为0 Byte的文件，或目录下没有任何子目录或文件的空目录；<br>
+-exec&lt;执行指令&gt;：假设find指令的回传值为True，就执行该指令；<br>
+-false：将find指令的回传值皆设为False；<br>
+-fls&lt;列表文件&gt;：此参数的效果和指定“-ls”参数类似，但会把结果保存为指定的列表文件；<br>
+-follow：排除符号连接；<br>
+-fprint&lt;列表文件&gt;：此参数的效果和指定“-print”参数类似，但会把结果保存成指定的列表文件；<br>
+-fprint0&lt;列表文件&gt;：此参数的效果和指定“-print0”参数类似，但会把结果保存成指定的列表文件；<br>
+-fprintf&lt;列表文件&gt;&lt;输出格式&gt;：此参数的效果和指定“-printf”参数类似，但会把结果保存成指定的列表文件；<br>
+-fstype&lt;文件系统类型&gt;：只寻找该文件系统类型下的文件或目录；<br>
+-gid&lt;群组识别码&gt;：查找符合指定之群组识别码的文件或目录；<br>
+-group&lt;群组名称&gt;：查找符合指定之群组名称的文件或目录；<br>
+-help或——help：在线帮助；<br>
+-ilname&lt;范本样式&gt;：此参数的效果和指定“-lname”参数类似，但忽略字符大小写的差别；<br>
+-iname&lt;范本样式&gt;：此参数的效果和指定“-name”参数类似，但忽略字符大小写的差别；<br>
+-inum&lt;inode编号&gt;：查找符合指定的inode编号的文件或目录；<br>
+-ipath&lt;范本样式&gt;：此参数的效果和指定“-path”参数类似，但忽略字符大小写的差别；<br>
+-iregex&lt;范本样式&gt;：此参数的效果和指定“-regexe”参数类似，但忽略字符大小写的差别；<br>
+-links&lt;连接数目&gt;：查找符合指定的硬连接数目的文件或目录；<br>
+-iname&lt;范本样式&gt;：指定字符串作为寻找符号连接的范本样式；<br>
+-ls：假设find指令的回传值为Ture，就将文件或目录名称列出到标准输出；<br>
+-maxdepth&lt;目录层级&gt;：设置最大目录层级；<br>
+-mindepth&lt;目录层级&gt;：设置最小目录层级；<br>
+-mmin&lt;分钟&gt;：查找在指定时间曾被更改过的文件或目录，单位以分钟计算；<br>
+-mount：此参数的效果和指定“-xdev”相同；<br>
+-mtime&lt;24小时数&gt;：查找在指定时间曾被更改过的文件或目录，单位以24小时计算；<br>
+-name&lt;范本样式&gt;：指定字符串作为寻找文件或目录的范本样式；<br>
+-newer&lt;参考文件或目录&gt;：查找其更改时间较指定文件或目录的更改时间更接近现在的文件或目录；<br>
+-nogroup：找出不属于本地主机群组识别码的文件或目录；<br>
+-noleaf：不去考虑目录至少需拥有两个硬连接存在；<br>
+-nouser：找出不属于本地主机用户识别码的文件或目录；<br>
+-ok&lt;执行指令&gt;：此参数的效果和指定“-exec”类似，但在执行指令之前会先询问用户，若回答“y”或“Y”，则放弃执行命令；<br>
+-path&lt;范本样式&gt;：指定字符串作为寻找目录的范本样式；<br>
+-perm&lt;权限数值&gt;：查找符合指定的权限数值的文件或目录；<br>
+-print：假设find指令的回传值为Ture，就将文件或目录名称列出到标准输出。格式为每列一个名称，每个名称前皆有“./”字符串；<br>
+-print0：假设find指令的回传值为Ture，就将文件或目录名称列出到标准输出。格式为全部的名称皆在同一行；<br>
+-printf&lt;输出格式&gt;：假设find指令的回传值为Ture，就将文件或目录名称列出到标准输出。格式可以自行指定；<br>
+-prune：不寻找字符串作为寻找文件或目录的范本样式;<br>
+-regex&lt;范本样式&gt;：指定字符串作为寻找文件或目录的范本样式；<br>
+-size&lt;文件大小&gt;：查找符合指定的文件大小的文件；<br>
+-true：将find指令的回传值皆设为True；<br>
+-typ&lt;文件类型&gt;：只寻找符合指定的文件类型的文件；<br>
+-uid&lt;用户识别码&gt;：查找符合指定的用户识别码的文件或目录；<br>
+-used&lt;日数&gt;：查找文件或目录被更改之后在指定时间曾被存取过的文件或目录，单位以日计算；<br>
+-user&lt;拥有者名称&gt;：查找符和指定的拥有者名称的文件或目录；<br>
+-version或——version：显示版本信息；<br>
+-xdev：将范围局限在先行的文件系统中；<br>
+-xtype&lt;文件类型&gt;：此参数的效果和指定“-type”参数类似，差别在于它针对符号连接检查。</p>
+</blockquote>
+<p>示例<br>
+查找当前文件夹及子文件夹下的所有文件和文件夹</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find .</span><br></pre></td></tr></table></figure>
+<p>查找 /etc下文件后缀为 <strong>.conf</strong> 的文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find /etc -name &apos;*.conf&apos;</span><br></pre></td></tr></table></figure>
+<p>忽略大小写</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find /etc -iname &apos;*.conf&apos;</span><br></pre></td></tr></table></figure>
+<p>查找当前文件夹及子文件夹下后缀名为 <strong>.conf</strong> 或 <strong>.txt</strong> 的文件，（<strong>括号两边有空格哦</strong>）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . \( -name &quot;*.conf&quot; -o -name &quot;*.txt&quot; \)</span><br></pre></td></tr></table></figure>
+<p>匹配路径或文件（路径中有local或文件名含local）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find /usr/ -path &quot;*local&quot;</span><br></pre></td></tr></table></figure>
+<p>正则表达式匹配路径</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -regex &quot;.*\(\.txt\|\.pdf\)$&quot;</span><br></pre></td></tr></table></figure>
+<p>同上，忽略大小写</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -iregex &quot;.*\(\.txt\|\.pdf\)$&quot;</span><br></pre></td></tr></table></figure>
+<p>查询 <strong>/etc</strong> 下不是以 <strong>.conf</strong> 结尾的文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find /etc ! -name &quot;*.conf&quot;</span><br></pre></td></tr></table></figure>
+<p>根据文件类型查找</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find -type 类型参数</span><br></pre></td></tr></table></figure>
+<p>类型参数：</p>
+<blockquote>
+<p>f 普通文件<br>
+l 符号连接<br>
+d 目录<br>
+c 字符设备<br>
+b 块设备<br>
+s 套接字<br>
+p Fifo</p>
+</blockquote>
+<p>列出所有文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find -type f</span><br></pre></td></tr></table></figure>
+<p>向下最大深度限制为3</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find -maxdepth 3 -type f</span><br></pre></td></tr></table></figure>
+<p>搜索出深度距离当前目录至少2个子目录的所有文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find -mindepth -type f</span><br></pre></td></tr></table></figure>
+<h4 id="根据时间戳查找文件">根据时间戳查找文件</h4>
+<p>UNIX/Linux文件系统每个文件都有三种时间戳：</p>
+<pre><code>访问时间（-atime/天，-amin/分钟）：用户最近一次访问时间。
+修改时间（-mtime/天，-mmin/分钟）：文件最后一次修改时间。
+变化时间（-ctime/天，-cmin/分钟）：文件数据元（例如权限等）最后一次修改时间。
+</code></pre>
+<p>查找7天内修改过的文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find -type f -atime -7</span><br></pre></td></tr></table></figure>
+<p>修改时间正好是7天的文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find -type f -atime 7</span><br></pre></td></tr></table></figure>
+<p>查找修改时间大于7天的所有文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find -type f atime +7</span><br></pre></td></tr></table></figure>
+<p>查找访问时间在60分钟以内的文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find -type f -amin -60</span><br></pre></td></tr></table></figure>
+<h4 id="根据文件大小匹配">根据文件大小匹配</h4>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -type f size 文件大小</span><br></pre></td></tr></table></figure>
+<p>文件大小单元：</p>
+<pre><code>b —— 块（512字节）
+c —— 字节
+w —— 字（2字节）
+k —— 千字节
+M —— 兆字节
+G —— 吉字节
+</code></pre>
+<p>搜索大于10k的所有文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find -type f -size 10k</span><br></pre></td></tr></table></figure>
+<h4 id="删除匹配文件">删除匹配文件</h4>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find -type f -name &apos;*.txt&apos; -delete</span><br></pre></td></tr></table></figure>
+<h4 id="根据文件权限所有权匹配">根据文件权限/所有权匹配</h4>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find -type f -perm 777</span><br></pre></td></tr></table></figure>
+<p>找出当前目录下权限 <strong>不是</strong> 644的sh文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find -type f  -name &apos;*.sh&apos; ! -perm 644</span><br></pre></td></tr></table></figure>
+<p>找出当前目录用户root拥有的所有文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -type f -user root</span><br></pre></td></tr></table></figure>
+<p>找出当前目录用户组sunk拥有的所有文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -type f -group sunk</span><br></pre></td></tr></table></figure>
+<h2 id="过滤-grep">过滤 grep</h2>
+<p>过滤出 /etc/passwd 文件中包含 root 的记录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep &apos;root&apos; /etc/passwd</span><br></pre></td></tr></table></figure>
+<p>递归地过滤出 /var/log/ 目录中包含 linux 的记录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep -r &apos;linux&apos; /var/log/</span><br></pre></td></tr></table></figure>
+<h2 id="管道">管道 |</h2>
+<blockquote>
+<p>简单来说, Linux 中管道的作用是将上一个命令的输出作为下一个命令的输入, 像 pipe 一样将各个命令串联起来执行, 管道的操作符是 |</p>
+</blockquote>
+<p>比如, 我们可以将 cat 和 grep 两个命令用管道组合在一起</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/passwd | grep &apos;root&apos;</span><br></pre></td></tr></table></figure>
+<p>过滤出 /etc 目录中名字包含 ssh 的目录(不包括子目录)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls /etc | grep &apos;ssh&apos;</span><br></pre></td></tr></table></figure>
+<h3 id="重定向-gt-lt">重定向 &gt; &lt;</h3>
+<blockquote>
+<p>可以使用 &gt; 或 &lt; 将命令的输出重定向到一个文件中</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &apos;Hello World&apos; &gt; ~/test.txt</span><br></pre></td></tr></table></figure>
+<h2 id="运维常用命令">运维常用命令</h2>
+<h3 id="ping">ping</h3>
+<p>对 <a href="http://cloud.tencent.com" target="_blank" rel="noopener">cloud.tencent.com</a> 发送 4 个 ping 包, 检查与其是否联通</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ping -c 4 www.baidu.com</span><br></pre></td></tr></table></figure>
+<h3 id="netstat-命令">netstat 命令</h3>
+<blockquote>
+<p>netstat 命令用于显示各种网络相关信息，如网络连接, 路由表, 接口状态等等</p>
+</blockquote>
+<p>列出所有处于监听状态的tcp端口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -lt</span><br></pre></td></tr></table></figure>
+<p>查看所有的端口信息, 包括 PID 和进程名称</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -tulpn</span><br></pre></td></tr></table></figure>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/Linux/Linux命令[系统管理与维护命令]/" data-toggle="tooltip" data-placement="top" title="Linux命令[系统管理与维护命令]">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/Linux/Modbus协议服务端（Netty）/" data-toggle="tooltip" data-placement="top" title="Modbus协议服务端（Netty）">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <br>
+
+                <!--打赏-->
+                
+                <!--打赏-->
+
+                <br>
+                <!--分享-->
+                
+                    <div class="social-share"  data-wechat-qrcode-helper="" align="center"></div>
+                    <!--  css & js -->
+                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+                
+                <!--分享-->
+                <br>                       
+                
+                <!-- require APlayer -->
+                
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+
+                
+
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#linux" title="linux">linux</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="#" target="_blank">CSDN Blog 漆建国</a></li>
+                    
+                        <li><a href="#" target="_blank">DockOne 漆建国</a></li>
+                    
+                        <li><a href="#" target="_blank">阿里云栖社区 漆建国</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/qijianguo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 漆建国 2019 
+                    <br>
+                    <!-- 
+					Theme by <a href="http://beantech.org">BeanTech</a>  
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://www.huweihuang.com">胡伟煌</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=huweihuang&repo=hexo-theme-huweihuang&type=star&count=true" >
+                    </iframe>
+					-->
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://www.qijianguo.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = 'xxx';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="http://www.qijianguo.com/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

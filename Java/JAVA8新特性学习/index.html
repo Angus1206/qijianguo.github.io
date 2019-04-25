@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          JAVA8新特性学习 - 漆建国 | Blog
+        
+    </title>
+
+    <link rel="canonical" href="http://www.qijianguo.com/Java/JAVA8新特性学习/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+
+    <link rel="stylesheet" href="/css/donate.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+	<link rel="icon" type="image/x-icon" href="favicon.ico">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('/img/article_header/article_bg.jpg')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#java" title="java">java</a>
+                            
+                        </div>
+                        <h1>JAVA8新特性学习</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by 漆建国 on
+                            2018-03-11
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">漆建国</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h3 id="lambda表达式">Lambda表达式</h3>
+<blockquote>
+<p>lambda简称闭包，类似Groovy，Scala等的函数式编程，即将函数作为方法的参数。<br>
+一个简单的Lambda表达式由逗号分隔开的参数列表、-&gt; 及函数体组成</p>
+</blockquote>
+<a id="more"></a>
+<p>例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; strList = Arrays.asList(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;);</span><br><span class="line">strList.forEach(str -&gt; System.out.println(str));</span><br></pre></td></tr></table></figure>
+<p>同：（其中str的类型是由编译器推断出来的。可省略）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">strList.forEach((String str)-&gt; System.out.println(str));</span><br></pre></td></tr></table></figure>
+<p>如果 <strong>-&gt;</strong> 后有多条语句，则需要将代码块放在 <strong>{}</strong> 中，即函数体中的代码块。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">strList.forEach(str -&gt; &#123;</span><br><span class="line">	System.out.println(&quot;输出&quot;);</span><br><span class="line">	System.out.println(str);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h4 id="lambda可以引用成员变量和局部变量但是他们会隐含的被-final-修饰">Lambda可以引用成员变量和局部变量，但是他们会隐含的被 <strong>final</strong> 修饰。</h4>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">String separator = &quot;,&quot;;</span><br><span class="line">List&lt;String&gt; strList = Arrays.asList(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;);</span><br><span class="line">strList.forEach(str -&gt; &#123;</span><br><span class="line">	System.out.println(str + separator);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>同：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">final String separator = &quot;,&quot;;</span><br><span class="line">List&lt;String&gt; strList = Arrays.asList(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;);</span><br><span class="line">strList.forEach(str -&gt; &#123;</span><br><span class="line">	System.out.println(str + separator);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h4 id="lambda返回值">Lambda返回值</h4>
+<p>如果函数体中只有一条语句，则无需写<strong>return</strong>语句，例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; list2 = Arrays.asList(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;);</span><br><span class="line">list2.sort((e1, e2) -&gt; e1.compareTo(e2));</span><br></pre></td></tr></table></figure>
+<p>同：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> list2.sort((e1, e2) -&gt; &#123;</span><br><span class="line">	int compare = e1.compareTo(e2);</span><br><span class="line">	return compare;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="函数式接口functional-interface">函数式接口（<strong>Functional Interface</strong>）</h3>
+<ul>
+<li>什么样的才算是函数式接口呢？</li>
+</ul>
+<blockquote>
+<p>首先定义<strong>一个接口</strong><br>
+接口中定义 <strong>有且仅有一个</strong> 抽象方法</p>
+</blockquote>
+<p>例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public interface FunctionalDemo &#123;</span><br><span class="line">	// 抽象方法</span><br><span class="line">	int add(int a, int b);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">	// Java8之前是用匿名函数来实现的。</span><br><span class="line">       FunctionalDemo methods = (a, b) -&gt; &#123;</span><br><span class="line">            return a + b;</span><br><span class="line">       &#125;;</span><br><span class="line">       int sum = methods.add(1, 2);</span><br><span class="line">       System.out.println(sum);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>函数式接口在实际应用中容易出错，当其他开发人员在你的函数式接口中添加了其他抽象方法，此时这个接口就不再是函数式接口了。如何避免这种事情的发生呢？在声明的函数式接口上添加注解 <strong><em>@FunctionalInterface</em></strong>。添加注解后如果添加其他抽象方法则编译器报错。<br>
+<img src="https://img-blog.csdnimg.cn/2018120413311650.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1OTc0NzU5,size_16,color_FFFFFF,t_70" alt="!在这里插入图片描述](https://img-blog.csdnimg.cn/20181204132900553.png)">在上述描述中多次提到抽象方法，主要是因为函数式接口中允许添加</p>
+<ol>
+<li>默认方法，默认方法不是抽象方法。</li>
+<li>静态方法，静态方法也不是抽象方法，它已经是一个实现了的方法。静态方法，静态方法也不是抽象方法，它已经是一个实现了的方法。</li>
+<li>重写Object中的Public方法重写Object中的Public方法。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">@FunctionalInterface</span><br><span class="line">public interface FunctionalDemo &#123;</span><br><span class="line"></span><br><span class="line">	int add(int a, int b);</span><br><span class="line">    </span><br><span class="line">	/** 默认方法 */</span><br><span class="line">	default void defaultMethod() &#123;</span><br><span class="line">		System.out.println(&quot;default method 1&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">	default void defaultMethod2(String message) &#123;</span><br><span class="line">		System.out.println(message + &quot;：default method 2 &quot;);</span><br><span class="line">	&#125;</span><br><span class="line">	// 静态方法	</span><br><span class="line">	static void printMessage(String message) &#123;</span><br><span class="line">		System.out.println(message);</span><br><span class="line">	&#125;</span><br><span class="line">	// 重写Object中的方法。</span><br><span class="line">	@Override</span><br><span class="line">	public int hashCode();</span><br><span class="line"></span><br><span class="line">	public boolean equals(Object obj);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">        FunctionalDemo methods = (a, b) -&gt; &#123;</span><br><span class="line">            return a + b;</span><br><span class="line">        &#125;;</span><br><span class="line">        int sum = methods.add(1, 2);</span><br><span class="line">        System.out.println(sum);</span><br><span class="line"></span><br><span class="line">        // 调用默认方法</span><br><span class="line">        methods.defaultMethod();</span><br><span class="line">        methods.defaultMethod2(&quot;默认方法加参数&quot;);</span><br><span class="line">        // 静态方法</span><br><span class="line">        FunctionalDemo.printMessage(&quot;静态方法&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">3</span><br><span class="line">default method 1</span><br><span class="line">默认方法加参数：default method 2 </span><br><span class="line">静态方法**</span><br></pre></td></tr></table></figure>
+<p>JDK中的栗子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">java.lang.Runnable,</span><br><span class="line"></span><br><span class="line">java.util.Comparator,</span><br><span class="line"></span><br><span class="line">java.util.concurrent.Callable</span><br></pre></td></tr></table></figure>
+<h4 id="接口的默认方法">接口的默认方法</h4>
+<p>Java8之后允许在接口中添加默认方法，默认方法不需要实现，如果有需要则可以覆盖默认方法，而抽象方法必须要实现。</p>
+<p>接口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public interface Function &#123;</span><br><span class="line">    // 抽象方法</span><br><span class="line">    void required();</span><br><span class="line">    </span><br><span class="line">    // 默认方法</span><br><span class="line">    default void notRequired() &#123;</span><br><span class="line">        // 函数体</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>实现类</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public class FunctionalImpl implements Function &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void required() &#123;</span><br><span class="line">        System.out.println(&quot;interface abstract method must override&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void notRequired() &#123;</span><br><span class="line">        System.out.println(&quot;interface default method not required&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> public static void main(String[] args) &#123;</span><br><span class="line">	 Function function = FunctionalFactory.crate(FunctionalImpl::new);</span><br><span class="line">        function.required();</span><br><span class="line">        function.notRequired();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">interface abstract method must override</span><br><span class="line">interface default method not required</span><br></pre></td></tr></table></figure>
+<p>思考：怎么优雅的使用默认方法呢？</p>
+<blockquote>
+<p>尽管默认方法非常强大，但是在使用默认方法时我们需要小心注意一个地方：在声明一个默认方法前，请仔细思考是不是真的有必要使用默认方法，因为默认方法会带给程序歧义，并且在复杂的继承体系中容易产生编译错误</p>
+</blockquote>
+<h4 id="方法引用">方法引用</h4>
+<blockquote>
+<p>方法引用提供了非常有用的语法，可以直接引用已有Java类或对象（实例）的方法或构造器。与lambda联合使用，方法引用可以使语言的构造更紧凑简洁，减少冗余代码。</p>
+</blockquote>
+<p>例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">public class Person &#123;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 构造器引用</span><br><span class="line">     * @param supplier 该引用接收一个空构造参数</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    public static Person constructMethod(final Supplier&lt;Person&gt; supplier) &#123;</span><br><span class="line">        System.out.println(&quot;构造器引用, 语法是：Class::new， 构造器无参&quot;);</span><br><span class="line">        return supplier.get();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 静态方法引用</span><br><span class="line">     * @param person 该引用接收一个Person参数</span><br><span class="line">     */</span><br><span class="line">    public static void staticMethod(Person person) &#123;</span><br><span class="line">        System.out.println(&quot;构造器引用，语法是Class::static_method, 接收到的person：&quot; + person.toString());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 特定方法的引用</span><br><span class="line">     * @param person 该引用接收一个Person参数</span><br><span class="line">     */</span><br><span class="line">    public void instanceMethod(Person person) &#123;</span><br><span class="line">        System.out.println(&quot;特定对象的方法引用，语法是：Class::method, 接收到的person: &quot; + person.toString());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 任意方法的引用</span><br><span class="line">     * 注意：无参</span><br><span class="line">     */</span><br><span class="line">    public void otherMethod() &#123;</span><br><span class="line">        System.out.println(&quot;任意对象的方法引用，语法是：Class::method， 无参&quot; + this.toString());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public class LambdaTest &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        // 构造器引入</span><br><span class="line">        Person person = Person.constructMethod(Person::new);</span><br><span class="line"></span><br><span class="line">        List&lt;Person&gt; list = new ArrayList&lt;&gt;(Arrays.asList(person));</span><br><span class="line"></span><br><span class="line">        // 静态方法引入</span><br><span class="line">        list.forEach(Person::staticMethod);</span><br><span class="line"></span><br><span class="line">        list.forEach(person::instanceMethod);</span><br><span class="line"></span><br><span class="line">        list.forEach(Person::otherMethod);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">构造器引用, 语法是：Class::new， 构造器无参</span><br><span class="line">构造器引用，语法是Class::static_method, 接收到的person：domain.Person@d70c109</span><br><span class="line">特定对象的方法引用，语法是：Class::method, 接收到的person: domain.Person@d70c109</span><br><span class="line">任意对象的方法引用，语法是：Class::method， 无参domain.Person@d70c109</span><br></pre></td></tr></table></figure>
+<h3 id="optional-官方文档">Optional <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html" target="_blank" rel="noopener">官方文档</a></h3>
+<blockquote>
+<p>优雅的判断 <strong><em>null</em></strong>， 不再进行 <strong><em>if（obj == null） {…}</em></strong></p>
+</blockquote>
+<h4 id="慎重使用以下方式">慎重使用以下方式：</h4>
+<blockquote>
+<p>调用 isPresent() 方法时<br>
+调用 get() 方法时<br>
+Optional 类型作为类/实例属性时<br>
+Optional 类型作为方法参数时</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">User user = new User();</span><br><span class="line">Optional&lt;User&gt; optional = Optional.ofNullable(user); </span><br><span class="line">if (optional.isPresent()) &#123;</span><br><span class="line">	User u = optional.get();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面代码跟以前写的null判断有什么区别呢？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">User user = new User();</span><br><span class="line">if (user != null) &#123;</span><br><span class="line">	System.out.println(user.getName());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如何优雅的使用Optional呢？</p>
+<p>Optional中的方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public&lt;U&gt; Optional&lt;U&gt; map(Function&lt;? super T, ? extends U&gt; mapper)</span><br><span class="line">public T orElse(T other)</span><br><span class="line">public T orElseGet(Supplier&lt;? extends T&gt; other)</span><br><span class="line">public void ifPresent(Consumer&lt;? super T&gt; consumer)</span><br><span class="line">public Optional&lt;T&gt; filter(Predicate&lt;? super T&gt; predicate)</span><br><span class="line">public&lt;U&gt; Optional&lt;U&gt; flatMap(Function&lt;? super T, Optional&lt;U&gt;&gt; mapper)</span><br><span class="line">public &lt;X extends Throwable&gt; T orElseThrow(Supplier&lt;? extends X&gt; exceptionSupplier) throws X</span><br></pre></td></tr></table></figure>
+<p>例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">User zs = new User(&quot;zs&quot;, 23, new ArrayList&lt;&gt;(&quot;篮球&quot;, &quot;旅行&quot;));   </span><br><span class="line">Optional.of(zs).map(user -&gt; user.getName()).map(name -&gt; name.toUpperCase()).orElse(null);</span><br></pre></td></tr></table></figure>
+<h3 id="stream">Stream</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line">public class Streams &#123;</span><br><span class="line"></span><br><span class="line">    private enum Status&#123;</span><br><span class="line">        OPEN, CLOSED</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private final static class Task &#123;</span><br><span class="line">        private Status status;</span><br><span class="line">        private Integer points;</span><br><span class="line"></span><br><span class="line">        Task(final Status status, final Integer points) &#123;</span><br><span class="line">            this.status  =status;</span><br><span class="line">            this.points = points;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public Status getStatus() &#123;</span><br><span class="line">            return status;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public Integer getPoints() &#123;</span><br><span class="line">            return points;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        Collection&lt;Task&gt; tasks = Arrays.asList(</span><br><span class="line">            new Task(Status.OPEN, 5),</span><br><span class="line">            new Task(Status.OPEN, 13),</span><br><span class="line">            new Task(Status.CLOSED, 8)</span><br><span class="line">        );</span><br><span class="line"></span><br><span class="line">        // 所有OPEN的总points</span><br><span class="line">        Integer openSum =</span><br><span class="line">                tasks.stream()          // 将集合转化为stream</span><br><span class="line">                .filter(task -&gt; task.getStatus() == Status.OPEN)   // 过滤掉CLOSED的选项</span><br><span class="line">                .mapToInt(Task::getPoints)      // mapToInt操作通过Task::getPoints这种方式调用每个task实例的getPoints方法把Task的stream转化为Integer的stream</span><br><span class="line">                .sum();         // 用sum函数把所有的分数加起来</span><br><span class="line">        System.out.println(&quot; OPEN points &quot; + openSum);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        Integer totalPoints = tasks.stream()</span><br><span class="line">                .parallel()                 // 并行操作</span><br><span class="line">                .map(Task::getPoints)</span><br><span class="line">                .reduce(0, Integer::sum);</span><br><span class="line">        System.out.println(&quot;total points &quot; + totalPoints);</span><br><span class="line"></span><br><span class="line">        // 按某属性分组</span><br><span class="line">        Map&lt;Status, List&lt;Task&gt;&gt; group =</span><br><span class="line">                tasks.stream().collect(Collectors.groupingBy(Task::getStatus));</span><br><span class="line">        System.out.println(&quot;group by status: &quot; + group);</span><br><span class="line"></span><br><span class="line">        // 计算元素的权重</span><br><span class="line">        final Collection&lt; String &gt; result = tasks</span><br><span class="line">                .stream()                                        // Stream&lt; String &gt;</span><br><span class="line">                .mapToInt( Task::getPoints )                     // IntStream</span><br><span class="line">                .asLongStream()                                  // LongStream</span><br><span class="line">                .mapToDouble( points -&gt; points / totalPoints )   // DoubleStream</span><br><span class="line">                .boxed()                                         // Stream&lt; Double &gt;</span><br><span class="line">                .mapToLong( weigth -&gt; ( long )( weigth * 100 ) ) // LongStream</span><br><span class="line">                .mapToObj( percentage -&gt; percentage + &quot;%&quot; )      // Stream&lt; String&gt;</span><br><span class="line">                .collect( Collectors.toList() );                 // List&lt; String &gt;</span><br><span class="line">        System.out.println(&quot;权重为：&quot; + result);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="time">Time</h4>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br><span class="line">364</span><br><span class="line">365</span><br><span class="line">366</span><br><span class="line">367</span><br><span class="line">368</span><br><span class="line">369</span><br><span class="line">370</span><br><span class="line">371</span><br></pre></td><td class="code"><pre><span class="line">public class DateUtil &#123;</span><br><span class="line">    public static final String DATE_FORMAT_FULL = &quot;yyyy-MM-dd HH:mm:ss&quot;;</span><br><span class="line">    public static final String DATE_FORMAT_SHORT = &quot;yyyy-MM-dd&quot;;</span><br><span class="line">    public static final String DATE_FORMAT_COMPACT = &quot;yyyyMMdd&quot;;</span><br><span class="line">    public static final String DATE_FORMAT_COMPACTFULL = &quot;yyyyMMddHHmmss&quot;;</span><br><span class="line">    public static final String DATE_FORMAT_FULL_MSEL = &quot;yyyyMMddHHmmssSSSS&quot;;</span><br><span class="line">    public static final String DATE_YEAR_MONTH = &quot;yyyyMM&quot;;</span><br><span class="line">    public static final String DATE_FORMAT_FULL_MSE = &quot;yyyyMMddHHmmssSSS&quot;;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 获取系统当前日期</span><br><span class="line">     *</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    public static Date getCurrentDate() &#123;</span><br><span class="line">        return new Date();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 获取系统当前日期</span><br><span class="line">     *</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    public static LocalDateTime getCurrentLocalDateTime() &#123;</span><br><span class="line">        return LocalDateTime.now();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 根据时间格式返回对应的String类型的时间</span><br><span class="line">     *</span><br><span class="line">     * @param format</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    public static String getCurDateTime(String format) &#123;</span><br><span class="line">        LocalDateTime now = LocalDateTime.now();</span><br><span class="line">        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(format);</span><br><span class="line">        String dataTime = now.format(dateTimeFormatter);</span><br><span class="line">        return dataTime;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 得到当前日期</span><br><span class="line">     *</span><br><span class="line">     * @return String 当前日期 yyyy-MM-dd HH:mm:ss格式</span><br><span class="line">     * @author kevin</span><br><span class="line">     */</span><br><span class="line">    public static String getCurDateTimeFull() &#123;</span><br><span class="line">        return getCurDateTime(DATE_FORMAT_FULL);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 得到当前日期</span><br><span class="line">     *</span><br><span class="line">     * @return String 当前日期 yyyyMMddHHmmss格式</span><br><span class="line">     * @author kevin</span><br><span class="line">     */</span><br><span class="line">    public static String getCurDateTime1() &#123;</span><br><span class="line">        return getCurDateTime(DATE_FORMAT_FULL);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 得到当前日期YYYYMM格式</span><br><span class="line">     *</span><br><span class="line">     * @return String 当前日期 yyyyMM格式</span><br><span class="line">     * @author kevin</span><br><span class="line">     */</span><br><span class="line">    public static String getCurDateYYYYMM() &#123;</span><br><span class="line">        return getCurDateTime(DATE_YEAR_MONTH);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 得到当前日期</span><br><span class="line">     *</span><br><span class="line">     * @return String 当前日期 yyyyMMdd格式</span><br><span class="line">     * @author kevin</span><br><span class="line">     */</span><br><span class="line">    public static String getCurDateYYYYMMDD() &#123;</span><br><span class="line">        return getCurDateTime(DATE_FORMAT_COMPACT);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 判断是否是今天</span><br><span class="line">     *</span><br><span class="line">     * @param strDate</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    public static boolean isCurrentDay(String strDate) &#123;</span><br><span class="line">        boolean bRet = false;</span><br><span class="line">        LocalDate strLocalDate = LocalDate.parse(strDate);</span><br><span class="line">        if (LocalDate.now().getYear() == strLocalDate.getYear()) &#123;</span><br><span class="line">            MonthDay monthDay = MonthDay.from(strLocalDate);</span><br><span class="line">            MonthDay today = MonthDay.from(LocalDate.now());</span><br><span class="line">            return monthDay.equals(today);</span><br><span class="line">        &#125;</span><br><span class="line">        return bRet;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 获取几小时后的时间</span><br><span class="line">     *</span><br><span class="line">     * @param hour</span><br><span class="line">     * @param format</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    public static String getAfterDateTime(int hour, String format) &#123;</span><br><span class="line">        LocalTime localTime = LocalTime.now().plusHours(hour);</span><br><span class="line">        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(format);</span><br><span class="line">        String dataTime = localTime.format(dateTimeFormatter);</span><br><span class="line">        return dataTime;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 当前日期时间戳(yyyyMMddHHmmssSSSS)</span><br><span class="line">     *</span><br><span class="line">     * @return</span><br><span class="line">     * @author liangxuekai</span><br><span class="line">     */</span><br><span class="line">    public static String getTimeStamp() &#123;</span><br><span class="line">        LocalDateTime now = LocalDateTime.now();</span><br><span class="line">        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(DATE_FORMAT_FULL_MSEL);</span><br><span class="line">        return now.format(dateTimeFormatter);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 日期转字符串</span><br><span class="line">     *</span><br><span class="line">     * @return String</span><br><span class="line">     * @author kevin</span><br><span class="line">     */</span><br><span class="line">    public static String parseDateToString(Date thedate, String format) &#123;</span><br><span class="line">        if (thedate != null) &#123;</span><br><span class="line">            Instant instant = thedate.toInstant();</span><br><span class="line">            ZoneId zone = ZoneId.systemDefault();</span><br><span class="line">            LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, zone);</span><br><span class="line">            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(format);</span><br><span class="line">            return localDateTime.format(dateTimeFormatter);</span><br><span class="line">        &#125;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * parseDateToString(Date thedate, String format)的重载方法</span><br><span class="line">     *</span><br><span class="line">     * @param thedate</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    public static String parseDateToString(Date thedate) &#123;</span><br><span class="line">        // String format = &quot;yyyy-MM-dd&quot;;</span><br><span class="line">        return parseDateToString(thedate, DATE_FORMAT_FULL);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 字符串转日期</span><br><span class="line">     *</span><br><span class="line">     * @return Date</span><br><span class="line">     * @author kevin</span><br><span class="line">     */</span><br><span class="line">    public static Date parseStringToDate(String thedate, String format) &#123;</span><br><span class="line">        DateFormat sdf = new SimpleDateFormat(format);</span><br><span class="line">        Date dd1 = null;</span><br><span class="line">        try &#123;</span><br><span class="line">            dd1 = sdf.parse(thedate);</span><br><span class="line">        &#125; catch (ParseException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        return dd1;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 由String型日期转成format形式String</span><br><span class="line">     *</span><br><span class="line">     * @param format1 原先格式</span><br><span class="line">     * @param format2 转化格式</span><br><span class="line">     * @return String</span><br><span class="line">     * @author kevin</span><br><span class="line">     */</span><br><span class="line">    public static String changeFormatDateString(String format1, String format2, String strDate) &#123;</span><br><span class="line">        if (strDate == null)</span><br><span class="line">            return &quot;&quot;;</span><br><span class="line">        if (strDate.length() &gt;= format1.length() &amp;&amp; format1.length() &gt;= format2.length()) &#123;</span><br><span class="line">            return parseDateToString(parseStringToDate(strDate, format1), format2);</span><br><span class="line">        &#125;</span><br><span class="line">        return strDate;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 得到当前日期的前N天时间 yyyymmdd</span><br><span class="line">     *</span><br><span class="line">     * @param format</span><br><span class="line">     * @param day</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    public static String beforeNDaysDate(String format, int day) &#123;</span><br><span class="line">        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(format);</span><br><span class="line">        if (day &gt; 0) &#123;</span><br><span class="line">            return LocalDateTime.now().minusDays(day).format(dateTimeFormatter);</span><br><span class="line">        &#125;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 获得N个月后的日期</span><br><span class="line">     * &lt;p&gt;</span><br><span class="line">     * theDate 日期</span><br><span class="line">     * &lt;p&gt;</span><br><span class="line">     * int month 月数</span><br><span class="line">     * &lt;p&gt;</span><br><span class="line">     * format 格式</span><br><span class="line">     */</span><br><span class="line">    public static String afterNMonthDate(String theDate, int month, String format) &#123;</span><br><span class="line"></span><br><span class="line">        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(format);</span><br><span class="line">        return LocalDateTime.parse(theDate,dateTimeFormatter)</span><br><span class="line">                .plusMonths(month)</span><br><span class="line">                .format(dateTimeFormatter);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 得到N天后的日期</span><br><span class="line">     *</span><br><span class="line">     * @param theDate 某日期</span><br><span class="line">     *                格式 yyyy-MM-dd</span><br><span class="line">     * @param nDayNum N天</span><br><span class="line">     * @return String N天后的日期</span><br><span class="line">     * @author kevin</span><br><span class="line">     */</span><br><span class="line">    public static String afterNDaysDate(String theDate, Integer nDayNum, String format) &#123;</span><br><span class="line">        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(format);</span><br><span class="line"></span><br><span class="line">        return LocalDateTime.parse(theDate,dateTimeFormatter)</span><br><span class="line">                .plusDays(nDayNum)</span><br><span class="line">                .format(dateTimeFormatter);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 得到N小时后的日期</span><br><span class="line">     *</span><br><span class="line">     * @param theDate  时间</span><br><span class="line">     * @param nHourNum N小时数</span><br><span class="line">     * @param format   时间格式</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    public static String afterNHoursDate(String theDate, Integer nHourNum, String format) &#123;</span><br><span class="line">        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(format);</span><br><span class="line">        return LocalDateTime.parse(theDate,dateTimeFormatter)</span><br><span class="line">                .plusHours(nHourNum)</span><br><span class="line">                .format(dateTimeFormatter);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 得到N分钟后的日期</span><br><span class="line">     *</span><br><span class="line">     * @param theDate</span><br><span class="line">     * @param nMinNum</span><br><span class="line">     * @param format</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    public static String afterNMinsDate(String theDate, Integer nMinNum, String format) &#123;</span><br><span class="line">        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(format);</span><br><span class="line">        return LocalDateTime.parse(theDate,dateTimeFormatter)</span><br><span class="line">                .plusMinutes(nMinNum)</span><br><span class="line">                .format(dateTimeFormatter);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 得到N秒后的日期</span><br><span class="line">     * @param theDate</span><br><span class="line">     * @param nSecNum</span><br><span class="line">     * @param format</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    public static String afterNSecondsDate(String theDate, Integer nSecNum, String format) &#123;</span><br><span class="line">        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(format);</span><br><span class="line">        return LocalDateTime.parse(theDate,dateTimeFormatter)</span><br><span class="line">                .plusSeconds(nSecNum)</span><br><span class="line">                .format(dateTimeFormatter);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 比较两个字符串格式日期大小,带格式的日期</span><br><span class="line">    public static boolean isBefore(String strdat1, String strdat2, String format) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            Date dat1 = parseStringToDate(strdat1, format);</span><br><span class="line">            Date dat2 = parseStringToDate(strdat2, format);</span><br><span class="line">            return dat1.before(dat2);</span><br><span class="line">        &#125; catch (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 比较两个字符串格式日期大小,带格式的日期,返回int</span><br><span class="line">    public static long isBefore_int(String strdat1, String strdat2, String format) &#123;</span><br><span class="line">        long result = 0;</span><br><span class="line">        try &#123;</span><br><span class="line">            Date dat1 = parseStringToDate(strdat1, format);</span><br><span class="line">            Date dat2 = parseStringToDate(strdat2, format);</span><br><span class="line">            return dat2.getTime() - dat1.getTime();</span><br><span class="line">        &#125; catch (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    /*</span><br><span class="line">     * 得到上一个月或者下一个月的日期</span><br><span class="line">     */</span><br><span class="line">    public static String getDayafterMonth(String theDate, int month, String formatStr) &#123;</span><br><span class="line">        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(formatStr);</span><br><span class="line">        return LocalDateTime.parse(theDate).plusMonths(month).format(dateTimeFormatter);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 将秒转换为小时分秒等</span><br><span class="line">     *</span><br><span class="line">     * @param sec</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    public String changeTime(int sec) &#123;</span><br><span class="line">        String temp = &quot;&quot;;</span><br><span class="line">        if (sec &lt; 60) &#123;</span><br><span class="line">            temp = &quot;&quot; + sec + &quot;秒&quot;;</span><br><span class="line">        &#125; else if (sec &lt; 3600) &#123;</span><br><span class="line">            temp = &quot;&quot; + sec / 60 + &quot;分&quot; + sec % 60 + &quot;秒&quot;;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            temp = &quot;&quot; + sec / 3600 + &quot;小时&quot; + (sec % 3600) / 60 + &quot;分&quot; + sec % 60 + &quot;秒&quot;;</span><br><span class="line">        &#125;</span><br><span class="line">        return temp;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 方法描述:</span><br><span class="line">     * 计算两个日期相差天数</span><br><span class="line">     *</span><br><span class="line">     * @param end   结束日期</span><br><span class="line">     * @param start 开始日期</span><br><span class="line">     * @return 作者：liangxuekai</span><br><span class="line">     * 日期：2018 2018年1月31日</span><br><span class="line">     */</span><br><span class="line">    public static int getSubDays(String end, String start) &#123;</span><br><span class="line">        LocalDate startDate = LocalDate.parse(start);</span><br><span class="line">        LocalDate endDate = LocalDate.parse(end);</span><br><span class="line">        Long between = ChronoUnit.DAYS.between(startDate, endDate);</span><br><span class="line">        return between.intValue();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public static String getTimeDiff(Date time1, Date time2) throws Exception &#123;</span><br><span class="line">        long l = time1.getTime() - time2.getTime();</span><br><span class="line">        String returnStr = &quot;&quot;;</span><br><span class="line">        long day = l / (24 * 60 * 60 * 1000);</span><br><span class="line">        if (day &gt; 0) &#123;</span><br><span class="line">            returnStr += (day + &quot;天&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        long hour = (l / (60 * 60 * 1000) - day * 24);</span><br><span class="line">        if (hour &gt; 0) &#123;</span><br><span class="line">            returnStr += (hour + &quot;小时&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        long min = ((l / (60 * 1000)) - day * 24 * 60 - hour * 60);</span><br><span class="line">        if (min &gt; 0) &#123;</span><br><span class="line">            returnStr += (min + &quot;分&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        long s = (l / 1000 - day * 24 * 60 * 60 - hour * 60 * 60 - min * 60);</span><br><span class="line">        if (s &gt; 0) &#123;</span><br><span class="line">            returnStr += (s + &quot;秒&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        return returnStr;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="参考文章">参考文章：</h3>
+<h4 id="java-8新特性终极指南-httpwwwimportnewcom11908html">Java 8新特性终极指南  <a href="http://www.importnew.com/11908.html" target="_blank" rel="noopener">http://www.importnew.com/11908.html</a></h4>
+<h4 id="优雅的使用optional-httpsblogcsdnnetzhang89xiaoarticledetails76596046">优雅的使用Optional  <a href="https://blog.csdn.net/zhang89xiao/article/details/76596046" target="_blank" rel="noopener">https://blog.csdn.net/zhang89xiao/article/details/76596046</a></h4>
+<h4 id="深入浅出stream和parallelstreamhttpsblogcsdnnetdarrenstyarticledetails79283146">深入浅出Stream和parallelStream<a href="https://blog.csdn.net/darrensty/article/details/79283146" target="_blank" rel="noopener">https://blog.csdn.net/darrensty/article/details/79283146</a></h4>
+<h4 id="java8时间工具类httpswwwjianshucomp6261f4162cfe">java8时间工具类<a href="https://www.jianshu.com/p/6261f4162cfe" target="_blank" rel="noopener">https://www.jianshu.com/p/6261f4162cfe</a></h4>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/Java/阿里Java开发手册/" data-toggle="tooltip" data-placement="top" title="阿里Java开发手册">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/Other/书签/" data-toggle="tooltip" data-placement="top" title="书签">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <br>
+
+                <!--打赏-->
+                
+                <!--打赏-->
+
+                <br>
+                <!--分享-->
+                
+                    <div class="social-share"  data-wechat-qrcode-helper="" align="center"></div>
+                    <!--  css & js -->
+                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+                
+                <!--分享-->
+                <br>                       
+                
+                <!-- require APlayer -->
+                
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+
+                
+
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#java" title="java">java</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="#" target="_blank">CSDN Blog 漆建国</a></li>
+                    
+                        <li><a href="#" target="_blank">DockOne 漆建国</a></li>
+                    
+                        <li><a href="#" target="_blank">阿里云栖社区 漆建国</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/qijianguo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 漆建国 2019 
+                    <br>
+                    <!-- 
+					Theme by <a href="http://beantech.org">BeanTech</a>  
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://www.huweihuang.com">胡伟煌</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=huweihuang&repo=hexo-theme-huweihuang&type=star&count=true" >
+                    </iframe>
+					-->
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://www.qijianguo.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = 'xxx';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="http://www.qijianguo.com/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

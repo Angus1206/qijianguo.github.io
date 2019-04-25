@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          Spring Boot的启动器Starter大全及自定义Starter - 漆建国 | Blog
+        
+    </title>
+
+    <link rel="canonical" href="http://www.qijianguo.com/Java/Spring Boot的启动器Starter大全及自定义Starter/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+
+    <link rel="stylesheet" href="/css/donate.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+	<link rel="icon" type="image/x-icon" href="favicon.ico">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('/img/article_header/article_bg.jpg')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#java, springboot" title="java, springboot">java, springboot</a>
+                            
+                        </div>
+                        <h1>Spring Boot的启动器Starter大全及自定义Starter</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by 漆建国 on
+                            2019-04-18
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">漆建国</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <a id="more"></a>
+<p>转载自：<a href="https://www.cnblogs.com/shamo89/p/8051966.html" target="_blank" rel="noopener">https://www.cnblogs.com/shamo89/p/8051966.html</a></p>
+<p>现有启动器Starter目录<br>
+Spring Boot应用启动器基本的一共有44种，具体如下：</p>
+<p>1）spring-boot-starter<br>
+这是Spring Boot的核心启动器，包含了自动配置、日志和YAML。</p>
+<p>2）spring-boot-starter-actuator<br>
+帮助监控和管理应用。</p>
+<p>3）spring-boot-starter-amqp<br>
+通过spring-rabbit来支持AMQP协议（Advanced Message Queuing Protocol）。</p>
+<p>4）spring-boot-starter-aop<br>
+支持面向方面的编程即AOP，包括spring-aop和AspectJ。</p>
+<p>5）spring-boot-starter-artemis<br>
+通过Apache Artemis支持JMS的API（Java Message Service API）。</p>
+<p>6）spring-boot-starter-batch<br>
+支持Spring Batch，包括HSQLDB数据库。</p>
+<p>7）spring-boot-starter-cache<br>
+支持Spring的Cache抽象。</p>
+<p>8）spring-boot-starter-cloud-connectors<br>
+支持Spring Cloud Connectors，简化了在像Cloud Foundry或Heroku这样的云平台上连接服务。</p>
+<p>9）spring-boot-starter-data-elasticsearch<br>
+支持ElasticSearch搜索和分析引擎，包括spring-data-elasticsearch。</p>
+<p>10）spring-boot-starter-data-gemfire<br>
+支持GemFire分布式数据存储，包括spring-data-gemfire。</p>
+<p>11）spring-boot-starter-data-jpa<br>
+支持JPA（Java Persistence API），包括spring-data-jpa、spring-orm、Hibernate。</p>
+<p>12）spring-boot-starter-data-mongodb<br>
+支持MongoDB数据，包括spring-data-mongodb。</p>
+<p>13）spring-boot-starter-data-rest<br>
+通过spring-data-rest-webmvc，支持通过REST暴露Spring Data数据仓库。</p>
+<p>14）spring-boot-starter-data-solr<br>
+支持Apache Solr搜索平台，包括spring-data-solr。</p>
+<p>15）spring-boot-starter-freemarker<br>
+支持FreeMarker模板引擎。</p>
+<p>16）spring-boot-starter-groovy-templates<br>
+支持Groovy模板引擎。</p>
+<p>17）spring-boot-starter-hateoas<br>
+通过spring-hateoas支持基于HATEOAS的RESTful Web服务。</p>
+<p>18）spring-boot-starter-hornetq<br>
+通过HornetQ支持JMS。</p>
+<p>19）spring-boot-starter-integration<br>
+支持通用的spring-integration模块。</p>
+<p>20）spring-boot-starter-jdbc<br>
+支持JDBC数据库。</p>
+<p>21）spring-boot-starter-jersey<br>
+支持Jersey RESTful Web服务框架。</p>
+<p>22）spring-boot-starter-jta-atomikos<br>
+通过Atomikos支持JTA分布式事务处理。</p>
+<p>23）spring-boot-starter-jta-bitronix<br>
+通过Bitronix支持JTA分布式事务处理。</p>
+<p>24）spring-boot-starter-mail<br>
+支持javax.mail模块。</p>
+<p>25）spring-boot-starter-mobile<br>
+支持spring-mobile。</p>
+<p>26）spring-boot-starter-mustache<br>
+支持Mustache模板引擎。</p>
+<p>27）spring-boot-starter-redis<br>
+支持Redis键值存储数据库，包括spring-redis。</p>
+<p>28）spring-boot-starter-security<br>
+支持spring-security。</p>
+<p>29）spring-boot-starter-social-facebook<br>
+支持spring-social-facebook</p>
+<p>30）spring-boot-starter-social-linkedin<br>
+支持pring-social-linkedin</p>
+<p>31）spring-boot-starter-social-twitter<br>
+支持pring-social-twitter</p>
+<p>32）spring-boot-starter-test<br>
+支持常规的测试依赖，包括JUnit、Hamcrest、Mockito以及spring-test模块。</p>
+<p>33）spring-boot-starter-thymeleaf<br>
+支持Thymeleaf模板引擎，包括与Spring的集成。</p>
+<p>34）spring-boot-starter-velocity<br>
+支持Velocity模板引擎。</p>
+<p>35）spring-boot-starter-web<br>
+S支持全栈式Web开发，包括Tomcat和spring-webmvc。</p>
+<p>36）spring-boot-starter-websocket<br>
+支持WebSocket开发。</p>
+<p>37）spring-boot-starter-ws<br>
+支持Spring Web Services。</p>
+<p>Spring Boot应用启动器面向生产环境的还有2种，具体如下：</p>
+<p>1）spring-boot-starter-actuator<br>
+增加了面向产品上线相关的功能，比如测量和监控。</p>
+<p>2）spring-boot-starter-remote-shell<br>
+增加了远程ssh shell的支持。</p>
+<p>最后，Spring Boot应用启动器还有一些替换技术的启动器，具体如下：</p>
+<p>1）spring-boot-starter-jetty<br>
+引入了Jetty HTTP引擎（用于替换Tomcat）。</p>
+<p>2）spring-boot-starter-log4j<br>
+支持Log4J日志框架。</p>
+<p>3）spring-boot-starter-logging<br>
+引入了Spring Boot默认的日志框架Logback。</p>
+<p>4）spring-boot-starter-tomcat<br>
+引入了Spring Boot默认的HTTP引擎Tomcat。</p>
+<p>5）spring-boot-starter-undertow<br>
+引入了Undertow HTTP引擎（用于替换Tomcat）。</p>
+<h4 id="自定义springboot-starter">自定义SpringBoot-Starter</h4>
+<h5 id="前言">前言</h5>
+<p>我们都知道可以使用SpringBoot快速的开发基于Spring框架的项目。由于围绕SpringBoot存在很多开箱即用的Starter依赖，使得我们在开发业务代码时能够非常方便的、不需要过多关注框架的配置，而只需要关注业务即可。</p>
+<p>例如我想要在SpringBoot项目中集成Redis，那么我只需要加入spring-data-redis-starter的依赖，并简单配置一下连接信息以及Jedis连接池配置就可以。这为我们省去了之前很多的配置操作。甚至有些功能的开启只需要在启动类或配置类上增加一个注解即可完成。</p>
+<p>那么如果我们想要自己实现自己的Starter需要做些什么呢？下面就开始介绍如何实现自己的SpringBoot-xxx-starter。</p>
+<h5 id="原理">原理</h5>
+<p>首先说说原理，我们知道使用一个公用的starter的时候，只需要将相应的依赖添加的Maven的配置文件当中即可，免去了自己需要引用很多依赖类，并且SpringBoot会自动进行类的自动配置。那么 SpringBoot 是如何知道要实例化哪些类，并进行自动配置的呢？ 下面简单说一下。</p>
+<p>第一步，SpringBoot 在启动时会去依赖的starter包中寻找 resources/META-INF/spring.factories 文件，然后根据文件中配置的Jar包去扫描项目所依赖的Jar包，这类似于 Java 的 SPI 机制。(spi介绍参阅：Java的spi介绍和简单应用)</p>
+<p>第二步，根据 spring.factories配置加载AutoConfigure类。</p>
+<p>最后，根据 @Conditional注解的条件，进行自动配置并将Bean注入Spring Context 上下文当中。</p>
+<p>我们也可以使用@ImportAutoConfiguration({MyServiceAutoConfiguration.class}) 指定自动配置哪些类。</p>
+<h5 id="实现">实现</h5>
+<p>终于到了代码实现的步骤，接下来就开始编码我们自己的SpringBoot-starter。</p>
+<p>第一步创建一个SpringBoot 项目，并添加下面两个依赖到pom.xml文件当中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependencies&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;spring-boot-configuration-processor&lt;/artifactId&gt;</span><br><span class="line">        &lt;optional&gt;true&lt;/optional&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;spring-boot-autoconfigure&lt;/artifactId&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">&lt;/dependencies&gt;</span><br></pre></td></tr></table></figure>
+<p>其中 spring-boot-configuration-processor 的作用是编译时生成 spring-configuration-metadata.json ，此文件主要给IDE使用。如当配置此jar相关配置属性在 application.yml ，你可以用ctlr+鼠标左键点击属性名，IDE会跳转到你配置此属性的类中。</p>
+<p>我们日常使用的Spring官方的Starter一般采取spring-boot-starter-{name} 的命名方式，如 spring-boot-starter-web 。</p>
+<p>而非官方的Starter，官方建议 artifactId 命名应遵循{name}-spring-boot-starter 的格式。 例如：mybatis-spring-boot-starter  。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;groupId&gt;com.ysc&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;simple-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.0.0-SNAPSHOT&lt;/version&gt;</span><br><span class="line">&lt;packaging&gt;jar&lt;/packaging&gt;</span><br></pre></td></tr></table></figure>
+<p>第二步编写我们的Service类<br>
+这里讲一下我们的Starter要实现的功能，很简单，提供一个Service，包含一个能够将配置文件中配置的字符串根据传入的字符进行分割的方法String[] split(String separatorChar)。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public class StarterService &#123;</span><br><span class="line">    private String config;</span><br><span class="line"></span><br><span class="line">    public StarterService(String config) &#123;</span><br><span class="line">        this.config = config;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public String[] split(String separatorChar) &#123;</span><br><span class="line">        return StringUtils.split(this.config, separatorChar);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>第三步编写配置文件读取类</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@ConfigurationProperties(&quot;example.service&quot;)</span><br><span class="line">public class StarterServiceProperties &#123;</span><br><span class="line">    private String config;</span><br><span class="line">    </span><br><span class="line">    public void setConfig(String config) &#123;</span><br><span class="line">        this.config = config;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public String getConfig() &#123;</span><br><span class="line">        return config;</span><br><span class="line">    &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>第四步，编写AutoConfigure类 ，这步是关键点</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">@ConditionalOnClass(StarterService.class)</span><br><span class="line">@EnableConfigurationProperties(StarterServiceProperties.class)</span><br><span class="line">public class StarterAutoConfigure &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private StarterServiceProperties properties;</span><br><span class="line"></span><br><span class="line">    @Bean</span><br><span class="line">    @ConditionalOnMissingBean</span><br><span class="line">    @ConditionalOnProperty(prefix = &quot;example.service&quot;, value = &quot;enabled&quot;, havingValue = &quot;true&quot;)</span><br><span class="line">    StarterService starterService ()&#123;</span><br><span class="line">        return new StarterService(properties.getConfig());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>解释一下代码中用到的几个注解：</p>
+<p>@ConditionalOnClass，当classpath下发现该类的情况下进行自动配置。<br>
+@ConditionalOnMissingBean，当Spring Context中不存在该Bean时。<br>
+@ConditionalOnProperty(prefix = “example.service”,value = “enabled”,havingValue = “true”)，当配置文件中example.service.enabled=true时。<br>
+下面列举SpringBoot中的所有@Conditional注解及作用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@ConditionalOnBean:当容器中有指定的Bean的条件下  </span><br><span class="line">@ConditionalOnClass：当类路径下有指定的类的条件下  </span><br><span class="line">@ConditionalOnExpression:基于SpEL表达式作为判断条件  </span><br><span class="line">@ConditionalOnJava:基于JVM版本作为判断条件  </span><br><span class="line">@ConditionalOnJndi:在JNDI存在的条件下查找指定的位置  </span><br><span class="line">@ConditionalOnMissingBean:当容器中没有指定Bean的情况下  </span><br><span class="line">@ConditionalOnMissingClass:当类路径下没有指定的类的条件下  </span><br><span class="line">@ConditionalOnNotWebApplication:当前项目不是Web项目的条件下  </span><br><span class="line">@ConditionalOnProperty:指定的属性是否有指定的值  </span><br><span class="line">@ConditionalOnResource:类路径下是否有指定的资源  </span><br><span class="line">@ConditionalOnSingleCandidate:当指定的Bean在容器中只有一个，或者在有多个Bean的情况下，用来指定首选的Bean @ConditionalOnWebApplication:当前项目是Web项目的条件下</span><br></pre></td></tr></table></figure>
+<p>最后一步，在resources/META-INF/下创建spring.factories文件，并添加如下内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.example.autocinfigure.StarterAutoConfigure</span><br></pre></td></tr></table></figure>
+<p>至此，我们的一个Starter代码部分就是完成了，下面将项目安装到本地Maven仓库中。</p>
+<p>发布<br>
+在项目根目录执行 mvn install 进行打包安装。</p>
+<p>测试<br>
+将Starter项目的依赖添加到我们自己的SpringBoot项目中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.ysc&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;simple-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;</span><br><span class="line"> &lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<p>在application.yml 配置文件中添加配置信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">example</span><br><span class="line">  service</span><br><span class="line">    enabled: true</span><br><span class="line">    config： abc-des-dde,SSS-DRS-RE,SDR-SDFR-XXX</span><br></pre></td></tr></table></figure>
+<p>在本地使用JUnit进行代码测试</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@Autowired</span><br><span class="line">private StarterService starterService;</span><br><span class="line"></span><br><span class="line">@Test</span><br><span class="line">public void starterTest() &#123;</span><br><span class="line">    String[] splitArray = starterService.split(&quot;,&quot;);</span><br><span class="line">    System.out.println(splitArray);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>好，到这我们的一个自定义Stater就完成了</p>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/nginx/nginx启动、重启、关闭/" data-toggle="tooltip" data-placement="top" title="Nginx启动、重启、关闭">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/Java/Spring boot 实现Web Service/" data-toggle="tooltip" data-placement="top" title="Spring boot 实现Web Service">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <br>
+
+                <!--打赏-->
+                
+                <!--打赏-->
+
+                <br>
+                <!--分享-->
+                
+                    <div class="social-share"  data-wechat-qrcode-helper="" align="center"></div>
+                    <!--  css & js -->
+                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+                
+                <!--分享-->
+                <br>                       
+                
+                <!-- require APlayer -->
+                
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+
+                
+
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#java, springboot" title="java, springboot">java, springboot</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="#" target="_blank">CSDN Blog 漆建国</a></li>
+                    
+                        <li><a href="#" target="_blank">DockOne 漆建国</a></li>
+                    
+                        <li><a href="#" target="_blank">阿里云栖社区 漆建国</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/qijianguo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 漆建国 2019 
+                    <br>
+                    <!-- 
+					Theme by <a href="http://beantech.org">BeanTech</a>  
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://www.huweihuang.com">胡伟煌</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=huweihuang&repo=hexo-theme-huweihuang&type=star&count=true" >
+                    </iframe>
+					-->
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://www.qijianguo.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = 'xxx';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="http://www.qijianguo.com/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

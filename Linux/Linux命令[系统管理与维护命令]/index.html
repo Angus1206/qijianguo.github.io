@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          Linux命令[系统管理与维护命令] - 漆建国 | Blog
+        
+    </title>
+
+    <link rel="canonical" href="http://www.qijianguo.com/Linux/Linux命令[系统管理与维护命令]/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+
+    <link rel="stylesheet" href="/css/donate.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+	<link rel="icon" type="image/x-icon" href="favicon.ico">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('/img/article_header/article_bg.jpg')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#linux" title="linux">linux</a>
+                            
+                        </div>
+                        <h1>Linux命令[系统管理与维护命令]</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by 漆建国 on
+                            2018-09-02
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">漆建国</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <ul>
+<li>ls: 列出工作目录所含的文件及子目录,  可以用dir代替ls<br>
+语法:   <strong><em>ls [选项] [路径或文件]</em></strong></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">-- 注释: 列出mnt目录下的文件及其子目录--</span><br><span class="line">&gt; ls /mnt</span><br><span class="line">apk-update-service  git-repo-for-redmine  license_capture  lost+found  mysql  newprojects  test</span><br><span class="line"></span><br><span class="line">-- 注释: 列出/mnt目录下文件及其子目录的详细信息--</span><br><span class="line">&gt; ls  -l  /mnt</span><br><span class="line">total 40</span><br><span class="line">drwxrwxrwx  2 root root  4096 Jul 22 09:56 apk-update-service</span><br><span class="line">drwxr-xr-x  5 root root  4096 Jun 27  2017 git-repo-for-redmine</span><br><span class="line">drwxr-xr-x  3 root root  4096 Jul 31  2017 license_capture</span><br><span class="line">drwx------  2 root root 16384 Jun  6  2017 lost+found</span><br><span class="line">drwxr-xr-x  3 root root  4096 Jun 10  2017 mysql</span><br><span class="line">drwxr-xr-x  6 root root  4096 Oct 10  2017 newprojects</span><br><span class="line">drwxr-xr-x 10 root root  4096 Nov  6  2017 test</span><br><span class="line">&lt;!-- more --&gt;</span><br><span class="line">-- 注释: 显示mnt目录下的所有文件及其目录的详细信息, 并显示文件类型标记--</span><br><span class="line">&gt; ls -alF /mnt</span><br><span class="line"> ls -alF /mnt </span><br><span class="line">total 48</span><br><span class="line">drwxr-xr-x   9 root root  4096 Jul 31  2017 ./</span><br><span class="line">dr-xr-xr-x. 25 root root  4096 Jun  8 15:30 ../</span><br><span class="line">drwxrwxrwx   2 root root  4096 Jul 22 09:56 apk-update-service/</span><br><span class="line">drwxr-xr-x   5 root root  4096 Jun 27  2017 git-repo-for-redmine/</span><br><span class="line">drwxr-xr-x   3 root root  4096 Jul 31  2017 license_capture/</span><br><span class="line">drwx------   2 root root 16384 Jun  6  2017 lost+found/</span><br><span class="line">drwxr-xr-x   3 root root  4096 Jun 10  2017 mysql/</span><br><span class="line">drwxr-xr-x   6 root root  4096 Oct 10  2017 newprojects/</span><br><span class="line">drwxr-xr-x  10 root root  4096 Nov  6  2017 test/</span><br></pre></td></tr></table></figure>
+<ul>
+<li>pwd: 显示当前的工作目录, 即当前所在的工作目录的绝对路径名称<br>
+语法: <strong><em>pwd</em></strong></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; pwd</span><br><span class="line">/root</span><br></pre></td></tr></table></figure>
+<ul>
+<li>cd: 改变当前的工作目录<br>
+语法: cd  [目录名]</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; cd  /mnt</span><br><span class="line">&gt; pwd</span><br><span class="line">/mnt</span><br></pre></td></tr></table></figure>
+<p>语法: <strong>cd</strong> 返回根目录中<br>
+语法: **cd - **返回上次调整的目录中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt; pwd    -- 当前目录</span><br><span class="line">/mnt       </span><br><span class="line">&gt; cd       -- 跳到根目录</span><br><span class="line">/root</span><br><span class="line">&gt; cd -     -- 跳到最近一次跳转的目录中</span><br><span class="line">/mnt</span><br></pre></td></tr></table></figure>
+<ul>
+<li>date: 显示或修改系统时间和日期(只有超级用户才能使用date命令修改时间, 一般用户只能用date命令显示时间)<br>
+语法: <strong><em>date [选项] '+时间格式’</em></strong></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; date &apos;+%y-%m-%d&apos;         </span><br><span class="line">18-10-08</span><br></pre></td></tr></table></figure>
+<p>语法: <strong><em>date ‘%x’ 或  '%X’</em></strong> 显示日期/时间</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; date &apos;+today is %x %X&apos;</span><br><span class="line">today is 10/08/2018 02:21:41 PM</span><br></pre></td></tr></table></figure>
+<p>语法: <strong><em>date -s yyyyMMdd HH:mm:ss</em></strong>或 <strong><em>date -s yyyyMMdd</em></strong> 或 <strong><em>date  -s HH:mm:ss</em></strong> 设置系统时间</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; date -s &quot;20180715 17:25&quot;</span><br><span class="line">Tue Jul 15 17:25:00 CST 2018</span><br></pre></td></tr></table></figure>
+<p>语法: <strong><em>date -d “num years/months/days ago” %y-%m-%d</em></strong>当前时间的前年/月/日的时间</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; date +%y-%m-%d                 </span><br><span class="line">18-10-08</span><br><span class="line">&gt; date -d &quot;10 days ago&quot; +%y-%m-%d</span><br><span class="line">18-09-28</span><br></pre></td></tr></table></figure>
+<ul>
+<li>clear : 清除屏幕信息<br>
+语法: clear</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; clear</span><br></pre></td></tr></table></figure>
+<ul>
+<li>man:  显示命令的帮助信息<br>
+语法: <strong><em>man [命令名称]</em></strong></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&gt; man  clear</span><br><span class="line"></span><br><span class="line">clear(1)                                                              clear(1)</span><br><span class="line"></span><br><span class="line">NAME</span><br><span class="line">       clear - clear the terminal screen</span><br><span class="line"></span><br><span class="line">SYNOPSIS</span><br><span class="line">       clear</span><br><span class="line"></span><br><span class="line">DESCRIPTION</span><br><span class="line">       clear clears your screen if this is possible.  It looks in the environment for the terminal type and then in the terminfo database to figure out how to clear the screen.</span><br><span class="line"></span><br><span class="line">       clear ignores any command-line parameters that may be present.</span><br><span class="line"></span><br><span class="line">SEE ALSO</span><br><span class="line">       tput(1), terminfo(5)</span><br><span class="line"></span><br><span class="line">       This describes ncurses version 5.7 (patch 20090207).</span><br><span class="line"></span><br><span class="line">                                                                      clear(1)</span><br><span class="line">(END)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>who: 显示当前登录到系统的用户<br>
+语法: who</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&gt; who</span><br><span class="line">root     pts/0        2018-10-08 13:26 (203.110.178.83)</span><br><span class="line">-- 注释: 输出格式为</span><br><span class="line">名称 [状态] 终端 时间 [活动] [进程标识]（主机名）</span><br><span class="line">    * 名称：用户的登录名。</span><br><span class="line">    * 状态：表明终端是否对用户都是可写的。</span><br><span class="line">    * 终端：类似于pts/1、pts/2等，此终端标识在/dev目录中可找到。</span><br><span class="line">    * 时间：用户登录系统的时间。</span><br><span class="line">    * 活动：某个用户在自己的终端上最后一次活动发生以来到现在的时间，如果此项是个“.”，就表示一分钟内的终端活动；如果终端保持静止已经超过24小时或自从系统启动以来还没有被使用过，那么此项标记为“old”。</span><br><span class="line">    * 进程标识：用户登录shell的进程id。</span><br><span class="line">    * 主机名：登录到Linux系统上的客户端机器标识。</span><br><span class="line">--</span><br><span class="line"></span><br><span class="line">-- 注释: 查看运行级别-- </span><br><span class="line">&gt; who -r  </span><br><span class="line">         run-level 3  2017-07-15 15:26</span><br><span class="line">&gt; who  -w</span><br><span class="line">root     + pts/0        2018-10-08 13:26 (203.110.178.83)</span><br><span class="line"></span><br><span class="line">&gt;  who -buT</span><br><span class="line">           system boot  2017-07-15 15:26</span><br><span class="line">root     + pts/0        2018-10-08 13:26   .          2887 (203.110.178.83)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>free: 显示内存状态(系统物理内存、虚拟内存、共享内存和系统缓存)<br>
+语法: free [选项] [-s (间隔秒数)]</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; free</span><br><span class="line">             total       used       free     shared    buffers     cached</span><br><span class="line">Mem:       8061108    7875964     185144     146236     201324     558792</span><br><span class="line">-/+ buffers/cache:    7115848     945260</span><br><span class="line">Swap:            0          0          0</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdn.net/20181008150804369?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1OTc0NzU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="free参数说明"></p>
+<ul>
+<li>ps: 系统进程瞬间的运行状态, 非常常用, 可通过组合选项(-ef、aux)准确定位系统运行的状态<br>
+语法: <strong><em>ps [选项]</em></strong><br>
+<img src="https://img-blog.csdn.net/20181008151130846?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1OTc0NzU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="ps参数"></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&gt; ps</span><br><span class="line">  PID TTY          TIME CMD</span><br><span class="line"> 2887 pts/0    00:00:00 zsh</span><br><span class="line">24884 pts/0    00:00:00 ps</span><br><span class="line"></span><br><span class="line">-- 注释: (输出说明)</span><br><span class="line">pid: 进程的标识符</span><br><span class="line">tty: 进程所属的终端控制台</span><br><span class="line">time: 进程所使用的总的cpu时间</span><br><span class="line">cmd: 列出正在执行的命令行</span><br><span class="line">-- </span><br><span class="line"></span><br><span class="line">&gt; ps -aux </span><br><span class="line">&gt; ps -ef</span><br></pre></td></tr></table></figure>
+<ul>
+<li>top: 类型windows中的任务管理器, 能够实时显示进程的资源占用情况, 可以按照cpu使用情况或内存占用情况进行排序<br>
+<img src="https://img-blog.csdn.net/20181008152506209?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM1OTc0NzU5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="top参数"></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">&gt; top</span><br><span class="line">top - 15:31:25 up 450 days, 4 min,  1 user,  load average: 0.00, 0.00, 0.00</span><br><span class="line">Tasks: 403 total,   1 running, 402 sleeping,   0 stopped,   0 zombie</span><br><span class="line">Cpu(s):  0.9%us,  0.4%sy,  0.0%ni, 98.7%id,  0.0%wa,  0.0%hi,  0.0%si,  0.0%st</span><br><span class="line">Mem:   8061108k total,  7873600k used,   187508k free,   201444k buffers</span><br><span class="line">Swap:        0k total,        0k used,        0k free,   538576k cached</span><br><span class="line"></span><br><span class="line">  PID USER      PR  NI  VIRT  RES  SHR S %CPU %MEM    TIME+  COMMAND                                                                                                                                                           </span><br><span class="line"> 3687 git       20   0 1460m 760m  11m S  1.0  9.7 509:44.69 bundle                                                                                                                                                             </span><br><span class="line">15635 gitlab-r  20   0  241m  12m  912 S  1.0  0.2 366:27.19 redis-server </span><br><span class="line"></span><br><span class="line">-- 注释: </span><br><span class="line">&gt; 第一行:  </span><br><span class="line">15:31:25 当前系统的时间；</span><br><span class="line">up 450 days 表示系统已启动450天4分钟；</span><br><span class="line">1 user当前在线的用户数为1人；</span><br><span class="line">load average:0.00,0.00,0.00表示系统平均负载,3个数分别为1分钟/5分钟/15分钟前到现在的系统平均负载.</span><br><span class="line"></span><br><span class="line">&gt; 第二、三行</span><br><span class="line">Tasks：403 total总共有403个进程；</span><br><span class="line">1 running： 1个运行</span><br><span class="line">402 sleeping：402个处于休眠状态</span><br><span class="line">0 stopped：0个停止</span><br><span class="line">0 zombie：0个僵死</span><br><span class="line">Cpu(s)：0.9% us：表示用戶進程占用CPU的百分比。</span><br><span class="line">0.1% sy：系统进程占用CPU的百分比。</span><br><span class="line">0.0% ni：用户进程空间內改变过优先级的进程占用CPU的百分比。</span><br><span class="line">99.3% id：空闲CPU占用的百分比。</span><br><span class="line">0.2% wa：等待输入、输出的进程占用CPU的百分比。</span><br><span class="line"></span><br><span class="line">&gt; 最后两行</span><br><span class="line">Mem：4059952k total：系統的物理內存大小。</span><br><span class="line">4009540k used：已經使用的物理內存大小。</span><br><span class="line">50412k free：目前空余內存大小。</span><br><span class="line">468964k buffers：用作內核緩沖區的內存大小。</span><br><span class="line">Swap：8193108k total：交換分區內存大小。</span><br><span class="line">0k used：已經使用的交換分區大小。</span><br><span class="line">8193108k free：空閑的交換分區大小。</span><br><span class="line">2320396k cached：緩存大小。</span><br><span class="line"></span><br><span class="line">&gt; 进程信息区</span><br><span class="line">進程信息區</span><br><span class="line"></span><br><span class="line">進程信息區顯示了每個進程的運行狀態，我們先來看一下每列輸出的含義。</span><br><span class="line"></span><br><span class="line">PID：进程的id。</span><br><span class="line">USER：进程所有者的用户名。</span><br><span class="line">pr：进程优先级。</span><br><span class="line">NI：nice值。负值表示高优先级，正值表示低优先级。</span><br><span class="line">VIRT：进程使用的虚拟内存总量，单位KB。VIRT=SWAP+RES。</span><br><span class="line">RES：进程使用的、未被换出的物理內存大小，单位KB。RES=CODE+DATA，其中，CODE为执行代码占用的物理內存大小，DATA为数据占用的內存大小。</span><br><span class="line">SHR：共享內存大小，单位KB。</span><br><span class="line">S：进程状态，D表示不可中断的睡眠状态，R表示运行状态，S表示睡眠状态，T表示跟踪/停止，Z表示僵死进程。</span><br><span class="line">%CPU：上次更新到现在的CPU时间占用百分比。</span><br><span class="line">%MEM：进程占用的物理內存百分比。</span><br><span class="line">TIME+：进程總計使用的CPU时间，单位为1/100秒。</span><br><span class="line">COMMAND：正在运行进程的命令名或者命令路经。</span><br><span class="line">--</span><br></pre></td></tr></table></figure>
+<ul>
+<li>find: 查找文件<br>
+语法: find [路径]</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">-- 注释: 查找大于100M的文件, 但是这样无法看文件的大小/属性等 --</span><br><span class="line">&gt; find . -type f -size +100M</span><br><span class="line">./Downloads/root@cq.hbjk.com.cn</span><br><span class="line">./Downloads/jdk-8u131-linux-x64.rpm</span><br><span class="line"></span><br><span class="line">-- 注释: 查找大于100M的文件, 可以看到文件的大小/属性 --</span><br><span class="line">&gt;  find . -type f -size +100M -print0 | xargs -0 ls -l</span><br><span class="line">-rw-r--r-- 1 root root 169983496 Mar 16  2017 ./Downloads/jdk-8u131-linux-x64.rpm</span><br><span class="line">-rw-r--r-- 1 root root 169983496 Oct 18  2017 ./Downloads/root@cq.hbjk.com.cn</span><br><span class="line"></span><br><span class="line">-- 注释: 查找大于100M的文件, 只看大小 --</span><br><span class="line">&gt; find . -type f -size +100M  -print0 | xargs -0 du -h</span><br><span class="line">163M	./Downloads/root@cq.hbjk.com.cn</span><br><span class="line">163M	./Downloads/jdk-8u131-linux-x64.rpm</span><br><span class="line"></span><br><span class="line">-- 注释: 查找大于100M的文件, 只看大小,  并排序 --</span><br><span class="line">&gt; find . -type f -size +100M -print0 | xargs -0 du -h | sort -nr</span><br><span class="line">163M	./Downloads/root@cq.hbjk.com.cn</span><br><span class="line">163M	./Downloads/jdk-8u131-linux-x64.rpm</span><br></pre></td></tr></table></figure>
+<ul>
+<li>du: 查看当前指定文件或目录(会递归显示子目录)占用磁盘空间大小</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">-- 注释: 查询depth为1的所有文件, 并显示文件大小--</span><br><span class="line">&gt; du -h --max-depth=1</span><br><span class="line">69M	./.m2</span><br><span class="line">60K	./.cache</span><br><span class="line">1.4G	./Downloads</span><br><span class="line">12K	./.oracle_jre_usage</span><br><span class="line">8.0K	./.pki</span><br><span class="line">170M	./.nvm</span><br><span class="line">208M	./.npm</span><br><span class="line">3.6M	./.gem</span><br><span class="line">8.0K	./.pip</span><br><span class="line">112K	./tmp</span><br><span class="line">28M	./.bundle</span><br><span class="line">56K	./.java</span><br><span class="line">276K	./.ssh</span><br><span class="line">4.9M	./.oh-my-zsh</span><br><span class="line">296K	./.vue-templates</span><br><span class="line">1.9G	.</span><br><span class="line"></span><br><span class="line">-- 注释: 查询depth为1的所有文件, 并将文件大小单位用M, 并排序 --</span><br><span class="line">&gt; du -hm --max-depth=1 | sort -n</span><br><span class="line">1	./.cache</span><br><span class="line">1	./.java</span><br><span class="line">1	./.oracle_jre_usage</span><br><span class="line">1	./.pip</span><br><span class="line">1	./.pki</span><br><span class="line">1	./.ssh</span><br><span class="line">1	./tmp</span><br><span class="line">1	./.vue-templates</span><br><span class="line">4	./.gem</span><br><span class="line">5	./.oh-my-zsh</span><br><span class="line">28	./.bundle</span><br><span class="line">69	./.m2</span><br><span class="line">170	./.nvm</span><br><span class="line">208	./.npm</span><br><span class="line">1400	./Downloads</span><br><span class="line">1883	.</span><br><span class="line"></span><br><span class="line">-- 注释: 查询depth为1的所有文件, 并将文件大小单位用M, 排序, 取前12个--</span><br><span class="line">&gt;du -hm --max-depth=2 | sort -nr | head -12</span><br><span class="line">1883	.</span><br><span class="line">1400	./Downloads</span><br><span class="line">383	./Downloads/ruby-2.3.3</span><br><span class="line">377	./Downloads/ruby-2.4.1</span><br><span class="line">208	./.npm</span><br><span class="line">170	./.nvm</span><br><span class="line">167	./.nvm/versions</span><br><span class="line">73	./Downloads/redis-4.0.1</span><br><span class="line">69	./.m2/repository</span><br><span class="line">69	./.m2</span><br><span class="line">47	./Downloads/zookeeper-3.4.9</span><br><span class="line">45	./Downloads/kafka_2.11-0.11.0.0</span><br></pre></td></tr></table></figure>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/Linux/Linux有趣（无用）的命令/" data-toggle="tooltip" data-placement="top" title="Linux有趣（无用）的命令">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/Linux/Linux简单命令/" data-toggle="tooltip" data-placement="top" title="Linux简单命令">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <br>
+
+                <!--打赏-->
+                
+                <!--打赏-->
+
+                <br>
+                <!--分享-->
+                
+                    <div class="social-share"  data-wechat-qrcode-helper="" align="center"></div>
+                    <!--  css & js -->
+                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+                
+                <!--分享-->
+                <br>                       
+                
+                <!-- require APlayer -->
+                
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+
+                
+
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#linux" title="linux">linux</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="#" target="_blank">CSDN Blog 漆建国</a></li>
+                    
+                        <li><a href="#" target="_blank">DockOne 漆建国</a></li>
+                    
+                        <li><a href="#" target="_blank">阿里云栖社区 漆建国</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/qijianguo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 漆建国 2019 
+                    <br>
+                    <!-- 
+					Theme by <a href="http://beantech.org">BeanTech</a>  
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://www.huweihuang.com">胡伟煌</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=huweihuang&repo=hexo-theme-huweihuang&type=star&count=true" >
+                    </iframe>
+					-->
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://www.qijianguo.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = 'xxx';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="http://www.qijianguo.com/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

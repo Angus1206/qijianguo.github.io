@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          Modbus协议服务端（Netty） - 漆建国 | Blog
+        
+    </title>
+
+    <link rel="canonical" href="http://www.qijianguo.com/Linux/Modbus协议服务端（Netty）/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+
+    <link rel="stylesheet" href="/css/donate.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+	<link rel="icon" type="image/x-icon" href="favicon.ico">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('/img/article_header/article_bg.jpg')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#linux" title="linux">linux</a>
+                            
+                        </div>
+                        <h1>Modbus协议服务端（Netty）</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by 漆建国 on
+                            2018-08-15
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">漆建国</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <a id="more"></a>
+<h2 id="pomxml">pom.xml</h2>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;io.netty&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;netty-all&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;4.0.21.Final&lt;/version&gt;</span><br><span class="line">            &lt;scope&gt;compile&lt;/scope&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;commons-codec&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;commons-codec&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;1.7&lt;/version&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;log4j&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;log4j&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;1.2.17&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="listener">Listener</h2>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">import io.netty.bootstrap.ServerBootstrap;</span><br><span class="line">import io.netty.channel.*;</span><br><span class="line">import io.netty.channel.nio.NioEventLoopGroup;</span><br><span class="line">import io.netty.channel.socket.nio.NioServerSocketChannel;</span><br><span class="line">import io.netty.handler.codec.FixedLengthFrameDecoder;</span><br><span class="line">import io.netty.handler.timeout.ReadTimeoutHandler;</span><br><span class="line">import io.netty.util.concurrent.DefaultEventExecutorGroup;</span><br><span class="line">import io.netty.util.concurrent.EventExecutorGroup;</span><br><span class="line">import util.Consts;</span><br><span class="line"></span><br><span class="line">public class PortalSomCommunicationListener implements Runnable&#123;</span><br><span class="line">    private int port;</span><br><span class="line"></span><br><span class="line">    public PortalSomCommunicationListener(int port) &#123;</span><br><span class="line">        this.port = port;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void run() &#123;</span><br><span class="line">        startNettyServer(port);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void startNettyServer(int port) &#123;</span><br><span class="line">        EventLoopGroup bossGroup = new NioEventLoopGroup();</span><br><span class="line">        EventLoopGroup workerGroup = new NioEventLoopGroup();</span><br><span class="line">        final EventExecutorGroup businessGroup = new DefaultEventExecutorGroup(10);</span><br><span class="line">        try &#123;</span><br><span class="line">            // 配置服务器的NIO线程租</span><br><span class="line">            ServerBootstrap b = new ServerBootstrap();</span><br><span class="line">            b.group(bossGroup, workerGroup)</span><br><span class="line">                    .channel(NioServerSocketChannel.class)</span><br><span class="line">                    .option(ChannelOption.SO_BACKLOG, 1024)</span><br><span class="line">                    .childOption(ChannelOption.SO_KEEPALIVE, true)</span><br><span class="line">                    .childHandler(new ChannelInitializer() &#123;</span><br><span class="line">                        @Override</span><br><span class="line">                        protected void initChannel(Channel channel) throws Exception &#123;</span><br><span class="line">                            channel.pipeline().addLast(new FixedLengthFrameDecoder(12));</span><br><span class="line">                            // 设置超时时间，防止连接过多。</span><br><span class="line">                            channel.pipeline().addLast(&quot;readtime&quot;,new ReadTimeoutHandler(5));</span><br><span class="line">                            channel.pipeline().addLast(businessGroup, &quot;executer&quot;, new SomCommunicationHandler());</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;);</span><br><span class="line">            // 绑定端口，同步等待成功</span><br><span class="line">            ChannelFuture f = b.bind(port).sync();</span><br><span class="line">            // 等待服务端监听端口关闭</span><br><span class="line">            f.channel().closeFuture().sync();</span><br><span class="line">        &#125; catch(Exception e) &#123;</span><br><span class="line">        &#125; finally &#123;</span><br><span class="line">            // 优雅退出，释放线程池资源</span><br><span class="line">            bossGroup.shutdownGracefully();</span><br><span class="line">            workerGroup.shutdownGracefully();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        // 异味MODBUS协议</span><br><span class="line">        new Thread(new PortalSomCommunicationListener(Consts.YIWEI_PORT)).start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="handler">Handler</h2>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">import domain.YiWeiSample;</span><br><span class="line">import io.netty.buffer.ByteBuf;</span><br><span class="line">import io.netty.buffer.ByteBufUtil;</span><br><span class="line">import io.netty.buffer.Unpooled;</span><br><span class="line">import io.netty.channel.ChannelFutureListener;</span><br><span class="line">import io.netty.channel.ChannelHandlerContext;</span><br><span class="line">import io.netty.channel.ChannelInboundHandlerAdapter;</span><br><span class="line">import net.Client;</span><br><span class="line">import org.apache.commons.codec.binary.Hex;</span><br><span class="line">import util.Consts;</span><br><span class="line">import java.io.UnsupportedEncodingException;</span><br><span class="line">import java.nio.ByteBuffer;</span><br><span class="line">import java.nio.charset.Charset;</span><br><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 请求：</span><br><span class="line"> *  00 00   00 00   00 06      FF          03      00 01       00 00</span><br><span class="line"> * | 事务 |协议标识| 长度 | 单元标识 |功能码|起始地址|寄存器地址|</span><br><span class="line"> *</span><br><span class="line"> * 响应：</span><br><span class="line"> *  00 00   00 00   00 06       FF           03     00 01      00 00</span><br><span class="line"> * | 事务 |协议标识| 长度 | 单元标识 |功能码|字节个数|请求的数据|</span><br><span class="line"> */</span><br><span class="line">public class SomCommunicationHandler extends ChannelInboundHandlerAdapter &#123;</span><br><span class="line">    // 请求指令的长度，此协议指定12个字节长度</span><br><span class="line">    private static final int commandSize = 12;</span><br><span class="line">    private ByteBuf readBuf;</span><br><span class="line">    @Override</span><br><span class="line">    public void channelRead(ChannelHandlerContext ctx, Object msg) &#123;</span><br><span class="line"></span><br><span class="line">        ByteBuf m = (ByteBuf) msg;</span><br><span class="line">        Consts.logger.info(&quot;SomCommunicationHandler收到SOM的二进制形式指令： &quot; + ByteBufUtil.hexDump(m));</span><br><span class="line">        Consts.logger.info(&quot;SomCommunicationHandler收到SOM的ASCII形式指令： &quot; + m.toString(Charset.forName(&quot;US-ASCII&quot;)));</span><br><span class="line">        readBuf.writeBytes(m);</span><br><span class="line">        m.release();</span><br><span class="line">        byte[] bytes = handleData();</span><br><span class="line">        if (bytes == null) return;</span><br><span class="line">        ctx.channel().writeAndFlush(Unpooled.wrappedBuffer(bytes))</span><br><span class="line">                .addListener(ChannelFutureListener.FIRE_EXCEPTION_ON_FAILURE)</span><br><span class="line">                .addListener((ChannelFutureListener) channelFuture -&gt; Consts.logger.info(</span><br><span class="line">                        &quot;SomCommunicationHandler &quot;</span><br><span class="line">                                + this.getClass().getName()</span><br><span class="line">                                + &quot;成功发送指令:&quot;</span><br><span class="line">                                + Hex.encodeHexString(bytes)));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private byte[] handleData() &#123;</span><br><span class="line">        while (readBuf.readableBytes() &gt;= commandSize) &#123;</span><br><span class="line">            List&lt;Byte&gt; result = new ArrayList&lt;&gt;();</span><br><span class="line">            byte[] bytes = new byte[commandSize];</span><br><span class="line">            readBuf.readBytes(bytes);</span><br><span class="line">            // 事务</span><br><span class="line">            result.add(bytes[0]);</span><br><span class="line">            result.add(bytes[1]);</span><br><span class="line">            // 协议标识</span><br><span class="line">            result.add(bytes[2]);</span><br><span class="line">            result.add(bytes[3]);</span><br><span class="line">            // 起始地址</span><br><span class="line">            float startIndex = ByteBuffer.wrap(bytes, 8, 2).getShort();</span><br><span class="line">            // 寄存器个数</span><br><span class="line">            float numberRegister = ByteBuffer.wrap(bytes, 10, 2).getShort();</span><br><span class="line"></span><br><span class="line">            // 发送指令</span><br><span class="line">            try &#123;</span><br><span class="line">                // 数据包 AI + DI</span><br><span class="line">                byte[] dataBytes = getData((int) startIndex, (int) numberRegister);</span><br><span class="line">                // Length 长度:长度字段以字节计数，包括单元标识和数据字段。</span><br><span class="line">                int length = 3 + (dataBytes != null ? dataBytes.length : 0);</span><br><span class="line">                byte[] len = numToBytes(length);</span><br><span class="line">                addBytes(result, len);</span><br><span class="line">                //Unit Identifier 单元标识</span><br><span class="line">                result.add((byte) 0xFF);</span><br><span class="line">                // Function Code 功能码</span><br><span class="line">                result.add((byte) 0x04);</span><br><span class="line">                //Byte Count 字节个数</span><br><span class="line">//                result.add(numToBytes(dataBytes != null ? dataBytes.length : 0));</span><br><span class="line">                byte[] len2 = numToHex8((dataBytes != null ? dataBytes.length : 0));</span><br><span class="line">                addBytes(result, len2);</span><br><span class="line"></span><br><span class="line">                addBytes(result, dataBytes);</span><br><span class="line"></span><br><span class="line">                return list2byte(result);</span><br><span class="line">            &#125; catch (UnsupportedEncodingException e) &#123;</span><br><span class="line">                Consts.logger.error(e.getMessage(), e);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private byte[] list2byte(List&lt;Byte&gt; list) &#123;</span><br><span class="line">        if (list == null || list.size() &lt; 0)</span><br><span class="line">            return null;</span><br><span class="line">        byte[] bytes = new byte[list.size()];</span><br><span class="line">        int i = 0;</span><br><span class="line">        for (Byte aList : list) &#123;</span><br><span class="line">            bytes[i] = aList;</span><br><span class="line">            i++;</span><br><span class="line">        &#125;</span><br><span class="line">        return bytes;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * @param startIndex 起始地址是指从数据的第几个字段开始, 1：系统报警， 2。。。12 数据</span><br><span class="line">     * @param size 寄存器的个数 = DI + AI， DI有1个，AI有11个</span><br><span class="line">     */</span><br><span class="line">    private byte[] getData(int startIndex, int size) throws UnsupportedEncodingException &#123;</span><br><span class="line">        // TODO: demo数据。</span><br><span class="line">        YiWeiSample sample = new YiWeiSample(</span><br><span class="line">                20,</span><br><span class="line">                70,</span><br><span class="line">                50,</span><br><span class="line">                12,</span><br><span class="line">                1,</span><br><span class="line">                25,</span><br><span class="line">                70,</span><br><span class="line">                20,</span><br><span class="line">                18,</span><br><span class="line">                40,</span><br><span class="line">                10</span><br><span class="line">        );</span><br><span class="line">        //                                                  // 寄存器地址</span><br><span class="line">        // DI：系统报警值，0,1,2,3,4， 1为正常</span><br><span class="line">        byte [] di = numToBytes(1);                         // 1</span><br><span class="line">        // AI 请求的数据data，</span><br><span class="line">        List&lt;Byte&gt; bytes = new ArrayList&lt;&gt;();</span><br><span class="line">        addBytes(bytes, numToBytes(sample.getAvgTemp()));   // 2</span><br><span class="line">        addBytes(bytes, numToBytes(sample.getAvgHumid()));  // 3</span><br><span class="line">        addBytes(bytes, numToBytes(sample.getAvgPm10()));   // 4</span><br><span class="line">        addBytes(bytes, numToBytes(sample.getAvgCo2()));    // 5</span><br><span class="line">        addBytes(bytes, numToBytes(sample.getInYiwei()));   // 6</span><br><span class="line">        addBytes(bytes, numToBytes(sample.getInTemp()));    // 7</span><br><span class="line">        addBytes(bytes, numToBytes(sample.getInPm10()));    // 8</span><br><span class="line">        addBytes(bytes, numToBytes(sample.getInCo2()));     // 9</span><br><span class="line">        addBytes(bytes, numToBytes(sample.getOutTemp()));   // 10</span><br><span class="line">        addBytes(bytes, numToBytes(sample.getOutPm10()));   // 11</span><br><span class="line">        addBytes(bytes, numToBytes(sample.getOutCo2()));    // 12</span><br><span class="line"></span><br><span class="line">        // 处理一下startIndex, startIndex默认在区间[1,12]，1为DI，AI[2,12]</span><br><span class="line">        if (startIndex == 1) &#123;</span><br><span class="line">            startIndex = 0;</span><br><span class="line">        &#125; else if (startIndex &gt;= 2 &amp;&amp; startIndex &lt;= 12) &#123;</span><br><span class="line">            startIndex = (startIndex - 2) * 2;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            Consts.logger.error(&quot;Data (as requested)获取请求数据失败， Starting Address 起始地址小于2或大于12，为：&quot; + size);</span><br><span class="line">            return null;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 寄存器个数</span><br><span class="line">        if (size &lt; 0 || size &gt; bytes.size()) &#123;</span><br><span class="line">            Consts.logger.error(&quot;Data (as requested)获取请求数据失败， Number of Registers 寄存器个数错误，个数为：&quot; + size);</span><br><span class="line">            return null;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        bytes = bytes.subList(startIndex, (size - 1) * 2);</span><br><span class="line"></span><br><span class="line">        List&lt;Byte&gt; result = new ArrayList&lt;&gt;();</span><br><span class="line">        addBytes(result, di);</span><br><span class="line">        result.addAll(bytes);</span><br><span class="line">        return list2byte(result);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause)</span><br><span class="line">            throws Exception &#123;</span><br><span class="line">        Consts.logger.error(&quot;DTUHandler exception: &quot; + cause.toString());</span><br><span class="line">        ctx.close();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void handlerAdded(ChannelHandlerContext ctx) &#123;</span><br><span class="line">        readBuf = ctx.alloc().buffer();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void handlerRemoved(ChannelHandlerContext ctx) &#123;</span><br><span class="line">        readBuf.release();</span><br><span class="line">        readBuf = null;</span><br><span class="line">        Client.disconnect(ctx.channel());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void addBytes(List&lt;Byte&gt; list, byte[] arr) &#123;</span><br><span class="line">        if (arr == null || arr.length == 0) return;</span><br><span class="line">        for (byte b : arr) &#123;</span><br><span class="line">            list.add(b);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private static byte[] numToHex8(int b) &#123;</span><br><span class="line">        return hexStringToBytes(String.format(&quot;%02x&quot;, b));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private static byte[] numToBytes(int b) &#123;</span><br><span class="line">        String hex = String.format(&quot;%04x&quot;, b);</span><br><span class="line">        return hexStringToBytes(hex);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private static byte[] hexStringToBytes(String hexString) &#123;</span><br><span class="line">        if (hexString == null || hexString.equals(&quot;&quot;)) &#123;</span><br><span class="line">            return null;</span><br><span class="line">        &#125;</span><br><span class="line">        hexString = hexString.toUpperCase();</span><br><span class="line">        int length = hexString.length() / 2;</span><br><span class="line">        char[] hexChars = hexString.toCharArray();</span><br><span class="line">        byte[] d = new byte[length];</span><br><span class="line">        for (int i = 0; i &lt; length; i++) &#123;</span><br><span class="line">            int pos = i * 2;</span><br><span class="line">            d[i] = (byte) (charToByte(hexChars[pos]) &lt;&lt; 4 | charToByte(hexChars[pos + 1]));</span><br><span class="line">        &#125;</span><br><span class="line">        return d;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private static byte charToByte(char c) &#123;</span><br><span class="line">        return (byte) &quot;0123456789ABCDEF&quot;.indexOf(c);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="constsjava">Consts.java</h2>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import org.apache.log4j.Logger;</span><br><span class="line"></span><br><span class="line">public class Consts &#123;</span><br><span class="line"></span><br><span class="line">	public static final int YIWEI_PORT = 10000;</span><br><span class="line">	public static Logger logger = Logger.getRootLogger();</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="clientjava">Client.java</h2>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">import io.netty.channel.Channel;</span><br><span class="line"></span><br><span class="line">import java.util.Map;</span><br><span class="line">import java.util.concurrent.ConcurrentHashMap;</span><br><span class="line"></span><br><span class="line">public class Client &#123;</span><br><span class="line">    private static final Map&lt;String, Client&gt; devCode2Client;</span><br><span class="line"></span><br><span class="line">    static &#123;</span><br><span class="line">        devCode2Client = new ConcurrentHashMap&lt;&gt;();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private static final Map&lt;Channel, String&gt; channel2DevCode = new ConcurrentHashMap&lt;&gt;();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public static void disconnect(Channel channel) &#123;</span><br><span class="line"></span><br><span class="line">        if (channel2DevCode.containsKey(channel)) &#123;</span><br><span class="line">            String devCode = channel2DevCode.get(channel);</span><br><span class="line">            devCode2Client.remove(devCode);</span><br><span class="line">            channel2DevCode.remove(channel);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="yiweisamplejava">YiWeiSample.java</h2>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br></pre></td><td class="code"><pre><span class="line">public class YiWeiSample &#123;</span><br><span class="line"></span><br><span class="line">    private int avgTemp;</span><br><span class="line">    private int avgHumid;</span><br><span class="line">    private int avgPm10;</span><br><span class="line">    private int avgCo2;</span><br><span class="line">    private int inYiwei;</span><br><span class="line">    private int inTemp;</span><br><span class="line">    private int inPm10;</span><br><span class="line">    private int inCo2;</span><br><span class="line">    private int outTemp;</span><br><span class="line">    private int outPm10;</span><br><span class="line">    private int outCo2;</span><br><span class="line">    private int warnData;</span><br><span class="line"></span><br><span class="line">    public YiWeiSample(int avgTemp, int avgHumid, int avgPm10, int avgCo2, int inYiwei, int inTemp, int inPm10, int inCo2, int outTemp, int outPm10, int outCo2) &#123;</span><br><span class="line">        this.avgTemp = avgTemp;</span><br><span class="line">        this.avgHumid = avgHumid;</span><br><span class="line">        this.avgPm10 = avgPm10;</span><br><span class="line">        this.avgCo2 = avgCo2;</span><br><span class="line">        this.inYiwei = inYiwei;</span><br><span class="line">        this.inTemp = inTemp;</span><br><span class="line">        this.inPm10 = inPm10;</span><br><span class="line">        this.inCo2 = inCo2;</span><br><span class="line">        this.outTemp = outTemp;</span><br><span class="line">        this.outPm10 = outPm10;</span><br><span class="line">        this.outCo2 = outCo2;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public int getAvgTemp() &#123;</span><br><span class="line">        return avgTemp;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setAvgTemp(int avgTemp) &#123;</span><br><span class="line">        this.avgTemp = avgTemp;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public int getAvgHumid() &#123;</span><br><span class="line">        return avgHumid;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setAvgHumid(int avgHumid) &#123;</span><br><span class="line">        this.avgHumid = avgHumid;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public int getAvgPm10() &#123;</span><br><span class="line">        return avgPm10;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setAvgPm10(int avgPm10) &#123;</span><br><span class="line">        this.avgPm10 = avgPm10;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public int getAvgCo2() &#123;</span><br><span class="line">        return avgCo2;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setAvgCo2(int avgCo2) &#123;</span><br><span class="line">        this.avgCo2 = avgCo2;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public int getInYiwei() &#123;</span><br><span class="line">        return inYiwei;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setInYiwei(int inYiwei) &#123;</span><br><span class="line">        this.inYiwei = inYiwei;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public int getInTemp() &#123;</span><br><span class="line">        return inTemp;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setInTemp(int inTemp) &#123;</span><br><span class="line">        this.inTemp = inTemp;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public int getInPm10() &#123;</span><br><span class="line">        return inPm10;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setInPm10(int inPm10) &#123;</span><br><span class="line">        this.inPm10 = inPm10;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public int getInCo2() &#123;</span><br><span class="line">        return inCo2;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setInCo2(int inCo2) &#123;</span><br><span class="line">        this.inCo2 = inCo2;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public int getOutTemp() &#123;</span><br><span class="line">        return outTemp;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setOutTemp(int outTemp) &#123;</span><br><span class="line">        this.outTemp = outTemp;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public int getOutPm10() &#123;</span><br><span class="line">        return outPm10;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setOutPm10(int outPm10) &#123;</span><br><span class="line">        this.outPm10 = outPm10;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public int getOutCo2() &#123;</span><br><span class="line">        return outCo2;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setOutCo2(int outCo2) &#123;</span><br><span class="line">        this.outCo2 = outCo2;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public int getWarnData() &#123;</span><br><span class="line">        return warnData;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setWarnData(int warnData) &#123;</span><br><span class="line">        this.warnData = warnData;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/Linux/Linux简单命令/" data-toggle="tooltip" data-placement="top" title="Linux简单命令">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/EffctiveJava学习/《EffctiveJava》对于所有对象都通用的方法/" data-toggle="tooltip" data-placement="top" title="《EffctiveJava》对于所有对象都通用的方法">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <br>
+
+                <!--打赏-->
+                
+                <!--打赏-->
+
+                <br>
+                <!--分享-->
+                
+                    <div class="social-share"  data-wechat-qrcode-helper="" align="center"></div>
+                    <!--  css & js -->
+                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+                
+                <!--分享-->
+                <br>                       
+                
+                <!-- require APlayer -->
+                
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                <!-- disqus comment end -->
+
+                
+
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#linux" title="linux">linux</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="#" target="_blank">CSDN Blog 漆建国</a></li>
+                    
+                        <li><a href="#" target="_blank">DockOne 漆建国</a></li>
+                    
+                        <li><a href="#" target="_blank">阿里云栖社区 漆建国</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/qijianguo">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 漆建国 2019 
+                    <br>
+                    <!-- 
+					Theme by <a href="http://beantech.org">BeanTech</a>  
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://www.huweihuang.com">胡伟煌</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=huweihuang&repo=hexo-theme-huweihuang&type=star&count=true" >
+                    </iframe>
+					-->
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://www.qijianguo.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = 'xxx';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="http://www.qijianguo.com/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
