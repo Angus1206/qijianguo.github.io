@@ -9,13 +9,6 @@
     </url>
 
     <url>
-        <loc>http://www.qijianguo.com/tags/EditText/</loc>
-        <lastmod>2019-04-18T05:13:52.965Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://www.qijianguo.com/tags/Hexo/</loc>
         <lastmod>2019-04-18T06:26:10.239Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -158,6 +151,13 @@
     <url>
         <loc>http://www.qijianguo.com/tags/winsw/</loc>
         <lastmod>2019-04-25T03:38:41.652Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://www.qijianguo.com/tags/EditText/</loc>
+        <lastmod>2019-04-25T03:40:58.059Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
