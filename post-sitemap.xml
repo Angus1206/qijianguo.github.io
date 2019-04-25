@@ -7,6 +7,14 @@
     </url>
 
     <url>
+        <loc>http://www.qijianguo.com/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%BC%96%E7%A8%8B%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%8A%80%E8%83%BD/</loc>
+        <lastmod>2019-04-25T03:31:47.745Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>http://www.qijianguo.com/Git/Git%E5%9F%BA%E7%A1%80/</loc>
         <lastmod>2019-04-25T01:37:45.069Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -135,7 +143,7 @@
     </url>
 
     <url>
-        <loc>http://www.qijianguo.com/Linux/Another%20app%20is%20currently%20holding%20the%20yum%20lock;%20waiting%20for%20it%20to%20exit.../</loc>
+        <loc>http://www.qijianguo.com/Linux/AnotherAppIsCurrentlyHolding/</loc>
         <lastmod>2019-04-25T01:11:08.663Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -263,6 +271,14 @@
     </url>
 
     <url>
+        <loc>http://www.qijianguo.com/Linux/Linux%E7%AE%80%E5%8D%95%E5%91%BD%E4%BB%A4/</loc>
+        <lastmod>2019-04-25T00:55:41.627Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>http://www.qijianguo.com/Linux/Modbus%E5%8D%8F%E8%AE%AE%E6%9C%8D%E5%8A%A1%E7%AB%AF%EF%BC%88Netty%EF%BC%89/</loc>
         <lastmod>2019-04-25T00:55:41.627Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -272,14 +288,6 @@
 
     <url>
         <loc>http://www.qijianguo.com/MySQL/MySQL%E6%85%A2%E6%9F%A5%E8%AF%A2%E6%97%A5%E5%BF%97%E6%80%BB%E7%BB%93/</loc>
-        <lastmod>2019-04-25T00:55:41.627Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://www.qijianguo.com/Linux/Linux%E7%AE%80%E5%8D%95%E5%91%BD%E4%BB%A4/</loc>
         <lastmod>2019-04-25T00:55:41.627Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -376,14 +384,6 @@
 
     <url>
         <loc>http://www.qijianguo.com/Java/JAVA%E4%B8%AD%E4%BD%BF%E7%94%A8openoffice%E5%B0%86Excel%E8%BD%ACPDF%E5%86%8D%E8%BD%AC%E5%9B%BE%E7%89%87%E5%8A%9F%E8%83%BD%E5%AE%9E%E7%8E%B0/</loc>
-        <lastmod>2019-04-25T00:55:41.607Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://www.qijianguo.com/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%BC%96%E7%A8%8B%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%8A%80%E8%83%BD/</loc>
         <lastmod>2019-04-25T00:55:41.607Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>

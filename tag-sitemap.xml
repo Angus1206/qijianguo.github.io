@@ -23,13 +23,6 @@
     </url>
 
     <url>
-        <loc>http://www.qijianguo.com/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/</loc>
-        <lastmod>2019-04-25T00:55:41.607Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>http://www.qijianguo.com/tags/openoffice/</loc>
         <lastmod>2019-04-25T00:55:41.607Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -158,6 +151,13 @@
     <url>
         <loc>http://www.qijianguo.com/tags/git/</loc>
         <lastmod>2019-04-25T01:37:45.069Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://www.qijianguo.com/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/</loc>
+        <lastmod>2019-04-25T03:31:47.745Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
