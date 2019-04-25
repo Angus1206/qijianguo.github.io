@@ -2,7 +2,7 @@
 title: Another app is currently holding the yum lock; waiting for it to exit...
 categories: Linux
 tags: linux
-time: 2018-04-24 11:44:32
+date: 2018-04-24 11:44:32
 ---
 
 <!-- more -->

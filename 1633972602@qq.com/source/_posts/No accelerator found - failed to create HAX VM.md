@@ -2,7 +2,7 @@
 title: No accelerator found - failed to create HAX VM
 categories: Java
 tags: java
-time: 2018-07-19 23:33:54
+date: 2018-07-19 23:33:54
 ---
 <!-- more -->
 ```

@@ -2,7 +2,7 @@
 title: Java Random seed伪随机
 categories: Java
 tags: java,random
-time: 2017-11-19 13:12:01
+date: 2017-11-19 13:12:01
 ---
 
 > 在指定区间内获得随机数，随机的几种方式。

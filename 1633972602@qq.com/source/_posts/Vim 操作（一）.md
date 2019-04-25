@@ -2,7 +2,7 @@
 title: Vim 操作（一）
 categories: Vim
 tags: vim
-time: 2018-11-28 20:45:33
+date: 2018-11-28 20:45:33
 ---
 
 ##### 上下左右

@@ -2,7 +2,7 @@
 title: Vue学习中踩的坑
 categories: Vue
 tags: vue
-time: 2018-06-13 22:14:44
+date: 2018-06-13 22:14:44
 ---
 
 * ERROR in Cannot find module 'node-sass'

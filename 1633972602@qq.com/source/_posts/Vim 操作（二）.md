@@ -2,7 +2,7 @@
 title: Vim 操作（二）
 categories: Vim
 tags: vim
-time: 2018-11-29 23:11:21
+date: 2018-11-29 23:11:21
 ---
 
 #### 操作多文件

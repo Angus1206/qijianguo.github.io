@@ -2,7 +2,7 @@
 title: SpringBoot定时任务Schedule使用
 categories: Java
 tags: java, schedule
-time: 2018-05-27 18:13:50
+date: 2018-05-27 18:13:50
 ---
 
 在开发中很多时候会用到定时任务, 以前用自定义类继承***TimerTask***

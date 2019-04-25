@@ -2,7 +2,7 @@
 title: Arrays.asList()返回ArrayList调用remove()或add()出现 java.lang.UnsupportedOperationException异常
 categories: Java
 tags: java
-time: 2017-04-24 11:44:32
+date: 2017-04-24 11:44:32
 ---
 
 * Iterator和ListIterator可以对集合遍历同时可以做remove操作, 但在调用Arrays.asList()转化为ArrayList的过程中并不能调用remove()

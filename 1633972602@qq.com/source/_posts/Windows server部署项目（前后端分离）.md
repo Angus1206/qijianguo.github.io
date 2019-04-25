@@ -1,6 +1,7 @@
 ---
 title: Windows server部署项目（前后端分离）
 categories: winsw
+tags: winsw
 date: 2018-11-20 15:20:10
 ---
 

@@ -134,14 +134,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archive/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archive/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -211,30 +211,55 @@
 
 <div class="post-preview">
 
-    <a href="/Java多线程编程核心技术/Java多线程技能/">
+    <a href="/Java多线程编程核心技术/单例模式和多线程/">
         <h2 class="post-title">
-            Java多线程技能
+            对象及变量的并发访问
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            进程和多线程的概念及线程的优点
-进程
-操作系统的基础；是一次程序的执行；是系统进行资源分配和调度的一个独立单位。
-线程
-进程中独立运行的子任务。
-多线程的优点
-可以极大的利用CPU的空闲时间来处理其他的任务，即同一时间内运行更多不同种类的任务。
-使用多线程
-一个进程中至少有一个线程在运行
-12345public class MainThread &#123;    public static......
+            立即加载/饿汉模式
+立即加载就是在使用类之前已经将对象创建完毕，常见的实现方法就是new实例化。
+1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859public class MyThread &#123;    private......
         </div>
     </a>
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by 漆建国 on
-            2019-04-25
+            2019-04-24
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#多线程" title="多线程">多线程</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/Java多线程编程核心技术/定时器Timer/">
+        <h2 class="post-title">
+            对象及变量的并发访问
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            在JDK库中Timer类主要负责计划任务的功能，也就是在指定的时间开始执行某一任务。
+Timer类主要设置计划任务，但封装任务的却是TimerTask类。执行计划任务的代码要放到TimerTask的子类中，因为TimerTask是一个抽象类。
+创建Timer类就是启动一个新线程，但它不是守护线程，它一直在运行。
+方法schedule(TimerTask task，Date date)的测试
+......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by 漆建国 on
+            2019-04-24
         </p>
         <div class="tags">
             
@@ -268,7 +293,7 @@ join具有让线程排队运行的效果，有些类似同步的效果。join与
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by 漆建国 on
-            2019-04-25
+            2019-04-23
         </p>
         <div class="tags">
             
@@ -282,25 +307,30 @@ join具有让线程排队运行的效果，有些类似同步的效果。join与
 
 <div class="post-preview">
 
-    <a href="/Java多线程编程核心技术/定时器Timer/">
+    <a href="/Java多线程编程核心技术/Java多线程技能/">
         <h2 class="post-title">
-            对象及变量的并发访问
+            Java多线程技能
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            在JDK库中Timer类主要负责计划任务的功能，也就是在指定的时间开始执行某一任务。
-Timer类主要设置计划任务，但封装任务的却是TimerTask类。执行计划任务的代码要放到TimerTask的子类中，因为TimerTask是一个抽象类。
-创建Timer类就是启动一个新线程，但它不是守护线程，它一直在运行。
-方法schedule(TimerTask task，Date date)的测试
-......
+            进程和多线程的概念及线程的优点
+进程
+操作系统的基础；是一次程序的执行；是系统进行资源分配和调度的一个独立单位。
+线程
+进程中独立运行的子任务。
+多线程的优点
+可以极大的利用CPU的空闲时间来处理其他的任务，即同一时间内运行更多不同种类的任务。
+使用多线程
+一个进程中至少有一个线程在运行
+12345public class MainThread &#123;    public static......
         </div>
     </a>
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by 漆建国 on
-            2019-04-25
+            2019-04-20
         </p>
         <div class="tags">
             
@@ -314,49 +344,20 @@ Timer类主要设置计划任务，但封装任务的却是TimerTask类。执行
 
 <div class="post-preview">
 
-    <a href="/Java多线程编程核心技术/单例模式和多线程/">
+    <a href="/Idea/IntelliJ IDEA插件（Java）/">
         <h2 class="post-title">
-            对象及变量的并发访问
+            IntelliJ IDEA插件（Java）
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            立即加载/饿汉模式
-立即加载就是在使用类之前已经将对象创建完毕，常见的实现方法就是new实例化。
-1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859public class MyThread &#123;    private......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by 漆建国 on
-            2019-04-25
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#多线程" title="多线程">多线程</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/Java/Arrays.asList()返回ArrayList调用remove()或add()出现 java.lang.UnsupportedOperationException异常/">
-        <h2 class="post-title">
-            Arrays.asList()返回ArrayList调用remove()或add()出现 java.lang.UnsupportedOperationException异常
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            
-Iterator和ListIterator可以对集合遍历同时可以做remove操作, 但在调用Arrays.asList()转化为ArrayList的过程中并不能调用remove()
-
-
-12345678910111213141516171819202122public class Test &#123;    public static void main(String[] args) ......
+            Maven Helper
+使用参考博文：https://blog.csdn.net/fly910905/article/details/79416878
+FindBugs-IDEA
+使用参考博文：https://www.cnblogs.com/adeng/p/7154636.html
+CheckStyle-IDEA
+使用参考博文：http://www.cnblogs.com/zhaopeng......
         </div>
     </a>
     
@@ -366,7 +367,7 @@ Iterator和ListIterator可以对集合遍历同时可以做remove操作, 但在�
         </p>
         <div class="tags">
             
-              <a href="/tags/#java" title="java">java</a>
+              <a href="/tags/#idea" title="idea">idea</a>
             
         </div>
     
@@ -376,25 +377,62 @@ Iterator和ListIterator可以对集合遍历同时可以做remove操作, 但在�
 
 <div class="post-preview">
 
-    <a href="/Linux/Another app is currently holding the yum lock; waiting for it to exit.../">
+    <a href="/Linux/Linux中的快捷键/">
         <h2 class="post-title">
-            Another app is currently holding the yum lock; waiting for it to exit...
+            Linux中的快捷键
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            
+            tab
 
-yum 安装时出现如下错误:
+自动补全
 
-123456789101112131415161718[root@localhost gitrepo]#  yum install gitlab-ceLoaded plugins: fastestmirror, langpacksExisting lock /var/run/yum.pid: another copy is running as pid 6......
+ctrl a
+
+光标移到命令行开头
+
+ctrl e
+
+光标移到命令行结尾
+
+ctrl u
+
+删除光标以前的内容
+
+
+ctrl k
+
+删除光标后的内容
+
+ctrl d
+
+删除当前字母
+
+ctrl w
+
+删除光标前一个单词
+
+ctrl y
+
+恢复ctrl w 或 ctrl u 或ctrl k删掉的单词
+
+ctrl l
+
+相当于clear
+
+ctrl b
+
+向前移动
+
+ctr......
         </div>
     </a>
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by 漆建国 on
-            2019-04-18
+            2019-03-21
         </p>
         <div class="tags">
             
@@ -408,26 +446,30 @@ yum 安装时出现如下错误:
 
 <div class="post-preview">
 
-    <a href="/SpringBoot/Springboot自定义分页工具类/">
+    <a href="/Java/Spring boot 实现Web Service/">
         <h2 class="post-title">
-            Springboot自定义分页工具类
+            Spring boot 实现Web Service
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
             
-123456789101112131415161718192021222324252627282930313233import org.springframework.data.domain.Page;import org.springframework.data.domain.PageImpl;import org.springframework.data.domain.PageRequ......
+@[TOC](Spring boot 实现Web Service)
+为什么要用Web service？
+最近公司跟其他公司有个数据对接，按照对方的传输方式来做，用的是web service方式，数据包格式为xml，业务需要双向通信，即我能发送给对方，对方也会发送给我。另外，用的是比较流行的spring boot，不了解的可以自行谷歌。
+什么是Web service？
+百度百科：Web se......
         </div>
     </a>
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by 漆建国 on
-            2019-04-18
+            2019-03-16
         </p>
         <div class="tags">
             
-              <a href="/tags/#springboot" title="springboot">springboot</a>
+              <a href="/tags/#java, springboot" title="java, springboot">java, springboot</a>
             
         </div>
     
@@ -437,50 +479,34 @@ yum 安装时出现如下错误:
 
 <div class="post-preview">
 
-    <a href="/Vim/Vim 操作（一）/">
+    <a href="/Android/Android技术分享/">
         <h2 class="post-title">
-            Vim 操作（一）
+            Android技术分享
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            上下左右
+            Android入门实践
+什么是Android
 
-左 h 	下 j	上 k	右 l
-
-
-翻页
-
-向下翻一页：ctrl  f
-想下翻半页：ctrl  d
-向上翻一页：ctrl  b
-向上翻半页：ctrl  u
+Android是基于Linux内核开发、主要以Java为开发语言的一个开源的操作系统，主要用于移动设备，如智能手机和平板电脑、可穿戴设备等，当然还有更多的领域使用到了Android系统，例如电视、机顶盒等
+为什么选用Linux内核
 
 
-移动光标
-
-w 移到下一个单词的开始
-W 移到下一个单词的开始（以空格区分是否到上一个单词）
-
-
-b 移到上一个单词的开始
-B  移到上一个单词的开始（以空格区分是否到上一个单词）
-
-
-0(零）移到行首
-$ 移到到行末
-......
+Android的历史
+（这儿把红框内容做成一个图片，例如乔布斯图、Linux图、Java图）
+** Steve......
         </div>
     </a>
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by 漆建国 on
-            2019-04-18
+            2019-02-26
         </p>
         <div class="tags">
             
-              <a href="/tags/#vim" title="vim">vim</a>
+              <a href="/tags/#android" title="android">android</a>
             
         </div>
     
@@ -490,69 +516,65 @@ $ 移到到行末
 
 <div class="post-preview">
 
-    <a href="/Vim/Vim 操作（二）/">
+    <a href="/Android/Android中ViewPager/">
         <h2 class="post-title">
-            Vim 操作（二）
+            Android中ViewPager
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            操作多文件
-
-vi 1.txt  2.txt  3.txt 同时打开或创建多个文件
-:next 切换到下一个文件
-:previous 切换到上一个文件
-:last 切换到最后一个文件
-:first 切换到第一个文件
-:wnext 保存并切换到下一个文件
-:wprevious 保存并切换到上一个文件
-:hide e file 切换到file文件，当完成操作wq后按entry会切换回来
-
-
-保存......
-        </div>
-    </a>
-    
-        <p class="post-meta" style="margin: 10px 0;">
-            Posted by 漆建国 on
-            2019-04-18
-        </p>
-        <div class="tags">
-            
-              <a href="/tags/#vim" title="vim">vim</a>
-            
-        </div>
-    
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/Vue/Vue学习中踩的坑/">
-        <h2 class="post-title">
-            Vue学习中踩的坑
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            
-ERROR in Cannot find module 'node-sass’
-参考： https://blog.csdn.net/Nalaluky/article/details/82598300
-
+            参考：ViewPager 详解（一）—基本入门传送门
+参考：ViewPager 全面剖析及使用详解传送门
 ...
         </div>
     </a>
     
         <p class="post-meta" style="margin: 10px 0;">
             Posted by 漆建国 on
-            2019-04-18
+            2018-12-30
         </p>
         <div class="tags">
             
-              <a href="/tags/#vue" title="vue">vue</a>
+              <a href="/tags/#android" title="android">android</a>
+            
+        </div>
+    
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/Netty/Springboot项目Netty做服务端并自定义Gson配置类解析数据包/">
+        <h2 class="post-title">
+            Springboot项目Netty做服务端并自定义Gson配置类解析数据包
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            简述
+
+Springboot项目中使用 Netty 作为服务端，接收并处理其他平台发送的 Json数据包，处理拆包、粘包及数据包中时间类型是 long 类型需转成 Date的情况。
+
+项目流程
+
+启动项目，开启Netty服务端口11111
+加载Bean
+本地开启socket tool，模拟发送惊悚数据包
+Netty解析json包，处理特殊情况，例如 拆包、粘包。
+Gson按照配置文件处理js......
+        </div>
+    </a>
+    
+        <p class="post-meta" style="margin: 10px 0;">
+            Posted by 漆建国 on
+            2018-12-29
+        </p>
+        <div class="tags">
+            
+              <a href="/tags/#netty" title="netty">netty</a>
             
         </div>
     
@@ -649,6 +671,8 @@ ERROR in Cannot find module 'node-sass’
             
         
             
+            <a href="/tags/#winsw" title="winsw" rel="2">winsw</a>
+            
         
             
         
@@ -719,11 +743,7 @@ ERROR in Cannot find module 'node-sass’
     <ul>
       
         <li>
-          <a href="/Java多线程编程核心技术/Java多线程技能/">Java多线程技能</a>
-        </li>
-      
-        <li>
-          <a href="/Java多线程编程核心技术/线程间通信/">对象及变量的并发访问</a>
+          <a href="/Java多线程编程核心技术/单例模式和多线程/">对象及变量的并发访问</a>
         </li>
       
         <li>
@@ -731,11 +751,15 @@ ERROR in Cannot find module 'node-sass’
         </li>
       
         <li>
-          <a href="/Java多线程编程核心技术/单例模式和多线程/">对象及变量的并发访问</a>
+          <a href="/Java多线程编程核心技术/线程间通信/">对象及变量的并发访问</a>
         </li>
       
         <li>
-          <a href="/Java/Arrays.asList()返回ArrayList调用remove()或add()出现 java.lang.UnsupportedOperationException异常/">Arrays.asList()返回ArrayList调用remove()或add()出现 java.lang.UnsupportedOperationException异常</a>
+          <a href="/Java多线程编程核心技术/Java多线程技能/">Java多线程技能</a>
+        </li>
+      
+        <li>
+          <a href="/Idea/IntelliJ IDEA插件（Java）/">IntelliJ IDEA插件（Java）</a>
         </li>
       
     </ul>
@@ -762,7 +786,7 @@ ERROR in Cannot find module 'node-sass’
         
     <h5>ARCHIVES</h5>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a><span class="archive-list-count">1</span></li></ul>
     </div>
 
         <hr>

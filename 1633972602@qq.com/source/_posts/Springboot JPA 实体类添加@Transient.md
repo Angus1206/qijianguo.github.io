@@ -2,7 +2,7 @@
 title: Springboot JPA 实体类添加@Transient
 categories: Java
 tags: java, springboot
-time: 2018-01-14 16:23:55
+date: 2018-01-14 16:23:55
 ---
 
 * Hibernate

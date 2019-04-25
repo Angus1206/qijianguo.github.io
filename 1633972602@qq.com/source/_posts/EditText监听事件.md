@@ -2,7 +2,7 @@
 title: EditText监听事件
 categories: Android
 tags: EditText
-date: 2015-01-19 00:34:14
+date: 2017-08-19 00:34:14
 ---
 
 <!-- more -->
